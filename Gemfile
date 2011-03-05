@@ -29,3 +29,9 @@ gem 'mysql2'
 # group :development, :test do
 #   gem 'webrat'
 # end
+group :test do
+  gem 'rspec-rails'
+  gem 'cucumber-rails'
+  gem 'capybara'
+  gem 'database_cleaner'
+end
