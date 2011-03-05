@@ -29,14 +29,11 @@ test: &test
   socket: /var/run/mysqld/mysqld.sock
 
 production:
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
-  reconnect: false
   database: hugolnx-blog_production
-  pool: 5
-  username: root
+  username:
   password:
-  socket: /var/run/mysqld/mysqld.sock
 
 cucumber:
   <<: *test
