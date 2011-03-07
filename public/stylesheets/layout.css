@@ -23,13 +23,16 @@ div#header div#banner {
 }
 
 div#post {
-  padding: 10px;
+  padding-top: 10px;
   padding-left: 0px;
   padding-top: 0px;
+  padding-bottom: 50px
 }
 
 div#post div#title {
   background-color: #ccf;
+  border-bottom: 3px solid #99f;
+  border-right: 3px solid #99f;
   -webkit-border-top-right-radius: 10px;
   -webkit-border-bottom-right-radius: 10px;
   margin-right: 30px;
@@ -44,4 +47,5 @@ div#post div#title h1 {
 
 div#post div#content {
   margin-left: 30px;
+  margin-right: 30px;
 }

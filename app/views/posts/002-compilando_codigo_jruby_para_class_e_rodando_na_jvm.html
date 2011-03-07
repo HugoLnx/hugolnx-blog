@@ -1,12 +1,11 @@
-<h1>Introdução</h1>
+<h1 class="first">Introdução</h1>
 Olá a todos, como meu primeiro post útil oficial, irei mostrar como podemos, através do jruby, compilar nosso arquivo .rb para um .class, e depois faze-lo rodar direto na JVM.
 
 <h1>Compilando</h1>
 Vou utilizar esse código no exemplo... 
 
 
-<pre style="background-color:white;font-family:'Lucida Console';display:inline-block;border-color:#36f;border-style:solid;border-width:2px;padding:10px;">
-# /example.rb
+<code class="syntax ruby"># /example.rb
 require 'java'
 
 java_import javax.swing.JFrame
@@ -41,19 +40,19 @@ frame.default_close_operation = JFrame::EXIT_ON_CLOSE
 mp = MyJPanel.new
 frame.content_pane.add(mp,BorderLayout::CENTER)
 frame.visible = true
-</pre>
+</code>
 
-...que também está disponível no github(comentado) através do link...
-<a href="http://github.com/HugoLnx/JRuby-e-Swing-e-Grafico/blob/master/no_jruby.rb">http://github.com/HugoLnx/JRuby-e-Swing-e-Grafico/blob/master/no_jruby.rb</a>
+...que também está disponível no github(comentado) através do link...</br>
+<a href="http://github.com/HugoLnx/JRuby-e-Swing-e-Grafico/blob/master/no_jruby.rb">http://github.com/HugoLnx/JRuby-e-Swing-e-Grafico/blob/master/no_jruby.rb</a></br>
 
-O JRuby vem com um compilador "rb to class" seu nome é jrubyc.
+O JRuby vem com um compilador "rb to class" seu nome é jrubyc.</br>
 Para compilar um arquivo .rb você deve escrever no console(no windows)...
 
-</br><p style="background-color:black;color:#36f;font-family:'Lucida Console';font-weight:bold;display:inline-block;border-color:#36f;border-style:solid;border-width:2px;padding:20px;">jruby -S jrubyc example.rb</p></br>
+</br><code class="syntax bash">jruby -S jrubyc example.rb</code></br>
 
 Pelo que eu li, em linux somente o jrubyc bastaria, porém não testei, no caso seria...
 
-</br><p style="background-color:black;color:#36f;font-family:'Lucida Console';font-weight:bold;display:inline-block;border-color:#36f;border-style:solid;border-width:2px;padding:20px;">jrubyc example.rb</p></br>
+</br><code class="syntax bash">jrubyc example.rb</code></br>
 
 Ele dará uma mensagem dizendo q foi compilado para .class e pronto, seu código jruby está compilado em um .class, porém ele não roda na JVM igual a outros programas java, e isso se dá pelas características dinâmicas do ruby. 
 
@@ -61,11 +60,11 @@ Ele dará uma mensagem dizendo q foi compilado para .class e pronto, seu código
 
 Como foi dito antes, simplesmente escrever...
 
-</br><p style="background-color:black;color:#36f;font-family:'Lucida Console';font-weight:bold;display:inline-block;border-color:#36f;border-style:solid;border-width:2px;padding:20px;">java example</p></br>
+</br><code class="syntax bash">java example</code></br>
 
 ...não vai funcionar, para que tudo funcione na perfeita paz do senhor (xD), é necessário que se "importe" o .jar do jruby, que pode ser baixado pelo link... <a href="http://jruby.org/download">http://jruby.org/download</a> (ele é o ultimo item, "JRuby x.x.x Complete.jar"). Aqui eu renomeei esse arquivo para "jruby.jar". bote esse arquivo na mesma pasta que o seu .class e escreva... 
 
-</br><p style="background-color:black;color:#36f;font-family:'Lucida Console';font-weight:bold;display:inline-block;border-color:#36f;border-style:solid;border-width:2px;padding:20px;">java -jar jruby.jar exemplo.class</p></br>
+</br><code class="syntax bash">java -jar jruby.jar exemplo.class</code></br>
 
 ... sim, é necessário ter o ".class" no final.
 Fazendo isso, tudo irá rodar perfeitamente =D
@@ -76,13 +75,11 @@ de um dos meios abaixo.xD
 Espero ter ajudado xD
 
 <h1>Créditos</h1>
-<a href="http://leandrosilva.com.br/2008/08/14/executar-jruby-a-partir-do-java/">http://leandrosilva.com.br/2008/08/14/executar-jruby-a-partir-do-java/</a>
-<a href="http://kenai.com/projects/jruby/pages/JRubyCompiler">http://kenai.com/projects/jruby/pages/JRubyCompiler</a>
-<a href="http://www.mouseoverstudio.com/blog/2008/08/29/interpretando-ruby-e-outras-linguagens-de-script-dentro-da-plataforma-java/">http://www.mouseoverstudio.com/blog/2008/08/29/interpretando-ruby-e-outras-linguagens-de-script-dentro-da-plataforma-java/</a>
+<a href="http://leandrosilva.com.br/2008/08/14/executar-jruby-a-partir-do-java/">http://leandrosilva.com.br/2008/08/14/executar-jruby-a-partir-do-java/</a></br>
+<a href="http://kenai.com/projects/jruby/pages/JRubyCompiler">http://kenai.com/projects/jruby/pages/JRubyCompiler</a></br>
+<a href="http://www.mouseoverstudio.com/blog/2008/08/29/interpretando-ruby-e-outras-linguagens-de-script-dentro-da-plataforma-java/">http://www.mouseoverstudio.com/blog/2008/08/29/interpretando-ruby-e-outras-linguagens-de-script-dentro-da-plataforma-java/</a></br>
 
 <h1>Contato</h1>
-<b>Twitter:</b> <a href="http://twitter.com/Hugolnx">http://twitter.com/Hugolnx</a>
-<b>Github:</b> <a href="http://github.com/HugoLnx">http://github.com/HugoLnx</a>
-<b>Google:</b> <a href="http://www.google.com/profiles/hugoLnx">http://www.google.com/profiles/hugoLnx</a>
-<b>Email:</b> hugolnx@gmail.com
-<b>Blog:</b> <a href="http://hugolnx.wordpress.com">http://hugolnx.wordpress.com</a>
+<b>Twitter:</b> <a href="http://twitter.com/Hugolnx">http://twitter.com/Hugolnx</a></br>
+<b>Github:</b> <a href="http://github.com/HugoLnx">http://github.com/HugoLnx</a></br>
+<b>Email:</b> hugo.roque@caelum.com.br</br>

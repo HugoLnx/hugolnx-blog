@@ -10,6 +10,24 @@ h1,h2,h3,h4,h5,h6 {
   color: #36f;
 }
 
+h1.first {
+  margin-top: 0px;
+}
+
 h1 {font-size: 25px}
 h2 {font-size: 20px}
 h3 {font-size: 15px}
+
+code {
+  white-space: pre;
+  display: block;
+  font-size: 12px;
+  width: 90%;
+  position: relative;
+  left: 25px;
+  right: 25px
+}
+
+body {
+  font-size: 13px;
+}
