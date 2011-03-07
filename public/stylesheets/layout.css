@@ -44,6 +44,7 @@ div#post div#title {
 
 div#post div#title h1 {
   font-family: Comic Sans MS;
+  font-weight: bolder;
   color: #369;
   margin-top: 20px;
   margin-left: 15px;

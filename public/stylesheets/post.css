@@ -5,8 +5,9 @@
 
 h1,h2,h3 {
   margin: 0px;
-  margin-top: 30px;
+  margin-top: 50px;
   font-family: Segoe Print Bold;
+  font-weight: normal;
   color: #36f;
 }
 
@@ -17,6 +18,9 @@ h1.first,h2.first,h3.first {
 h1 {font-size: 25px}
 h2 {font-size: 20px}
 h3 {font-size: 15px}
+
+p {
+}
 
 code {
   white-space: pre;
