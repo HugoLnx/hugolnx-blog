@@ -6,10 +6,8 @@ module Infraestrutura
       path = find_postfile_path(id,args)
       title = title_from path
       postfile_content = read_file_of path
-      first_line = postfile_content.lines.first
-      first_line.match(/^[cC]reation [dD]ate:(.*)$/)
-      creation_date = $1.strip.to_date
-      body = postfile_content.lines.to_a[1..-1].join
+      creation_date = creation_date_from postfile_content
+      body = postfile_content.without_first_line.strip
       Post.new(id,title,creation_date,body)
     end
 
@@ -34,6 +32,12 @@ module Infraestrutura
 
     def read_file_of(path)
       File.read(path).strip
+    end
+
+    def creation_date_from(content)
+      first_line = content.lines.first
+      match = first_line.match(/^[cC]reation [dD]ate:(.*)$/)
+      creation_date = match[1].strip.to_date
     end
 
     def all_htmls_in(directory)

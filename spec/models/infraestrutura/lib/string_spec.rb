@@ -16,4 +16,8 @@ describe String do
 		data.year.should be_eql 2010
 		data.should be_a Date
 	end
+
+  it 'should be returned without first line' do
+    "hugo\nroque".without_first_line.should == 'roque'
+  end
 end
