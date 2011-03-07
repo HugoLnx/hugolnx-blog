@@ -9,6 +9,12 @@ module Infraestrutura
       Post.new(title, body)
     end
 
+    def build_all_in(directory)
+      postfiles_names = all_htmls_in directory
+      ids = convert_3_first_numbers_of postfiles_names
+      build_all ids, directory
+    end
+
     def find_postfile_path(id,args={})
       directory = args[:in]
       id_prefix = sprintf('%.3d',id)
@@ -24,6 +30,20 @@ module Infraestrutura
 
     def read_file_of(path)
       File.read(path).strip
+    end
+
+    def all_htmls_in(directory)
+      postfiles_regexp = File.join(directory,"*.html")
+      postfiles_paths = Dir[postfiles_regexp]
+      postfiles_paths.collect{|path| File.basename path}
+    end
+
+    def convert_3_first_numbers_of(postfiles_names)
+      postfiles_names.collect{|filename| filename[0..2].to_i}
+    end
+
+    def build_all(ids,directory)
+      ids.sort.reverse.collect{|id| build_for_id(id, :in => directory)}
     end
 
     def string_beetween_id_prefix_and_extension_of(filename)

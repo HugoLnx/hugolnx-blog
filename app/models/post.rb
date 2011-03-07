@@ -10,4 +10,8 @@ class Post
   def self.find(*args)
     Infraestrutura::PostFactory.build_for_id(*args)
   end
+
+  def self.all_in(*args)
+    Infraestrutura::PostFactory.build_all_in(*args)
+  end
 end
