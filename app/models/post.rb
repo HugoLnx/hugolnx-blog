@@ -1,11 +1,13 @@
 class Post
   attr_reader :id
   attr_reader :title
+  attr_reader :creation_date
   attr_reader :body
 
-  def initialize(id,title,body)
+  def initialize(id,title,creation_date,body)
     @id = id
     @title = title
+    @creation_date = creation_date
     @body = body
   end
 

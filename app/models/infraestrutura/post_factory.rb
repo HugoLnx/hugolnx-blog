@@ -5,8 +5,12 @@ module Infraestrutura
     def build_for_id(id, args={})
       path = find_postfile_path(id,args)
       title = title_from path
-      body = read_file_of path
-      Post.new(id,title, body)
+      postfile_content = read_file_of path
+      first_line = postfile_content.lines.first
+      first_line.match(/^[cC]reation [dD]ate:(.*)$/)
+      creation_date = $1.strip.to_date
+      body = postfile_content.lines.to_a[1..-1].join
+      Post.new(id,title,creation_date,body)
     end
 
     def build_all_in(directory)
