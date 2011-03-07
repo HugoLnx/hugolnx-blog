@@ -1,8 +1,10 @@
 class Post
+  attr_reader :id
   attr_reader :title
   attr_reader :body
 
-  def initialize(title,body)
+  def initialize(id,title,body)
+    @id = id
     @title = title
     @body = body
   end

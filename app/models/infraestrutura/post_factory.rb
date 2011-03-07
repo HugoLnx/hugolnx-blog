@@ -2,11 +2,11 @@ module Infraestrutura
   module PostFactory
     extend self
 
-    def build_for_id(*args)
-      path = find_postfile_path(*args)
+    def build_for_id(id, args={})
+      path = find_postfile_path(id,args)
       title = title_from path
       body = read_file_of path
-      Post.new(title, body)
+      Post.new(id,title, body)
     end
 
     def build_all_in(directory)
