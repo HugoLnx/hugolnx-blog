@@ -1,0 +1,173 @@
+<h1 class="first">Introdu&ccedil;&atilde;o</h1>
+<p>Ontem teve dojo na CaelumRJ, e n&oacute;s discutimos sobre expressividade em ruby, alguns discordaram quanto a sintaxe de ruby ser indicativa e talz. Pensando nisso, eu implementei a solu&ccedil;&atilde;o pro problema de ontem, separando tudo em pequenos m&eacute;todos, pra podermos observar o resultado.</p>
+<h1>Mini Interpretador de Scheme - O Problema</h1>
+<p>Dentre os 3 problemas propostos escolhemos o mini interpretador de Scheme(dialeto de Lisp), que visava criar um interpretador para listas com operadores matem&aacute;ticos (soma, subtracao, multiplicacao, divisao) e com operadores l&oacute;gicos (maior, menor).</p>
+<p>Scheme trabalha com o conceito de listas(programa&ccedil;&atilde;o funcional), onde o primeiro elemento &eacute; o operador que ser&aacute; aplicado aos demais elementos da lista. Abaixo tempos alguns exemplos de <b>Entrada => Saida:</b></p>
+<code class="syntax lisp">(+ 1 2) => 3
+(+ 2 3 4) => 9
+(- 3 2) => 1
+(- 2 4) => -2
+(- 5 2 3) => 0
+(* 2 3) => 6
+(* 2 2 3) => 12
+(/ 4 2) => 2
+(/ 8 2 2) => 2
+(> 1 0) => true
+(= 1 1) => true
+</code>
+<h1>Resolvendo o Problema</h1>
+<p>A primeiramente, eu escrevi uma resolu&ccedil;&atilde;o r&aacute;pida, com expressivamente prec&aacute;ria, mas que resolvia o problema, para depois refatorar e observar a diferen&ccedil;a.</p>
+<p>Minha solu&ccedil;&atilde;o rapida foi essa:</p>
+<code class="syntax ruby">def interpretar(list)
+  elements = list.split(/[\)\( ]/)
+  elements.delete ""
+  operator = elements.delete_at 0
+  numbers = elements.collect{|element| element.to_i}
+  numbers.inject{|result,number| result.send(operator,number)}
+end
+</code>
+<p>Observe como o c&oacute;digo &eacute; pouco expressivo, e somente quem conhece algumas peculiaridades da linguagem conseguiria entender, assim como foi discutido, ruby abre espa&ccedil;o para escrevermos codigos ileg&iacute;veis, por&eacute;m n&atilde;o quer dizer que s&oacute; da para escrever c&oacute;digos ilegiveis.</p>
+<h1>Refatorando</h1>
+<p>A primeira coisa que eu fiz foi criar uma classe chamada List, mantendo o metodo interpretar para poder continuar rodando os testes que implementamos no dojo.</p>
+<p>Inicialmente passamos a lista em string no construtor, e repartimos ela dentro do construtor. E criamos um metodo solve, que ira resolver a lista.</p>
+<code class="syntax ruby"># dsl.rb
+def interpretar(list_in_string)
+  list = List.new list_in_string
+  list.solve
+end
+
+# list.rb
+class List
+  def initialize(list_in_string)
+    elements = list_in_string.split(/[\(\) ]/)
+    elements.delete ""
+    @operator = elements.delete_at 0
+    @numbers = elements.collect{|element| element.to_i}
+  end
+
+  def solve
+    @numbers.inject{|result,number| result.send(@operator,number)}
+  end
+end
+</code>
+<h1>Constru&ccedil;&atilde;o Complexa Demais</h1>
+<p>Nesse momento eu pergunto, ser&aacute; que a Lista tem que se preocupar em extrair o operador e os numeros de dentro da string? Acho que n&atilde;o, afinal a Lista simplesmente aplica um operador a v&aacute;rios numeros. Nossas classes devem ter responsabilidade &uacute;nica, portanto a lista deve receber o operador, os numeros e saber trabalhar com eles para chegar ao resultado. Nossa classe List ficaria assim...</p>
+<code class="syntax ruby"># list.rb
+class List
+  def initialize(operator,numbers)
+    @operator = operator
+    @numbers = numbers
+  end
+
+  def solve
+    @numbers.inject{|result,number| result.send(@operator,number)}
+  end
+end
+</code>
+<p>Pronto, agora a Lista tem responsabilidade &uacute;nica, mas e agora? Quem extrai o operador e os numeros da string para a Lista? Bem, existe uma pattern muito conhecida chamada Factory, ela presume que a constru&ccedil;&atilde;o de um objeto muitas vezes &eacute; complexo demais, e quando isso ocorre, devemos criar uma F&aacute;brica para construir esse objeto, encapsulando essa logica de constru&ccedil;&atilde;o.</p>
+<p>Ent&atilde;o &eacute; isso que n&oacute;s faremos, criaremos uma ListFactory, que ir&aacute; fabricar nossas listas apartir de uma string.</p>
+<code class="syntax ruby"># list_factory.rb
+class ListFactory
+  def build_from(list_in_string)
+    elements = list_in_string.split(/[\(\) ]/)
+    elements.delete ""
+    operator = elements.delete_at 0
+    numbers = elements.collect{|element| element.to_i}
+    List.new operator,numbers
+  end
+end
+</code>
+<p>Tamb&eacute;m teremos que mudar o metodo interpretar, agora teremos uma fabrica que ira construir uma lista para a gente, ent&atilde;o faremos isso:</p>
+<code class="syntax ruby"># dsl.rb
+def interpretar(list_in_string)
+  list_factory = ListFactory.new
+  list = list_factory.build_from list_in_string
+  list.solve
+end
+</code>
+<h1>M&eacute;todos com Multiplas Responsabilidades</h1>
+<p>Atualmente eu estou lendo o Clean Code(Uncle Bob) e no capitulo sobre fun&ccedil;&otilde;es ele fala que cada fun&ccedil;&atilde;o(metodo) deve fazer algo espec&iacute;fico, ent&atilde;o vamos seguir seu conselho. O m&eacute;todo build_from, conter&aacute; uma descri&ccedil;&atilde;o abstrata do processo de constru&ccedil;&atilde;o da lista, portanto extrair os elementos da string, deve ser delegado para uma fun&ccedil;&atilde;o que fa&ccedil;a somente isso.</p>
+<p>Portanto criemos um metodo extract_elements_from(list_in_string), que ir&aacute; extrair os elementos da string de uma lista. Mas como ele far&aacute; isso? Dever&aacute; estar descrito no corpo do m&eacute;todo. Ent&atilde;o implementando o m&eacute;todo, ficaria:</p>
+<code class="syntax ruby"># list_factory.rb
+def extract_elements_from(list_in_string)
+  list_in_string.delete! "()"
+  list_in_string.split " " 
+end
+</code>
+<p>Observe como est&aacute; explicitamente descrito no corpo do m&eacute;todo como ele ir&aacute; extrair os elementos, primeiro ele ir&aacute; deletar os parentesis e depois ir&aacute; partir a string pelos espa&ccedil;os em branco.</p>
+<p>Processo: "(+ 1 2)" => "+ 1 2" => ["+","1"."2"]</p>
+<h1>Classes Abertas</h1>
+<p>Agora iremos extrair o operador, sabemos que o operador ser&aacute; sempre o primeiro dos elementos, e a array, por padr&atilde;o j&aacute; tem um m&eacute;todo que nos retorna o primeiro elemento, portanto us&aacute;-lo d&aacute; a expressividade que queremos ao c&oacute;digo, n&atilde;o ser&aacute; necess&aacute;rio criar um metodo para isso.</p>
+<p>A extra&ccedil;&atilde;o dos n&uacute;meros por outro lado, &eacute; um pouco mais complexa. Criaremos, ent&atilde;o, um m&eacute;todo para ela:</p>
+<code class="syntax ruby"># list_factory.rb
+def extract_numbers_from(elements)
+  numbers_in_string = elements[1..-1]
+  numbers_in_string.collect{|number| number.to_i}
+end
+</code>
+<p>Opa, "elements[1..-1]" &eacute; expressivo? At&eacute; quem conhece a sintaxe de ruby pode estranhar esse -1 bizarro. Acontece que esse -1 est&aacute; representando o ultimo elemento da array, ao usar n&uacute;meros negativos estamos indicando o indice reverso(-1 &eacute; o ultimo elemento, -2 &eacute; o penultimo, e assim por diante).</p>
+<p>&Oacute;timo, mas ainda &eacute; altamente ileg&iacute;vel, queremos somente pegar os elementos da array, sem o primeiro, mas a Array n&atilde;o tem esse m&eacute;todo. E agora?</p>
+<p>Felizmente, Ruby trabalha com o conceito de classes abertas, sendo assim, podemos abrir a classe Array(padr&atilde;o do ruby) e inserir um metodo dentro dele. E &eacute; isso que faremos:</p>
+<code class="syntax ruby"># array.rb
+class Array
+  def without_first
+    self[1..-1]
+  end
+end
+</code>
+<p>Agora podemos chamar esse metodo dentro do nosso extract_numeros:</p>
+<code class="syntax ruby">def extract_numbers_from(elements)
+  numbers_in_string = elements.without_first
+  numbers_in_string.collect{|number| number.to_i}
+end
+</code>
+<p>Bem melhor n&atilde;o? Mas poder&iacute;amos estar nos questionando, do que adiantou criar o m&eacute;todo, se dentro da array ainda estamos usando esse "self[1..-1]" bizarro? Acontece que, quando outro programador for ver nosso c&oacute;digo, ir&aacute; olhar o nome do m&eacute;todo without_first, saber&aacute; o que aquele pequeno peda&ccedil;o de c&oacute;digo faz, facilitando ele deduzir o c&oacute;digo. Isso se ele precisar mudar esse comportamento em espec&iacute;fico, provavelmente ele olhar&aacute; o m&eacute;todo extract_numbers e entender&aacute; o que est&aacute; acontecendo, sem ter a necessidade de procurar pelo m&eacute;todo.</p>
+<p>Apesar de podermos criar um m&eacute;todo na Arrat para nos retornar todos os elementos convertidos para Fixnum, n&atilde;o vi necessidade visto que o metodo collect, &eacute; muito conhecido.</p>
+<p>Agora que j&aacute; temos os m&eacute;todo necess&aacute;rios, teremos que mudar nosso m&eacute;todo build_from:</p>
+<code class="syntax ruby"># list_factory.rb
+def build_from(list_in_string)
+  elements = extract_elements_from list_in_string
+  operator = elements.first
+  numbers = extract_numbers_from elements
+  List.new operator, numbers
+end
+</code>
+<p>Observe como o m&eacute;todo d&aacute; uma descri&ccedil;&atilde;o por alto de como &eacute; realizada a constru&ccedil;&atilde;o de uma lista.</p>
+<h1>O M&eacute;todo Inject</h1>
+<p>Bem, vamos ver como ficou a nossa classe List agora:</p>
+<code class="syntax ruby">class List
+  def initialize(operator,numbers)
+    @operator = operator
+    @numbers = numbers
+  end
+
+  def solve
+    @numbers.inject{|result,number| result.send(@operator,number)}
+  end
+end
+</code>
+<p>Voc&ecirc; deve estar se perguntando "inject"? WTF?!. &Eacute;, inject &eacute; um m&eacute;todo muito poderoso em ruby, por&eacute;m &eacute; pouco conhecido, relativamente complexo.</p>
+<p>O que ele faz &eacute; receber um bloco, que ir&aacute; receber 2 parametros, o primeiro &eacute; uma variavel para acumular, e a segunda, uma variavel para percorrer a array. Como n&atilde;o foi passado nenhum argumento no m&eacute;todo inject, inicialmente o primeiro parametro representar&aacute; o primeiro elemento da array, e o segundo parametro, o segundo elemento da array, depois, o retorno do bloco ir&aacute; para o primeiro parametro, e o segundo parametro ser&aacute; o terceiro elemento da array, no final ele retorna o ultimo retorno do bloco.</p>
+<p>Se quisermos utilizar o inject para somar todos os elementos de uma array, far&iacute;amos:</p>
+<code class="syntax ruby">[1,2,3,4].inject{|soma,numero| soma + numero}
+  => 10
+</code>
+<p>Diferente do m&eacute;todo collect, o inject &eacute; pouco conhecido, ent&atilde;o vale a pena esconder ele, portando criaremos um m&eacute;todo na array, que aplica um metodo(operador) em todos os seus elementos:</p>
+<code class="syntax ruby"># array.rb
+def apply_method(method_name)
+  self.inject{|result,number| result.send(method_name,number)}
+end
+</code>
+<p>Dessa forma resumimos nosso metodo solve &agrave;:</p>
+<code class="syntax ruby"># list.rb
+def solve
+  @elements.apply_method @operator
+end
+</code>
+<p>Agora podemos ler pelo m&eacute;todo solve, entender o que est&aacute; ocorrendo, sem saber que o m&eacute;todo inject existe.</p>
+<h1>Conclus&atilde;o</h1>
+<p>Ruby &eacute; uma linguagem expressivamente poderosa, por&eacute;m extremamente perigosa, a liberdade que ele d&aacute;, pode nos condenar &agrave; um c&oacute;digo extremamente sujo. A pr&oacute;pria metaprograma&ccedil;&atilde;o pode ser um tiro no p&eacute; (j&aacute; esfolei o meu por causa de metaprograma&ccedil;&atilde;o). Por&eacute;m com o tempo, e lendo livros como o Clean Code ou Growing Object-Oriented Software, aprendemos &agrave; evitar esses horrores n&atilde;o s&oacute; em Ruby, mas em qualquer outra linguagem.</p>
+<p>Muitos devem estar se perguntando por que eu escrevi o c&oacute;digo em ingl&ecirc;s, acontece que os m&eacute;todos de ruby s&atilde;o todos em ingl&ecirc;s, ent&atilde;o para chegar mais perto daquela famosa impress&atilde;o de estar lendo um texto ao inv&eacute;s de um c&oacute;digo, eu optei por escrever o c&oacute;digo em ingl&ecirc;s.</p>
+<p>O <a href="https://github.com/DojoCaelumRio/Mini-Interpretador-de-Scheme/tree/master/lib/solution">c&oacute;digo produzido</a> aqui pode ser encontrado no github, dentro do <a href="https://github.com/DojoCaelumRio/Mini-Interpretador-de-Scheme/">reposit&oacute;rio do c&oacute;digo do dojo</a>.</p>
+<h1>Referências</h1>
+<p>Clean Code e <a href="http://www.ruby-doc.org/core/">RubyDoc</a>

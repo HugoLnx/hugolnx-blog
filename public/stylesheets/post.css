@@ -3,14 +3,14 @@
   src: url(/segoe_print_bold.ttf);
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1,h2,h3 {
   margin: 0px;
   margin-top: 30px;
   font-family: Segoe Print Bold;
   color: #36f;
 }
 
-h1.first {
+h1.first,h2.first,h3.first {
   margin-top: 0px;
 }
 

@@ -1,0 +1,97 @@
+<h1 style="color:#36f;font-weight:bold;font-family:'Segoe Print';">Introdução</h1>
+Olá a todos xD
+  Após tanto tempo sem postar nada aqui estou eu de novo, postando mais uma coisinha sobre JRuby, importando bytecodes para uma aplicação JRuby.
+  Primeiramente, temos que lembrar que trataremos de dois "tipos" de bytecodes aqui, o que é gerado pelo javac apartir de um .java, e o gerado pelo jrubyc apartir de um .rb.
+
+<h1 style="color:#36f;font-weight:bold;font-family:'Segoe Print';">O Tutorial</h1>
+<h2 style="color:#24f;font-weight:bold;font-family:'Segoe Print';">Importando um bytecode criado pelo jruby</h2>
+  Para importar um bytecode que foi criado a partir de um arquivo .rb utilizamos o já manjado require.
+
+<pre style="background-color:white;font-family:'Lucida Console';display:inline-block;border-color:#36f;border-style:solid;border-width:2px;padding:10px;">require 'path do bytecode'</pre>
+
+Obs.: Lembre-se de retirar a extensão do arquivo (.class), o certo seria fazer algo como ...
+
+<pre style="background-color:white;font-family:'Lucida Console';display:inline-block;border-color:#36f;border-style:solid;border-width:2px;padding:10px;">require 'app/funcionario'</pre>
+
+... e não ...
+
+<pre style="background-color:white;font-family:'Lucida Console';display:inline-block;border-color:#36f;border-style:solid;border-width:2px;padding:10px;">require 'app/funcionario.class'</pre>
+
+... o arquivo não será encontrado.
+
+<h2 style="color:#24f;font-weight:bold;font-family:'Segoe Print';">Importando bytecodes Java</h2>
+  Para importar classes Java utilizamos o método java_import, porém devemos ter o cuidado de antes requerer a biblioteca "java" que tem esse método.
+  Existem algumas fenomenos interessantes de serem destacadas ao importarmos um bytecode Java, por isso vamos criar uma classe Pessoa em Java e importar ela para dentro do JRuby.
+Primeiramente criaremos a classe Pessoa no java:
+
+<pre style="background-color:white;font-family:'Lucida Console';display:inline-block;border-color:#36f;border-style:solid;border-width:2px;padding:10px;">// Pessoa.java
+public class Pessoa {
+  private String nome;
+  
+  public Pessoa(String meuNome) {
+    this.nome = meuNome;
+  }
+  
+  public void setNome(String novoNome) {
+    this.nome = novoNome;
+  }
+  
+  public String getNome(){
+    return this.nome;
+  }
+  
+  public void seMostra(){
+    System.out.println(this.getNome());
+  }
+}</pre>
+
+
+Agora iremos compilar o código fonte com o javac utilizando:
+
+<p style="background-color:black;color:#36f;font-family:'Lucida Console';font-weight:bold;display:inline-block;border-color:#36f;border-style:solid;border-width:2px;padding:20px;">javac Pessoa.java</p>
+
+Teremos então o arquivo Pessoa.class. Vamos criar um arquivo testando_jruby.rb onde iremos testar essa classe:
+
+<pre style="background-color:white;font-family:'Lucida Console';display:inline-block;border-color:#36f;border-style:solid;border-width:2px;padding:10px;"># testando_jruby.rb
+require 'java' # o java_import faz parte desta biblioteca
+java_import 'Pessoa' # Lembrando que no caso da classe
+                            # estar num pacote, é necessário
+                            # botar o nome completo da classe.
+
+pessoa = Pessoa.new 'Hugo Roque'
+
+# Observe que o nome do método no código Java é
+# seMostra, porém o JRuby faz um alias para
+# todos os métodos passando-os de Camelcase para 
+# Underscore case.
+# Obs.: o método seMostra ainda existe.
+pessoa.se_mostra 
+
+# Observe que ao criarmos um setter
+# para o nome(setNome), o JRuby criou
+# o método nome= automaticamente.
+# Obs.: Os métodos setNome e set_nome 
+# continuam existindo.
+pessoa.nome = 'Nico Steppat' 
+
+# Observe que ao criarmos um getter
+# para o nome(getNome), o JRuby criou
+# o método nome automaticamente
+# Obs.: Os métodos getNome e get_nome 
+# continuam existindo.       
+puts pessoa.nome</pre>
+
+
+Ao executarmos isto, teremos como saida:
+
+<p style="background-color:black;color:#36f;font-family:'Lucida Console';font-weight:bold;display:inline-block;border-color:#36f;border-style:solid;border-width:2px;padding:20px;">Hugo Roque
+Nico Steppat</p>
+
+<h1 style="color:#36f;font-weight:bold;font-family:'Segoe Print';">Concluindo</h1>
+Em breve, espero conseguir botar esse material na apostila RR-71 da caelum. =D
+
+Qualquer dúvida, conselho, sugestão, chingamento, etc, contate através de um dos meios abaixo. 
+Espero ter ajudado xD
+
+<h1 style="color:#36f;font-weight:bold;font-family:'Segoe Print';">Créditos</h1>
+<a href="http://kenai.com/projects/jruby/pages/Home">http://kenai.com/projects/jruby/pages/Home</a>
