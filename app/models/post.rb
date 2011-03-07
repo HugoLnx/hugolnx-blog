@@ -7,11 +7,7 @@ class Post
     @body = body
   end
 
-  def self.find(id,args={})
-    directory = args[:in]
-    post_file = Infraestrutura::PostFile.find id, :in => directory
-    title = post_file.title_from_filename
-    body = post_file.read
-    Post.new title, body
+  def self.find(*args)
+    Infraestrutura::PostFactory.build_for_id(*args)
   end
 end
