@@ -84,3 +84,12 @@ div#post div#footer {
   font-size: 10px;
   text-align: right;
 }
+
+div#creative_commons {
+  text-align: center;
+  padding-top: 10px;
+  margin-bottom: 0px;
+  -webkit-border-bottom-left-radius: 0px;
+  -webkit-border-bottom-right-radius: 0px;
+  border-bottom: none;
+}
