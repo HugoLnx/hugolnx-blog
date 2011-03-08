@@ -1,14 +1,16 @@
+$(function(){ 
+  setInterval(checkChangeOfHash,500);
+  var id = catchIdFromHash();
+  changePostTo(id);
+  $.syntax() 
+  declareSlider(id_max,id,titles);
+});
+
 function onChange(event,slider){
   $("#slider_subtitle span#warning").fadeIn(6000);
   $("#slider_subtitle span#title").hide();
-  $("div#post").replaceWith($.ajax({
-    type: "post",
-    url: "/posts/change/",
-    dataType: "html",
-    data: {id: slider.value},
-    async: false,
-    context: document.body
-  }).responseText);
+  changePostTo(slider.value);
+  document.location.hash = "#"+slider.value;
   $.syntax()
 }
 
@@ -26,4 +28,29 @@ function declareSlider(max,value,titles){
   });
 }
 
-$(function(){ $.syntax() });
+function catchIdFromHash(){
+  var id = document.location.hash.slice(1);
+  if(id == "") id = id_max;
+  return id;
+}
+
+function checkChangeOfHash(){
+  if (recentHash != document.location.hash){
+    var id = catchIdFromHash();
+    changePostTo(id);
+    $("#slider").slider({value: id});
+  }
+}
+
+function changePostTo(id) {
+  $("div#post").replaceWith($.ajax({
+    type: "post",
+    url: "/posts/show/",
+    dataType: "html",
+    data: {id: id},
+    async: false,
+    context: document.body
+  }).responseText);
+
+  recentHash = document.location.hash;
+}
