@@ -1,5 +1,6 @@
 <% content_for :javascripts do %>
-  <%= javascript_include_tag 'jquery1.5.1.min',"../jquery-syntax/jquery.syntax.min","jquery-ui-1.8.10.custom.min","application", :cache => true %>
+  <%= javascript_include_tag "../jquery-syntax/jquery.syntax.min" %>
+  <%= javascript_include_tag 'jquery1.5.1.min',"jquery-ui-1.8.10.custom.min","application", :cache => true %>
   <%= javascript_tag do %>
     var id_max = <%=@id_max%>;
     var titles = <%=raw @titles%>;
