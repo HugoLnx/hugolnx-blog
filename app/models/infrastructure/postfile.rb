@@ -24,25 +24,5 @@ module Infrastructure
     def <=>(other_postfile)
       @id <=> other_postfile.id
     end
-
-    class << self
-      def find_all_post_titles_in(directory)
-        postfiles_names = all_htmls_in directory
-        ids = convert_3_first_numbers_of postfiles_names
-        postfiles = ids.collect{|id| new(id,directory)}
-        postfiles.sort!
-        postfiles.collect{|postfile| postfile.title}
-      end
-
-      def find_id_max_in(directory)
-        postfiles_names = all_htmls_in directory
-        ids = convert_3_first_numbers_of postfiles_names
-        ids.max
-      end
-
-      def convert_3_first_numbers_of(postfiles_names)
-        postfiles_names.collect{|filename| filename[0..2].to_i}
-      end
-    end
   end
 end
