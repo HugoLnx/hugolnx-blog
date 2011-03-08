@@ -39,6 +39,14 @@ div#header div#slider_subtitle {
   height: 15px;
 }
 
+div#header div#slider_subtitle span#warning {
+  opacity: 0.4;
+}
+
+div#header div#slider_subtitle span#title {
+  color: #369;
+}
+
 div#post {
   padding-top: 10px;
   padding-left: 0px;
