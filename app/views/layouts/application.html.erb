@@ -7,9 +7,25 @@
   </head>
   
   <body>
-    <%= yield %>
-    <div id="creative_commons" class='box'>
-      <%=render 'layouts/creative_commons'%>
+    <div id="all">
+
+      <div class='box' id="header">
+        <div id="banner"></div>
+        <div id="slider"></div>
+        <div id="slider_subtitle">
+          <span id="title"></span>
+          <span id="warning">Arraste para navegar pelos posts</span>
+        </div>
+      </div>
+      
+      <div id="contents">
+        <%= yield :contents %>
+      </div>
+
+      <div id="creative_commons" class='box'>
+        <%=render 'layouts/creative_commons'%>
+      </div>
+
     </div>
   </body>
   <%= yield :javascripts %>

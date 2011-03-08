@@ -1,5 +1,6 @@
 body {
-  background-color: ddf;
+  background-image: url("/images/back.png");
+  background-repeat: repeat;
 }
 
 div.box {
@@ -10,26 +11,33 @@ div.box {
   margin-bottom: 30px;
 }
 
-div#all {
+div#contents {
   width: 760px;
   margin-left: auto;
   margin-right: auto;
 }
 
 div#header {
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
+  padding-top: 30px;
   padding-bottom: 20px;
+  text-align: center;
+  -webkit-border-radius: 100px;
 }
 
 div#header div#banner {
   height: 149px;
-  -webkit-border-radius: 30px;
-  -moz-border-radius: 30px;
+  width: 791px;
   background-image: url("/images/banner.png");
+  margin-left: auto;
+  margin-right: auto;
 }
 
 div#header div#slider {
   margin-top: 20px;
-  width: 90%;
+  width: 750px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -86,10 +94,10 @@ div#post div#footer {
 }
 
 div#creative_commons {
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
   text-align: center;
   padding-top: 10px;
   margin-bottom: 0px;
-  -webkit-border-bottom-left-radius: 0px;
-  -webkit-border-bottom-right-radius: 0px;
-  border-bottom: none;
 }
