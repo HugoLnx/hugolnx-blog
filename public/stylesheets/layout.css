@@ -45,6 +45,7 @@ div#header div#slider_subtitle span#warning {
 
 div#header div#slider_subtitle span#title {
   color: #369;
+  font-weight: bolder;
 }
 
 div#post {

@@ -9,6 +9,7 @@ function onChange(event,slider){
     async: false,
     context: document.body
   }).responseText);
+  $.syntax()
 }
 
 function declareSlider(max,value,titles){
@@ -21,7 +22,7 @@ function declareSlider(max,value,titles){
       $("#slider_subtitle span#warning").hide();
       $("#slider_subtitle span#title").show();
       $("#slider_subtitle span#title").text(titles[ui.value-1]);
-    }
+    },
   });
 }
 
