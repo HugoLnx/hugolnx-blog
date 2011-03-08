@@ -6,20 +6,12 @@ module Infrastructure
     attr_reader :title
     attr_reader :id
 
-    def initialize(id,directory)
-      @path = find_path(id,directory)
+    def initialize(path)
       filename = File.basename path
       @title = title_from filename
-      @id = id.to_i
+      @id = filename[0..2].to_i
     end
     
-    def find_path(id,directory)
-      id_prefix = sprintf('%.3d',id)
-      filename_regexp = "#{id_prefix}-*"
-      path_regexp = File.join(directory,filename_regexp)
-      Dir[path_regexp].first
-    end
-
     def title_from(filename)
       string_beetween_id_prefix_and_extension_of filename
     end
@@ -46,16 +38,6 @@ module Infrastructure
         postfiles_names = all_htmls_in directory
         ids = convert_3_first_numbers_of postfiles_names
         ids.max
-      end
-
-      def find(id,directory)
-        new(id,directory)
-      end
-
-      def all_htmls_in(directory)
-        postfiles_regexp = File.join(directory,"*.html")
-        postfiles_paths = Dir[postfiles_regexp]
-        postfiles_paths.collect{|path| File.basename path}
       end
 
       def convert_3_first_numbers_of(postfiles_names)
