@@ -1,4 +1,9 @@
 class PostsController < ApplicationController
+  def index
+    id_max = Post.id_max_in 'app/views/posts/posts/'
+    redirect_to :action => :show, :id => id_max
+  end
+
   def show
     id = params[:id]
     @post = Post.find id, :in => 'app/views/posts/posts/'
@@ -10,10 +15,5 @@ class PostsController < ApplicationController
     id = params[:id]
     @post = Post.find id, :in => 'app/views/posts/posts/'
     render :inline => "<%= render 'box_for_post' %>"
-  end
-
-  def index
-    id_max = Post.id_max_in 'app/views/posts/posts/'
-    redirect_to :action => :show, :id => id_max
   end
 end
