@@ -1,5 +1,6 @@
 function onChange(event,slider){
-  $("#slider_subtitle").text("");
+  $("#slider_subtitle span#warning").fadeIn(6000);
+  $("#slider_subtitle span#title").hide();
   $("div#post").replaceWith($.ajax({
     type: "post",
     url: "/posts/change/",
@@ -17,7 +18,9 @@ function declareSlider(max,value,titles){
     value: value,
     change: onChange,
     slide: function onSlide(event,ui) {
-      $("#slider_subtitle").text(titles[ui.value-1]);
+      $("#slider_subtitle span#warning").hide();
+      $("#slider_subtitle span#title").show();
+      $("#slider_subtitle span#title").text(titles[ui.value-1]);
     }
   });
 }
