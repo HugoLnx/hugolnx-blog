@@ -57,4 +57,5 @@ HugolnxBlog::Application.routes.draw do
   # match ':controller(/:action(/:id(.:format)))'
   resources :posts
   match 'posts/show/' => 'posts#show'
+  match '/' => 'posts#index'
 end
