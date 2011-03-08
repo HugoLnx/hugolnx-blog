@@ -1,4 +1,4 @@
-module Infraestrutura
+module Infrastructure
   class Postfile
     def initialize(id,directory)
       path = find_path(id,directory)

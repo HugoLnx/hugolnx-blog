@@ -1,4 +1,4 @@
-module Infraestrutura
+module Infrastructure
   module PostFactory
     extend self
 

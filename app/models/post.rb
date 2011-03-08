@@ -13,15 +13,15 @@ class Post
 
   class << self
     def find(*args)
-      Infraestrutura::PostFactory.build_for_id(*args)
+      Infrastructure::PostFactory.build_for_id(*args)
     end
 
     def all_post_titles_in(directory)
-      Infraestrutura::Postfile.find_all_post_titles_in directory
+      Infrastructure::Postfile.find_all_post_titles_in directory
     end
 
     def id_max_in(directory)
-      Infraestrutura::Postfile.find_id_max_in directory
+      Infrastructure::Postfile.find_id_max_in directory
     end
   end
 end

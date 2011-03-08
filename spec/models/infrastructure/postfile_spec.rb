@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module Infraestrutura
+module Infrastructure
   describe Postfile do
     it 'should find all post titles in spec/fixtures' do
       titles = Postfile.find_all_post_titles_in 'spec/fixtures'
