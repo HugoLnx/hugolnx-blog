@@ -16,12 +16,27 @@ div#all {
   margin-right: auto;
 }
 
+div#header {
+  padding-bottom: 20px;
+}
+
 div#header div#banner {
   height: 149px;
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
   background-image: url("/images/banner.png");
-  margin-bottom: 30px;
+}
+
+div#header div#slider {
+  margin-top: 20px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div#header div#slider_subtitle {
+  text-align: center;
+  height: 15px;
 }
 
 div#post {

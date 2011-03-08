@@ -11,11 +11,17 @@ class Post
     @body = body
   end
 
-  def self.find(*args)
-    Infraestrutura::PostFactory.build_for_id(*args)
-  end
+  class << self
+    def find(*args)
+      Infraestrutura::PostFactory.build_for_id(*args)
+    end
 
-  def self.all_in(*args)
-    Infraestrutura::PostFactory.build_all_in(*args)
+    def all_post_titles_in(directory)
+      Infraestrutura::Postfile.find_all_post_titles_in directory
+    end
+
+    def id_max_in(directory)
+      Infraestrutura::Postfile.find_id_max_in directory
+    end
   end
 end

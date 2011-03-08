@@ -7,9 +7,15 @@ describe Post do
     Post.find 1 ,:in => 'spec/fixtures/'
   end
 
-  it 'should delegates find of all posts to PostFactory' do
-    Infraestrutura::PostFactory.should_receive('build_all_in')
-                               .with('spec/fixtures/')
-    Post.all_in 'spec/fixtures/'
+  it 'should delegates find of post titles to Postfile' do
+    Infraestrutura::Postfile.should_receive('find_all_post_titles_in')
+                            .with('spec/fixtures/')
+    Post.all_post_titles_in 'spec/fixtures/'
+  end
+
+  it 'should delegates find of id max to Postfile' do
+    Infraestrutura::Postfile.should_receive('find_id_max_in')
+                            .with('spec/fixtures/')
+    Post.id_max_in 'spec/fixtures/'
   end
 end

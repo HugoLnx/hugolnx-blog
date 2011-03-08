@@ -7,14 +7,40 @@
   <body>
     <div id="all">
 
-      <div id="header">
+      <div class='box' id="header">
         <div id="banner"></div>
+        <div id="slider"></div>
+        <div id="slider_subtitle"></div>
       </div>
 
       <%=yield%>
 
     </div>
   </body>
-  <%= javascript_include_tag 'jquery1.5.1.min',"../jquery-syntax/jquery.syntax.min.js", :cache => true %>
-  <%= javascript_tag "$(function(){$.syntax()});" %>
+  <%= javascript_include_tag 'jquery1.5.1.min',"../jquery-syntax/jquery.syntax.min","jquery-ui-1.8.10.custom.min", :cache => true %>
+  <%= javascript_tag do %>
+    $(function(){ $.syntax() });
+
+    var titles = <%= raw @titles %>;
+    $("#slider").slider({
+      min: 1,
+      max: <%=@id_max%>,
+      value: <%=@post.id%>,
+      slide: function(event,ui) {
+        $("#slider_subtitle").text(titles[ui.value-1]);
+      },
+      change: function(event,ui) {
+        $("#slider_subtitle").text("");
+        //$.post("change", {id: ui.value}, function(){},"script");
+        $("div#post").replaceWith($.ajax({
+          type: "post",
+          url: "/posts/change/",
+          dataType: "html",
+          data: {id: ui.value},
+          async: false,
+          context: document.body
+        }).responseText);
+      }
+    });
+  <%end%>
 </html>
