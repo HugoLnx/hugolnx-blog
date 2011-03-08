@@ -16,8 +16,14 @@ module Infrastructure
       postfile = Postfile.find(1,'spec/fixtures')
       postfile.should be_a Postfile
       postfile.title.should == 'Testing Post 1'
-      postfile.creation_date == Date.new(1993,03,22)
-      postfile.body == 'Testing Body 1'
+      postfile.path.should == 'spec/fixtures/001-Testing Post 1.html'
+      postfile.id.should == 1
+    end
+
+    it 'should be compared by id' do
+      postfile1 = Postfile.find(1,'spec/fixtures')
+      postfile2 = Postfile.find(2,'spec/fixtures')
+      postfile1.should be < postfile2
     end
   end
 end
