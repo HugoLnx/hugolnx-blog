@@ -11,7 +11,9 @@ module Infrastructure
       id_prefix = sprintf('%.3d',id)
       filename_regexp = "#{id_prefix}-*"
       path_regexp = File.join(directory,filename_regexp)
-      Dir[path_regexp].first
+      path = Dir[path_regexp].first
+      raise PostException, PostException::PostNotFoundedMessage if path.nil?
+      path
     end
   end
 end

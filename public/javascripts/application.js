@@ -13,10 +13,9 @@ PostSlider = function(elementSelector,warningSelector,titleSelector,max,initialV
   }
 
   var events = {
-    onChange: function(event,ui){
+    onStop: function(event,ui){
       warningElement.fadeIn(6000);
       titleElement.hide();
-      changePostTo(ui.value);
       document.location.hash = "#"+ui.value;
     },
 
@@ -31,7 +30,7 @@ PostSlider = function(elementSelector,warningSelector,titleSelector,max,initialV
     min: 1,
     max: max,
     value: initialValue,
-    change: events.onChange,
+    stop: events.onStop,
     slide: events.onSliderStartOrSlide,
     start: events.onSliderStartOrSlide
   });
@@ -54,20 +53,34 @@ function catchIdFromHash(){
 function checkChangeOfHash(){
   if (recentHash != document.location.hash){
     var id = catchIdFromHash();
+    console.log("recentHash="+recentHash+"|"+"actualHash="+document.location.hash);
     changePostTo(id);
     slider.updateValueWith(id);
   }
 }
 
 function changePostTo(id) {
-  $("div#post").replaceWith($.ajax({
+  recentHash = document.location.hash;
+  $.ajax({
     type: "POST",
     url: "/posts/show/",
     dataType: "html",
     data: {id: id},
-    async: false
-  }).responseText);
-
-  recentHash = document.location.hash;
+    async: false,
+    success: success,
+    statusCode: {
+      500: failure
+    }
+  });
   $.syntax()
+}
+
+function success(data) {
+  $("div#error").hide();
+  $("div#post").replaceWith(data);
+}
+
+function failure(ajax) {
+  $("div#post").hide();
+  $("div#error").replaceWith(ajax.responseText);
 }

@@ -6,8 +6,6 @@ body {
 div.box {
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
-  border: 5px solid #99f;
-  background-color: #bbf;
   margin-bottom: 30px;
 }
 
@@ -56,7 +54,14 @@ div#header div#slider_subtitle span#title {
   font-weight: bolder;
 }
 
+div#error {
+  border: 5px solid #f99;
+  background-color: #fbb;
+}
+
 div#post {
+  border: 5px solid #99f;
+  background-color: #bbf;
   padding-top: 10px;
   padding-left: 0px;
   padding-top: 0px;
