@@ -61,7 +61,7 @@ function checkChangeOfHash(){
 
 function changePostTo(id) {
   $("div#post").replaceWith($.ajax({
-    type: "post",
+    type: "POST",
     url: "/posts/show/",
     dataType: "html",
     data: {id: id},
