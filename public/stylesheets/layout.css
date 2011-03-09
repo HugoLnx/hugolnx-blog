@@ -57,6 +57,8 @@ div#header div#slider_subtitle span#title {
 div#error {
   border: 5px solid #f99;
   background-color: #fbb;
+  text-align: center;
+  padding: 20px;
 }
 
 div#post {
