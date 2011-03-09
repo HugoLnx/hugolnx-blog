@@ -1,20 +1,11 @@
 $(document).ready(function(){ 
-  if( wasPassedIdParameter() ) {
-    var href = document.location.href;
-    document.location.href = href.match(/.*\//) + "#" + href.match(/[0-9]+$/);
-  } else {
-    recentHash = document.location.hash;
-    setInterval(checkChangeOfHash,500);
-    var id = catchIdFromHash();
-    changePostTo(id);
-    $.syntax() 
-    declareSlider(id_max,id,titles);
-  }
+  recentHash = document.location.hash;
+  setInterval(checkChangeOfHash,500);
+  var id = catchIdFromHash();
+  changePostTo(id);
+  $.syntax() 
+  declareSlider(id_max,id,titles);
 });
-
-function wasPassedIdParameter(){
-  return (document.location.href.match(/\/[0-9]+/) != null)
-}
 
 function onChange(event,slider){
   $("#slider_subtitle span#warning").fadeIn(6000);
