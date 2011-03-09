@@ -9,6 +9,11 @@ div.box {
   margin-bottom: 30px;
 }
 
+div#post,div#creative_commons,div#header {
+  border: 5px solid #99f;
+  background-color: #bbf;
+}
+
 div#contents {
   width: 760px;
   margin-left: auto;
@@ -62,8 +67,6 @@ div#error {
 }
 
 div#post {
-  border: 5px solid #99f;
-  background-color: #bbf;
   padding-top: 10px;
   padding-left: 0px;
   padding-top: 0px;
