@@ -21,12 +21,15 @@ function declareSlider(max,value,titles){
     max: max,
     value: value,
     change: onChange,
-    slide: function onSlide(event,ui) {
-      $("#slider_subtitle span#warning").hide();
-      $("#slider_subtitle span#title").show();
-      $("#slider_subtitle span#title").text(titles[ui.value-1]);
-    },
+    slide: onSliderStartOrSlide,
+    start: onSliderStartOrSlide
   });
+}
+
+function onSliderStartOrSlide(event,ui){
+  $("#slider_subtitle span#warning").hide();
+  $("#slider_subtitle span#title").show();
+  $("#slider_subtitle span#title").text(titles[ui.value-1]);
 }
 
 function catchIdFromHash(){
