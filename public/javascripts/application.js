@@ -76,11 +76,9 @@ function changePostTo(id) {
 }
 
 function success(data) {
-  $("div#error").hide();
-  $("div#post").replaceWith(data);
+  $("div#contents").html(data);
 }
 
 function failure(ajax) {
-  $("div#post").hide();
-  $("div#error").replaceWith(ajax.responseText);
+  $("div#contents").html(ajax.responseText);
 }
