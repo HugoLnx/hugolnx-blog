@@ -57,5 +57,5 @@ HugolnxBlog::Application.routes.draw do
   # match ':controller(/:action(/:id(.:format)))'
   match 'posts/show(/:id)' => 'posts#show'
   match 'errors/show(/:id)' => 'errors#show'
-  match '/(:id)' => 'posts#index', :constraints => {:id => /\d+/}
+  match '/(:id)' => 'posts#index'#, :constraints => {:id => /\d+/}
 end

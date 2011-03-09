@@ -46,14 +46,13 @@ $(document).ready(function(){
 
 function catchIdFromHash(){
   var id = document.location.hash.slice(1);
-  if(id == "") id = id_max;
+  if(id == "" || id.match(/[a-zA-Z]+/) != null) id = id_max;
   return id;
 }
 
 function checkChangeOfHash(){
   if (recentHash != document.location.hash){
     var id = catchIdFromHash();
-    console.log("recentHash="+recentHash+"|"+"actualHash="+document.location.hash);
     changePostTo(id);
     slider.updateValueWith(id);
   }
