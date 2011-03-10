@@ -1,7 +1,7 @@
 AJAX = function() {
   this.changePostTo = function(id) {
     $.ajax({
-      type: "POST",
+      type: "GET",
       url: "/posts/show/",
       dataType: "html",
       data: {id: id},
