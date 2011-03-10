@@ -99,86 +99,115 @@ if(k===1)c.range[e?"animate":"css"]({width:f-g+"%"},{queue:false,duration:a.anim
 1)[e?"animate":"css"]({width:f+"%"},a.animate);if(b==="max"&&this.orientation==="horizontal")this.range[e?"animate":"css"]({width:100-f+"%"},{queue:false,duration:a.animate});if(b==="min"&&this.orientation==="vertical")this.range.stop(1,1)[e?"animate":"css"]({height:f+"%"},a.animate);if(b==="max"&&this.orientation==="vertical")this.range[e?"animate":"css"]({height:100-f+"%"},{queue:false,duration:a.animate})}}});d.extend(d.ui.slider,{version:"1.8.10"})})(jQuery);
 ;
 
-PostSlider = function(elementSelector,warningSelector,titleSelector,max,initialValue,_titles) {
-  var titles = _titles;
-  var element = $(elementSelector);
-  var warningElement = $(warningSelector);
-  var titleElement = $(titleSelector);
+PostSlider = function(args) {
+  var divElement = $(args.divSelector);
+  var warningElement = $(args.warningSelector);
+  var titleElement = $(args.titleSelector);
+  var max = args.max;
+  var titles = args.titles;
 
-  this.updateValueWith = function(newValue) {
-    element.slider({value: newValue});
-  }
-
-  var titleFor = function(ui) {
-    return titles[ui.value-1];
-  }
-
-  var events = {
-    onStop: function(event,ui){
-      warningElement.fadeIn(6000);
-      titleElement.hide();
-      document.location.hash = "#"+ui.value;
-    },
-
-    onSliderStartOrSlide: function(event,ui){
-      warningElement.hide();
-      titleElement.show();
-      titleElement.text(titleFor(ui));
-    }
-  }
-
-  element.slider({
+  divElement.slider({
     min: 1,
     max: max,
-    value: initialValue,
-    stop: events.onStop,
-    slide: events.onSliderStartOrSlide,
-    start: events.onSliderStartOrSlide
+    stop: onStop,
+    slide: onSliderStartOrSlide,
+    start: onSliderStartOrSlide
   });
-}
-$(document).ready(function(){ 
-  recentHash = document.location.hash;
-  setInterval(checkChangeOfHash,500);
-  var id = catchIdFromHash();
-  changePostTo(id);
-  slider = new PostSlider("#slider","#slider_subtitle span#warning","#slider_subtitle span#title",id_max,id,titles);
-});
 
+  this.updateValueWith = function(newValue) {
+    divElement.slider({value: newValue});
+  }
 
-function catchIdFromHash(){
-  var id = document.location.hash.slice(1);
-  if(id == "" || id.match(/[a-zA-Z]+/) != null) id = id_max;
-  return id;
-}
+  function onStop(event,ui){
+    warningElement.fadeIn(6000);
+    titleElement.hide();
+    document.location.hash = "#"+ui.value;
+  }
 
-function checkChangeOfHash(){
-  if (recentHash != document.location.hash){
-    var id = catchIdFromHash();
-    changePostTo(id);
-    slider.updateValueWith(id);
+  function onSliderStartOrSlide(event,ui){
+    warningElement.hide();
+    titleElement.show();
+    titleElement.text(titleFor(ui));
+  }
+
+  function titleFor(ui) {
+    return titles[ui.value-1];
   }
 }
 
-function changePostTo(id) {
-  recentHash = document.location.hash;
-  $.ajax({
-    type: "POST",
-    url: "/posts/show/",
-    dataType: "html",
-    data: {id: id},
-    async: false,
-    success: success,
-    statusCode: {
-      500: failure
+
+SynchronizedHash = function(args) {
+  var delay = args.syncronizingEach;
+
+  var lastHash = document.location.hash;
+  var onchangeFunction = function(){};
+  synchronizeWithDocumentHashEach(delay);
+
+  function synchronizeWithDocumentHashEach(delay) {
+    setInterval(checkHashChangeNow,delay);
+  }
+
+  function checkHashChangeNow(){
+    if (lastHash != document.location.hash){
+      lastHash = document.location.hash;
+      onChangeFunction();
     }
-  });
-  $.syntax()
+  }
+
+  this.getArgument = function(){
+    return lastHash.slice(1);
+  }
+
+  this.onChange = function(_onChangeFunction){
+    onChangeFunction = _onChangeFunction;
+  }
 }
 
-function success(data) {
-  $("div#contents").html(data);
+
+
+AJAX = function() {
+  this.changePostTo = function(id) {
+    var url = "/errors/show";
+    
+    var x = document.location.pathname.slice(1);
+    if ((x == "" && document.location.hash.slice(1).match(/[^0-9]+/) == null) || x.match(/[0-9]+/) != null) url = "/posts/show";
+    $.ajax({
+      type: "GET",
+      url: url,
+      dataType: "html",
+      data: {id: id},
+      async: true,
+      complete: insertDataInContents
+    });
+    $.syntax()
+  }
+
+  function insertDataInContents(xmlHttpRequest) {
+    $("div#contents").html(xmlHttpRequest.responseText);
+  }
 }
 
-function failure(ajax) {
-  $("div#contents").html(ajax.responseText);
+
+
+$(document).ready(function(){ 
+  hash = new SynchronizedHash({synchronizingEach: 500});
+  hash.onChange(refreshComponents);
+  ajax = new AJAX();
+  postSlider = new PostSlider(
+    {
+      divSelector: "#slider",
+      warningSelector: "#slider_subtitle span#warning",
+      titleSelector: "slider_subtitle span#title",
+      max: id_max,
+      titles: titles
+    }
+  );
+  refreshComponents();
+});
+
+function refreshComponents() {
+  var argument = hash.getArgument();
+  if((argument == "" || argument.match(/[^0-9]+/) != null)) argument = id_max;
+  ajax.changePostTo(argument);
+  postSlider.updateValueWith(argument);
 }

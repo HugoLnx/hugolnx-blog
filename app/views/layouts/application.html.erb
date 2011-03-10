@@ -30,12 +30,8 @@
     </div>
   </body>
 
-  <%= javascript_include_tag "jquery.min",        :cache => true %>
-  <%= javascript_include_tag "jquery-ui.min",     :cache => true %>
-  <%= javascript_include_tag "post.slider",       :cache => true %>
-  <%= javascript_include_tag "synchronized.hash", :cache => true %>
-  <%= javascript_include_tag "ajax",              :cache => true %>
-  <%= javascript_include_tag "application",       :cache => true %>
+  <% js_to_cache = %w{jquery.min jquery-ui.min post.slider synchronized.hash ajax application} %>
+  <%= javascript_include_tag(js_to_cache, :cache => true) %>
   <%= javascript_include_tag "../jquery-syntax/jquery.syntax.min" %>
   <%= javascript_tag do %>
     var id_max = <%=@id_max%>;
