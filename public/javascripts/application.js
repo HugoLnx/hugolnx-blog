@@ -1,5 +1,5 @@
 $(document).ready(function(){ 
-  hash = new SynchronizedHash();
+  hash = new SynchronizedHash({synchronizingEach: 500});
   hash.onChange(refreshComponents);
   ajax = new AJAX();
   postSlider = new PostSlider(
