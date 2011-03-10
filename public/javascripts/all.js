@@ -197,7 +197,7 @@ $(document).ready(function(){
     {
       divSelector: "#slider",
       warningSelector: "#slider_subtitle span#warning",
-      titleSelector: "slider_subtitle span#title",
+      titleSelector: "#slider_subtitle span#title",
       max: id_max,
       titles: titles
     }
