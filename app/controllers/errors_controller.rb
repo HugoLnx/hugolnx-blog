@@ -1,11 +1,16 @@
 #encoding: utf-8
 class ErrorsController < ApplicationController
+  def index
+    redirect_to "/##{params[:tryied_path]}"
+  end
+
   def show
-    response.status = 500
     error_message = params[:id]
     case error_message
     when Infrastructure::PostException::PostNotFoundedMessage
-      @message = "O Post não foi encontrado"
+      @message = "O Post não foi encontrado."
+    else
+      @message = "Esta url não é válida."
     end
     render :layout => false
   end

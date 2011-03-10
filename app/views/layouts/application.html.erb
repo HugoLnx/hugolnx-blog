@@ -29,7 +29,18 @@
 
     </div>
   </body>
-  <%= yield :javascripts %>
-  <%= javascript_include_tag 'google.analitics' %>
 
+  <%= javascript_include_tag "jquery.min",        :cache => true %>
+  <%= javascript_include_tag "jquery-ui.min",     :cache => true %>
+  <%= javascript_include_tag "post.slider",       :cache => true %>
+  <%= javascript_include_tag "synchronized.hash", :cache => true %>
+  <%= javascript_include_tag "ajax",              :cache => true %>
+  <%= javascript_include_tag "application",       :cache => true %>
+  <%= javascript_include_tag "../jquery-syntax/jquery.syntax.min" %>
+  <%= javascript_tag do %>
+    var id_max = <%=@id_max%>;
+    var titles = <%=raw @titles%>;
+  <%end%>
+
+  <%= javascript_include_tag 'google.analitics' %>
 </html>
