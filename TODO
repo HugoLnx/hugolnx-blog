@@ -1,6 +1,6 @@
 X- Refactor javascript;
-R- Do layout be renderized automaticaly;
-R- Find better solution to RoutingError validation;
+X- Find better solution to RoutingError validation;
+X- Do layout be renderized automaticaly;
  - Tests for javascripts
  - Tests for routes
  - Refactor javascript again
