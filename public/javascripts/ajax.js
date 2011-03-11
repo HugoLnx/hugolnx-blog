@@ -12,7 +12,6 @@ AJAX = function() {
       async: true,
       complete: insertDataInContents
     });
-    $.syntax()
   }
 
   function insertDataInContents(xmlHttpRequest) {
