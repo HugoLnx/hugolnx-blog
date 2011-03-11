@@ -58,6 +58,6 @@ HugolnxBlog::Application.routes.draw do
   match '/' => 'posts#master_layout'
   match 'posts/show(/:id)' => 'posts#show'
   match 'errors/show(/:id)' => 'errors#show'
-  match '/(:id)' => 'posts#index', :constraints => {:id => /\d+/}
-  match'/(*tryied_path)' => 'errors#index'
+  match '/(:id)' => 'posts#call_ajax', :constraints => {:id => /\d+/}
+  match'/(*tryied_path)' => 'errors#call_ajax'
 end

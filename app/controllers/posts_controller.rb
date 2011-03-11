@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   rescue_from Infrastructure::PostException, :with => :to_error
   
-  def index
+  def call_ajax
     redirect_to "/##{params[:id]}" 
   end
 

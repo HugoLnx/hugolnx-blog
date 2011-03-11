@@ -27,9 +27,12 @@ gem 'rails', '3.0.5'
 # group :development, :test do
 #   gem 'webrat'
 # end
-group :test do
+group :test, :development do
   gem 'rspec-rails'
   gem 'cucumber-rails'
+end
+
+group :test do
   gem 'capybara'
   gem 'database_cleaner'
 end

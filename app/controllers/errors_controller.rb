@@ -1,6 +1,6 @@
 #encoding: utf-8
 class ErrorsController < ApplicationController
-  def index
+  def call_ajax
     redirect_to "/##{params[:tryied_path]}"
   end
 
