@@ -30,6 +30,7 @@ gem 'rails', '3.0.5'
 group :test, :development do
   gem 'rspec-rails'
   gem 'cucumber-rails'
+  gem 'jspec'
 end
 
 group :test do
