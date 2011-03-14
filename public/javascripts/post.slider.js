@@ -1,11 +1,11 @@
 PostSlider = function(args) {
-  var divElement = $(args.divSelector);
-  var warningElement = $(args.warningSelector);
-  var titleElement = $(args.titleSelector);
-  var max = args.max;
-  var titles = args.titles;
+  var element = args["element"];
+  var noticeElement = args["noticeElement"];
+  var titleElement = args["titleElement"];
+  var max = args["max"];
+  var titles = args["titles"];
 
-  divElement.slider({
+  element.slider({
     min: 1,
     max: max,
     stop: onStop,
@@ -14,17 +14,17 @@ PostSlider = function(args) {
   });
 
   this.updateValueWith = function(newValue) {
-    divElement.slider({value: newValue});
+    element.slider({value: newValue});
   }
 
   function onStop(event,ui){
-    warningElement.fadeIn(6000);
+    noticeElement.fadeIn(6000);
     titleElement.hide();
     document.location.hash = "#"+ui.value;
   }
 
   function onSliderStartOrSlide(event,ui){
-    warningElement.hide();
+    noticeElement.hide();
     titleElement.show();
     titleElement.text(titleFor(ui));
   }

@@ -3,15 +3,19 @@
 		<link type="text/css" rel="stylesheet" href="/home/hugolnx/.rvm/gems/ruby-1.9.2-p136/gems/jspec-4.3.3/lib/jspec.css" />
 		<script src="/home/hugolnx/.rvm/gems/ruby-1.9.2-p136/gems/jspec-4.3.3/lib/jspec.js"></script>
 		<script src="/home/hugolnx/.rvm/gems/ruby-1.9.2-p136/gems/jspec-4.3.3/lib/jspec.xhr.js"></script>
+		<script src="timers.mocker.js"></script>
+		<script src="../public/javascripts/jquery.min.js"></script>
+		<script src="../public/javascripts/jquery-ui.min.js"></script>
 		<script src="../public/javascripts/post.slider.js"></script>
 		<script src="../public/javascripts/synchronized.hash.js"></script>
 		<script src="../public/javascripts/ajax.js"></script>
-		<script src="../public/javascripts/application.js"></script>
+		<!-- <script src="../public/javascripts/application.js"></script> -->
 		<script src="unit/spec.helper.js"></script>
 		<script>
 			function runSuites() {
 				JSpec
-				.exec('unit/spec.js')
+				.exec('unit/post.slider.spec.js')
+				.exec('unit/synchronized.hash.spec.js')
 				.run({ fixturePath: 'fixtures' })
 				.report()
 			}

@@ -1,5 +1,5 @@
 SynchronizedHash = function(args) {
-  var delay = args.syncronizingEach;
+  var delay = args["syncronizingEach"];
 
   var lastHash = document.location.hash;
   var onchangeFunction = function(){};
@@ -10,6 +10,7 @@ SynchronizedHash = function(args) {
   }
 
   function checkHashChangeNow(){
+    alert(1);
     if (lastHash != document.location.hash){
       lastHash = document.location.hash;
       onChangeFunction();
