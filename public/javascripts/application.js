@@ -4,9 +4,9 @@ $(document).ready(function(){
   ajax = new AJAX();
   postSlider = new PostSlider(
     {
-      divSelector: "#slider",
-      warningSelector: "#slider_subtitle span#warning",
-      titleSelector: "#slider_subtitle span#title",
+      element: $("#slider"),
+      noticeElement: $("#slider_subtitle span#notice"),
+      titleElement: $("#slider_subtitle span#title"),
       max: id_max,
       titles: titles
     }

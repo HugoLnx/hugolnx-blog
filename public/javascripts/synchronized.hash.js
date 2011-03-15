@@ -10,7 +10,6 @@ SynchronizedHash = function(args) {
   }
 
   function checkHashChangeNow(){
-    alert(1);
     if (lastHash != document.location.hash){
       lastHash = document.location.hash;
       onChangeFunction();

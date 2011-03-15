@@ -10,7 +10,10 @@ module Infrastructure
       title = postfile.title
       creation_date = postfile_content.creation_date
       body = postfile_content.body
-      Post.new(id,title,creation_date,body)
+      Post.new :id => id,
+               :title => title, 
+               :creation_date => creation_date,
+               :body => body
     end
 
     def find_all_post_titles_in(directory)

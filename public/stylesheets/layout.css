@@ -3,6 +3,10 @@ body {
   background-repeat: repeat;
 }
 
+textarea {
+  resize: none;
+}
+
 div.box {
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;

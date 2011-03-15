@@ -1,4 +1,12 @@
 <%= javascript_tag '$.syntax()' %>
+<%= javascript_tag do %>
+  $("form#comment").submit(function(){
+    var data = $.post($(this).attr("action"),$(this).serialize())
+      .complete(function(xmlHttpRequest){$("div#comments").html(xmlHttpRequest.responseText)})
+    return false;
+  });
+<%end%>
+
 <div id="post" class="box">
   <div id="title">
     <h1><%=@post.title%></h1>
@@ -6,7 +14,22 @@
   <div id="content">
     <%= render :inline => @post.body %>
   </div>
+
   <div id="footer">
     <%= @post.creation_date.to_s :portuguese %>
   </div>
+</div>
+
+<div id="comments">
+</div>
+
+<div id="commentForm" class="box">
+  <h1>Faça seu comentário:</h1>
+  <form id="comment" action="/posts/<%=@post.id%>/comments">
+    <label for="author">Autor</label></br>
+    <input name="comment[author]"></input></br>
+    <label for="content">Comentário</label></br>
+    <textarea name="comment[content]" rows="8" cols="70"></textarea></br>
+    <input type="submit" value="Comentar"></input>
+  </form>
 </div>

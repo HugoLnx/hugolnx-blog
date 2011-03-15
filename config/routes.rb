@@ -57,6 +57,9 @@ HugolnxBlog::Application.routes.draw do
   # match ':controller(/:action(/:id(.:format)))'
   match '/' => 'posts#master_layout'
   match 'posts/show(/:id)' => 'posts#show'
+  resources :posts, :only => ['show'] do
+    resources :comments
+  end
   match 'errors/show(/:id)' => 'errors#show'
   match '/(:id)' => 'posts#call_ajax', :constraints => {:id => /\d+/}
   match'/(*tryied_path)' => 'errors#call_ajax'

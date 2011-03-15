@@ -27,13 +27,17 @@ gem 'rails', '3.0.5'
 # group :development, :test do
 #   gem 'webrat'
 # end
+
+gem 'mysql2'
+
 group :test, :development do
   gem 'rspec-rails'
-  gem 'cucumber-rails'
   gem 'jspec'
 end
 
 group :test do
+  gem 'shoulda'
+  gem 'cucumber-rails'
   gem 'capybara'
   gem 'database_cleaner'
 end

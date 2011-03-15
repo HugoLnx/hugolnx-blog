@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Post do
+  it {should have_many :comments}
+
   it 'should delegates find of post to PostDsl' do
     Infrastructure::PostDsl.should_receive('find_and_build')
                                .with(1 ,:in => 'spec/fixtures/')
