@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
   def create
     params[:comment].merge!(params.select{|key| key == 'post_id'})
-    p params[:comment]
     comment = Comment.new params[:comment]
     comment.save
     if comment.errors.empty?

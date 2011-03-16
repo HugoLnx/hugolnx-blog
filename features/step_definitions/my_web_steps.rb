@@ -4,6 +4,6 @@ When /^(?:|I )fill in "([^"]*)" of "([^"]*)" with "([^"]*)"(?: within "([^"]*)")
   end
 end
 
-Then /^I should see "([^"]*)" with "([^"]*)"$/ do |field, field_class|
-  should have_selector "#{field}.#{field_class}"
+Then /^I should see that the field to "([^"]*)" of "([^"]*)" have a "([^"]*)"$/ do |field, model, field_class|
+  should have_selector "[name='#{model}[#{field}]'].#{field_class}"
 end
