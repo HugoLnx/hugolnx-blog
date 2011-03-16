@@ -4,3 +4,5 @@ X- Do layout be renderized automaticaly;
 X - Tests for routes
  - Tests for javascripts
  - Refactor javascript again
+ - Define default directory to find posts.
+ - Tests with cucumber for comments fails.
