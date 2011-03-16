@@ -7,11 +7,8 @@ class CommentsController < ApplicationController
       redirect_to :action => :index
     else
       response.status = 500
-      javascript = ""
-      comment.errors.each do |field|
-        javascript += "$('form#comment [name=\"comment[#{field}]\"]').addClass('field_error');"
-      end
-      render :inline => javascript
+      response.content_type = "text/plain"
+      render :inline => comment.errors.keys.join(';;');
     end
   end
 

@@ -7,3 +7,7 @@ end
 Then /^I should see that the field to "([^"]*)" of "([^"]*)" have a "([^"]*)"$/ do |field, model, field_class|
   should have_selector "[name='#{model}[#{field}]'].#{field_class}"
 end
+
+Then /^I should not see that the field to "([^"]*)" of "([^"]*)" have a "([^"]*)"$/ do |field, model, field_class|
+  should_not have_selector "[name='#{model}[#{field}]'].#{field_class}"
+end

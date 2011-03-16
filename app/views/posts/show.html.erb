@@ -1,22 +1,4 @@
-<%= javascript_tag '$.syntax()' %>
-<%= javascript_tag do %>
-  $("form#comment").submit(function(){
-    $("form#comment [name^='comment[']").removeClass("field_error");
-    $.post($(this).attr("action"),$(this).serialize())
-      .complete(function(xmlHttpRequest){
-        if (xmlHttpRequest.status == 500) {
-          var script = document.createElement("script");
-          script.type = "text/javascript";
-          script.innerHTML = xmlHttpRequest.responseText;
-          document.body.appendChild(script);
-        } else {
-          $("form#comment [name^='comment[']").attr("value","");
-          $("div#comments").html(xmlHttpRequest.responseText);
-        }
-      });
-    return false;
-  });
-<%end%>
+<%= javascript_include_tag "posts/show" %>
 
 <div id="post" class="box">
   <div id="title">
@@ -31,8 +13,7 @@
   </div>
 </div>
 
-<div id="comments">
-</div>
+<div id="comments"></div>
 
 <div id="commentForm" class="box">
   <h1>Faça seu comentário:</h1>
