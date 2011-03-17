@@ -62,5 +62,9 @@ HugolnxBlog::Application.routes.draw do
   end
   match 'errors/show(/:id)' => 'errors#show'
   match '/(:id)' => 'posts#call_ajax', :constraints => {:id => /\d+/}
+
+  match "/auth/:provider" => "sessions#setup"
+  match "/auth/:provider/callback" => "sessions#create"
+  match "/signout" => "sessions#destroy", :as => :signout
   match'/(*tryied_path)' => 'errors#call_ajax'
 end

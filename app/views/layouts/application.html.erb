@@ -7,6 +7,11 @@
   </head>
   
   <body>
+    <% if current_user %>
+      VOCE ESTA LOGADO NO TWITTER
+    <% else %>
+      VOCE NAO ESTA LOGADO NO TWITTER
+    <% end %>
     <div id="all">
 
       <div class='box' id="header">
