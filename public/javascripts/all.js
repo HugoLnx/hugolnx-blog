@@ -100,13 +100,13 @@ if(k===1)c.range[e?"animate":"css"]({width:f-g+"%"},{queue:false,duration:a.anim
 ;
 
 PostSlider = function(args) {
-  var divElement = $(args.divSelector);
-  var warningElement = $(args.warningSelector);
-  var titleElement = $(args.titleSelector);
-  var max = args.max;
-  var titles = args.titles;
+  var element = args["element"];
+  var noticeElement = args["noticeElement"];
+  var titleElement = args["titleElement"];
+  var max = args["max"];
+  var titles = args["titles"];
 
-  divElement.slider({
+  element.slider({
     min: 1,
     max: max,
     stop: onStop,
@@ -115,17 +115,17 @@ PostSlider = function(args) {
   });
 
   this.updateValueWith = function(newValue) {
-    divElement.slider({value: newValue});
+    element.slider({value: newValue});
   }
 
   function onStop(event,ui){
-    warningElement.fadeIn(6000);
+    noticeElement.fadeIn(6000);
     titleElement.hide();
     document.location.hash = "#"+ui.value;
   }
 
   function onSliderStartOrSlide(event,ui){
-    warningElement.hide();
+    noticeElement.hide();
     titleElement.show();
     titleElement.text(titleFor(ui));
   }
@@ -137,7 +137,7 @@ PostSlider = function(args) {
 
 
 SynchronizedHash = function(args) {
-  var delay = args.syncronizingEach;
+  var delay = args["syncronizingEach"];
 
   var lastHash = document.location.hash;
   var onchangeFunction = function(){};
@@ -169,8 +169,8 @@ AJAX = function() {
   this.changePostTo = function(id) {
     var url = "/errors/show";
     
-    var x = document.location.pathname.slice(1);
-    if ((x == "" && document.location.hash.slice(1).match(/[^0-9]+/) == null) || x.match(/[0-9]+/) != null) url = "/posts/show";
+    var path = document.location.pathname.slice(1);
+    if ((path == "" && document.location.hash.slice(1).match(/[^0-9]+/) == null) || path.match(/[0-9]+/) != null) url = "/posts/show";
     $.ajax({
       type: "GET",
       url: url,
@@ -179,7 +179,6 @@ AJAX = function() {
       async: true,
       complete: insertDataInContents
     });
-    $.syntax()
   }
 
   function insertDataInContents(xmlHttpRequest) {
@@ -195,9 +194,9 @@ $(document).ready(function(){
   ajax = new AJAX();
   postSlider = new PostSlider(
     {
-      divSelector: "#slider",
-      warningSelector: "#slider_subtitle span#warning",
-      titleSelector: "#slider_subtitle span#title",
+      element: $("#slider"),
+      noticeElement: $("#slider_subtitle span#notice"),
+      titleElement: $("#slider_subtitle span#title"),
       max: id_max,
       titles: titles
     }
