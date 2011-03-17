@@ -1,6 +1,7 @@
 <% for comment in @comments %>
   <div id="comment<%=comment.id%>">
-    <span class="author"><%=comment.author%></span>
+    <img class="img" src="<%=comment.user.avatar_path%>"></img>
+    <span class="user"><%=comment.user.name%>(<%=comment.user.nickname%>)</span>
     <span class="content"><%=comment.content%></span>
   </div>
 <%end%>

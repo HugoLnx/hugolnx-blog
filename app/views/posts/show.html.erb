@@ -1,4 +1,9 @@
 <%= javascript_include_tag "posts/show" %>
+<%= javascript_tag do %>
+  $("a#signTwitter").click(function(){
+    this.href = this.href + "?hash=" + hash.getArgument();
+  });
+<%end%>
 
 <div id="post" class="box">
   <div id="title">
@@ -17,11 +22,18 @@
 
 <div id="commentForm" class="box">
   <h1>Faça seu comentário:</h1>
-  <form id="comment" action="/posts/<%=@post.id%>/comments">
-    <label for="author">Autor</label></br>
-    <input name="comment[author]"></input></br>
-    <label for="content">Comentário</label></br>
-    <textarea name="comment[content]" rows="8" cols="70"></textarea></br>
-    <input type="submit" value="Comentar"></input>
-  </form>
+  <% if current_user %>
+    <a href="/signout" id="signoutTwitter">Deslogue do Twitter</a></br>
+    <form id="comment" action="/posts/<%=@post.id%>/comments">
+      <input type="hidden" name="comment[user_id]" value="<%=current_user.id%>"></input>
+      <input type="hidden" name="comment[post_id]" value="<%=@post.id%>"></input>
+
+      <label for="user_id">Comentando Como: <%=current_user.name%><b>(<%=current_user.nickname%>)</b></label></br>
+      <label for="content">Comentário</label></br>
+      <textarea name="comment[content]" rows="8" cols="70"></textarea></br>
+      <input type="submit" value="Comentar"></input>
+    </form>
+  <%else%>
+    <a href="/auth/twitter/" id="signTwitter">Logue no Twitter para comentar</a>
+  <%end%>
 </div>

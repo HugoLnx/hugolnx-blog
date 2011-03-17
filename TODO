@@ -3,6 +3,9 @@ X- Find better solution to RoutingError validation;
 X- Do layout be renderized automaticaly;
 X - Tests for routes
 X - Tests with cucumber for comments fails.
+X - Define default directory to find posts.
  - Tests for javascripts
  - Refactor javascript again
- - Define default directory to find posts.
+ - Discover why when user comment it is automaticaly signout from twitter.
+ - Put a window in bottom right of screen to user comment and sign in/out to/from twitter.
+ - Update cucumber tests
