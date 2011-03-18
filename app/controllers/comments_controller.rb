@@ -3,17 +3,11 @@ class CommentsController < ApplicationController
     comment = Comment.new params[:comment]
     comment.save
     if comment.errors.empty?
-      redirect_to :action => :index
+      @comments = comment.post.comments
+      render @comments, :layout => false
     else
-      response.status = 500
-      response.content_type = "text/plain"
-      render :inline => comment.errors.keys.join(';;');
+      render :text => comment.errors.keys.join(';;'),
+             :status => 500
     end
-  end
-
-  def index
-    post = Post.find params[:post_id], :in => "app/views/posts/posts/"
-    @comments = post.comments
-    render :layout => false
   end
 end

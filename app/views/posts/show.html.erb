@@ -1,39 +1,35 @@
-<%= javascript_include_tag "posts/show" %>
-<%= javascript_tag do %>
-  $("a#signTwitter").click(function(){
-    this.href = this.href + "?hash=" + hash.getArgument();
-  });
-<%end%>
+<%= javascript_tag '$.syntax()' %>
 
 <div id="post" class="box">
-  <div id="title">
+  <div class="title">
     <h1><%=@post.title%></h1>
   </div>
-  <div id="content">
+  <div class="content">
     <%= render :inline => @post.body %>
   </div>
 
-  <div id="footer">
+  <div class="footer">
     <%= @post.creation_date.to_s :portuguese %>
   </div>
 </div>
 
-<div id="comments"></div>
+<div id="comments" class="box">
+  <div class="title">
+    <h1>Comentários</h1>
+  </div>
+
+  <div class="content">
+    <%= render @comments %>
+  </div>
+
+</div>
 
 <div id="commentForm" class="box">
-  <h1>Faça seu comentário:</h1>
-  <% if current_user %>
-    <a href="/signout" id="signoutTwitter">Deslogue do Twitter</a></br>
-    <form id="comment" action="/posts/<%=@post.id%>/comments">
-      <input type="hidden" name="comment[user_id]" value="<%=current_user.id%>"></input>
-      <input type="hidden" name="comment[post_id]" value="<%=@post.id%>"></input>
+  <div class="title">
+    <h1>Deixe seu Comentário</h1>
+  </div>
 
-      <label for="user_id">Comentando Como: <%=current_user.name%><b>(<%=current_user.nickname%>)</b></label></br>
-      <label for="content">Comentário</label></br>
-      <textarea name="comment[content]" rows="8" cols="70"></textarea></br>
-      <input type="submit" value="Comentar"></input>
-    </form>
-  <%else%>
-    <a href="/auth/twitter/" id="signTwitter">Logue no Twitter para comentar</a>
-  <%end%>
+  <div class="content">
+    <%= render "comments/form" %>
+  </div>
 </div>

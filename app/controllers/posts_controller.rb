@@ -8,6 +8,7 @@ class PostsController < ApplicationController
   def show
     id = params[:id].to_i
     @post = Post.find id, :in => 'app/views/posts/posts/'
+    @comments = @post.comments
     render :layout => false
   end
 

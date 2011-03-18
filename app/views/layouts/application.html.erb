@@ -1,7 +1,7 @@
 <html>
   <head>
     <title>HugoLnx::Blog beta</title>
-    <%= stylesheet_link_tag :all, :cache => true %>
+    <%= stylesheet_link_tag :all, :recursive => true, :cache => true %>
     <%= favicon_link_tag %>
     <%= csrf_meta_tag %>
   </head>
@@ -9,7 +9,7 @@
   <body>
     <div id="all">
 
-      <div class='box' id="header">
+      <div id="header" class='box'>
         <a href="/"><div id="banner"></div></a>
         <center style="opacity:0.3;color:#f0f">Em Produção</center>
         <div id="slider"></div>
@@ -20,8 +20,7 @@
       </div>
       
 
-      <div id="contents">
-      </div>
+      <div id="contents"></div>
 
       <div id="creative_commons" class='box'>
         <%=render 'layouts/creative_commons'%>
@@ -30,13 +29,11 @@
     </div>
   </body>
 
-  <% js_to_cache = %w{jquery.min jquery-ui.min post.slider synchronized.hash ajax application} %>
+  <% js_to_cache = %w{jquery.min jquery-ui.min post.slider synchronized.hash ajax application google.analitics} %>
   <%= javascript_include_tag(js_to_cache, :cache => true) %>
   <%= javascript_include_tag "../jquery-syntax/jquery.syntax.min" %>
   <%= javascript_tag do %>
     var id_max = <%=@id_max%>;
     var titles = <%=raw @titles%>;
   <%end%>
-
-  <%= javascript_include_tag 'google.analitics' %>
 </html>

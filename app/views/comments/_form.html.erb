@@ -1,0 +1,20 @@
+<% if current_user %>
+
+  <%= javascript_include_tag "comments/form" %>
+  <a href="/signout" id="signoutTwitter">Deslogue do Twitter</a></br>
+  <form id="comment" action="/posts/<%=@post.id%>/comments">
+    <input type="hidden" name="comment[user_id]" value="<%=current_user.id%>"></input>
+    <input type="hidden" name="comment[post_id]" value="<%=@post.id%>"></input>
+
+    <label for="user_id">Comentando Como: <%=current_user.name%><b>(<%=current_user.nickname%>)</b></label></br>
+    <label for="content">Comentário</label></br>
+    <textarea name="comment[content]" rows="8" cols="70"></textarea></br>
+    <input type="submit" value="Comentar"></input>
+  </form>
+
+<%else%>
+
+  <%= javascript_include_tag "comments/a.sign.twitter.click" %>
+  <a href="/auth/twitter/" id="signTwitter">Logue no Twitter para comentar</a>
+
+<%end%>
