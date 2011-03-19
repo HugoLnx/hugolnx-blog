@@ -1,20 +1,30 @@
 DONE IN SOME DAY =========================
-X- Refactor javascript;
-X- Find better solution to RoutingError validation;
-X- Do layout be renderized automaticaly;
-X - Tests for routes
-X - Tests with cucumber for comments fails.
-X - Define default directory to find posts.
+ - Refactor javascript;
+ - Find better solution to RoutingError validation;
+ - Do layout be renderized automaticaly;
+ - Tests for routes
+ - Tests with cucumber for comments fails.
+ - Define default directory to find posts.
 
 DONE IN 18-03-2011 =======================
-X - Refactor rendering system
-X - Refactor CSS
+ - Refactor rendering system
+ - Refactor CSS
+ - Update cucumber tests to comment feature with twitter
+
+DONE IN 19-03-2011 ======================
+  - Create cucumber tests to twitter feature
+  - Fix bug that when user comment it is automaticaly signout from twitter.
 
 TODO =====================================
- - Tests for javascripts
- - Refactor javascript again
- - Fix bug that when user comment it is automaticaly signout from twitter.
- - Put a window in bottom right of screen to user comment and sign in/out to/from twitter.
- - Update cucumber tests
- - User ajax to log in Twitter
- - Redirect to origin url when a session is destroyed
+ FEATURES
+   - Previne double post
+   - Allow user to edit or delete your own comments.
+   - Fix bug of rendering comments after the user post a comment.(the title don't appear)
+   - Redirect to origin url when a session is destroyed
+   - Use ajax to sign out Twitter
+   - Use ajax to sign in Twitter
+   - Put a window in bottom right of screen to user comment and sign in/out to/from twitter.
+ TECNICAL
+   - Understand why user can't post double times.(parameters come empty)
+   - Tests for javascripts
+   - Refactor javascript again
