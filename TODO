@@ -14,12 +14,13 @@ DONE IN 18-03-2011 =======================
 DONE IN 19-03-2011 ======================
   - Create cucumber tests to twitter feature
   - Fix bug that when user comment it is automaticaly signout from twitter.
+  - Fix bug of rendering comments after the user post a comment.(the title don't appear)
 
 TODO =====================================
  FEATURES
    - Previne double post
+   - Move screen to bottom after user post a comment and server renderize comments again.
    - Allow user to edit or delete your own comments.
-   - Fix bug of rendering comments after the user post a comment.(the title don't appear)
    - Redirect to origin url when a session is destroyed
    - Use ajax to sign out Twitter
    - Use ajax to sign in Twitter

@@ -32,5 +32,5 @@ function resetForm() {
 }
 
 function updateCommentsWith(commentsDivs) {
-  $("div#comments").html(commentsDivs);
+  $("div#comments div.content").html(commentsDivs);
 }
