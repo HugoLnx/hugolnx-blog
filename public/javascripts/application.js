@@ -16,7 +16,8 @@ $(document).ready(function(){
 
 function refreshComponents() {
   var argument = hash.getArgument();
-  if((argument == "" || argument.match(/[^0-9]+/) != null)) argument = id_max;
+  if(argument == "" ) argument = id_max;
   ajax.changePostTo(argument);
+  if(argument.match(/[^0-9]+/) != null) argument = id_max;
   postSlider.updateValueWith(argument);
 }

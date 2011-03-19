@@ -17,3 +17,4 @@ TODO =====================================
  - Put a window in bottom right of screen to user comment and sign in/out to/from twitter.
  - Update cucumber tests
  - User ajax to log in Twitter
+ - Redirect to origin url when a session is destroyed

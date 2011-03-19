@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     session[:user_id] = user.id
     origin = request.env['omniauth.origin']
     origin = File.join(origin,"#" + params['hash']) if params.has_key? 'hash'
-    redirect_to origin
+    redirect_to origin || '/'
   end
 
   def destroy
