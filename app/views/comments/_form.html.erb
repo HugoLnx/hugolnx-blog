@@ -1,5 +1,6 @@
-<% if current_user %>
-
+<% if @post.comments.last && @post.comments.last.user == current_user %>
+  Não comente duas vezes seguidas, edite o comentário anterior
+<% elsif current_user %>
   <%= javascript_include_tag "comments/form" %>
   <a href="/signout" id="signoutTwitter">Deslogue do Twitter</a></br>
   <form id="comment" action="/posts/<%=@post.id%>/comments">

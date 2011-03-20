@@ -1,10 +1,3 @@
-module MyWebHelpers
-  def image_selector_for(image)
-    "img[src='#{image}']"
-  end
-end
-World(MyWebHelpers)
-
 When /^(?:|I )fill in "([^"]*)" of "([^"]*)" with "([^"]*)"(?: within "([^"]*)")?$/ do |field, model, value, selector|
   with_scope(selector) do
     fill_in("#{model}[#{field}]", :with => value)
@@ -26,4 +19,10 @@ Then /^I should see the image "([^"]*)"(?: within "([^"]*)")?$/ do |image, selec
 end
 
 Given /^I do nothing$/ do
+end
+
+Given /^I fill in "([^"]*)" of "([^"]*)" with a text with "([^"]*)" lines within "([^"]*)"$/ do |field, model, qnt, selector|
+  with_scope (selector) do
+    fill_in("#{model}[#{field}]", :with => text_with(qnt).lines)
+  end
 end

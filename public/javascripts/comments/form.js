@@ -16,6 +16,7 @@ function onInternalServerError (xmlHttpRequest) {
 function onSucess(responseText){
   resetForm();
   updateCommentsWith(responseText);
+  $("div#commentForm div.content").html("Não comente duas vezes seguidas, edite o comentário anterior");
 }
 
 function fieldsOf(attributes) {
