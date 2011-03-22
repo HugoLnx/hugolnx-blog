@@ -16,9 +16,16 @@ DONE IN 19-03-2011 ======================
   - Fix bug that when user comment it is automaticaly signout from twitter.
   - Fix bug of rendering comments after the user post a comment.(the title don't appear)
 
+DONE IN 20-03-2011 =====================
+   - Previne double post
+   - Understand why user can't post double times.(parameters come empty)
+
+DONE IN 22-03-2011 ====================
+   - Trate show of an oversized comment.
+
 TODO =====================================
  FEATURES
-   - Previne double post
+   - Trate to user can't overflow database.
    - Move screen to bottom after user post a comment and server renderize comments again.
    - Allow user to edit or delete your own comments.
    - Redirect to origin url when a session is destroyed
@@ -26,6 +33,5 @@ TODO =====================================
    - Use ajax to sign in Twitter
    - Put a window in bottom right of screen to user comment and sign in/out to/from twitter.
  TECNICAL
-   - Understand why user can't post double times.(parameters come empty)
    - Tests for javascripts
    - Refactor javascript again

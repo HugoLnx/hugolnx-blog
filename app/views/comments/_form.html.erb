@@ -1,22 +1,20 @@
-<% if @post.comments.last && @post.comments.last.user == current_user %>
-  Não comente duas vezes seguidas, edite o comentário anterior
-<% elsif current_user %>
+<% if current_user %>
   <%= javascript_include_tag "comments/form" %>
-  <a href="/signout" id="signoutTwitter">Deslogue do Twitter</a></br>
+  <a href="/signout" id="signoutTwitter"><%= I18n.t :sign_out_from_twitter %></a></br>
   <form id="comment" action="/posts/<%=@post.id%>/comments">
     <input type="hidden" name="comment[user_id]" value="<%=current_user.id%>"></input>
     <input type="hidden" name="comment[post_id]" value="<%=@post.id%>"></input>
     <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>"></input>
 
-    <label for="user_id">Comentando Como: <%=current_user.name%><b>(<%=current_user.nickname%>)</b></label></br>
+    <label for="user_id"><%= I18n.t :commenting_as %>: <%=current_user.name%><b>(<%=current_user.nickname%>)</b></label></br>
     <label for="content">Comentário</label></br>
-    <textarea name="comment[content]" rows="8" cols="70"></textarea></br>
+    <textarea name="comment[content]" rows="8" cols="80"></textarea></br>
     <input type="submit" value="Comentar"></input>
   </form>
 
 <%else%>
 
   <%= javascript_include_tag "comments/a.sign.twitter.click" %>
-  <a href="/auth/twitter/" id="signTwitter">Logue no Twitter para comentar</a>
+  <a href="/auth/twitter/" id="signTwitter"><%= I18n.t :sign_in_twitter_to_comment %></a>
 
 <%end%>

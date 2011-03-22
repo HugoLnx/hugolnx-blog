@@ -1,0 +1,21 @@
+div.comment p.content {
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+div.comment button.showMore {
+  margin-bottom: 10px;
+}
+
+div.comment p.content textarea.appear {
+  width: 100%;
+  overflow: auto;
+  white-space: pre;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+div.comment p.content span.not_appear {
+  display: none;
+}

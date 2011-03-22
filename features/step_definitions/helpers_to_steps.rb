@@ -23,14 +23,14 @@ module FixturesHelpers
 end
 
 module TextFixturesHelpers
-  def text_with(lines)
-    full_text = read_fixture "lerolero.txt"
-    @reduced_text = full_text.lines.to_a[0..lines.to_i].join
+  def text_with(qnt)
+    @full_text = read_fixture "lerolero.txt"
+    @qnt = qnt.to_i
     self
   end
 
-  def lines
-    @reduced_text
+  def characters
+    @full_text[0..@qnt]
   end
 end
 

@@ -1,5 +1,9 @@
-<div id="comment<%=comment.id%>">
+<div class="comment" id="comment<%=comment.id%>">
   <img src="<%=comment.user.avatar_path%>"></img>
-  <span class="user"><%=comment.user.name%>(<%=comment.user.nickname%>)</span>
-  <span class="content"><%=comment.content%></span>
+  <span class="user"><b><%=comment.user.name%></b> (<%=comment.user.nickname%>)</span>
+  <p class="content">
+    <textarea readonly="true" cols="80" class="appear"></textarea>
+    <span class="not_appear"><%=comment.content%></span>
+  </p>
+  <button class="showMore">ler mais</button>
 </div>

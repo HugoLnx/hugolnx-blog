@@ -15,7 +15,7 @@
         <div id="slider"></div>
         <div id="slider_subtitle">
           <span id="title"></span>
-          <span id="notice">Arraste para navegar pelos posts</span>
+          <span id="notice"><%=I18n.t :drag_it_to_roll_from_posts%></span>
         </div>
       </div>
       
@@ -35,5 +35,6 @@
   <%= javascript_tag do %>
     var id_max = <%=@id_max%>;
     var titles = <%=raw @titles%>;
+    i18n = <%=raw YAML.load_file(I18n.load_path.find{|path| path.include? I18n.locale.to_s})[I18n.locale.to_s].to_json%>;
   <%end%>
 </html>

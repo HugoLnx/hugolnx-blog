@@ -30,20 +30,39 @@ Feature: Coment a post
     Then I should see that the field to "content" of "comment" have a "field_error"
 
   @comment_block_double_comment
+  Scenario: I post one time and reload page
+    When I fill in "content" of "comment" with "Testing comment" within "form#comment"
+    And I press "Comentar" within "form#comment"
+    And I go to newest post page
+    Then I should see translate for "dont_do_double_comment"
+    And I should not see a "form#comment" within "div#commentForm"
+
+  @comment_block_double_comment_after_comment
   Scenario: I post one time and can't post again
-    Given I fill in "content" of "comment" with "Testing comment" within "form#comment"
-    When I press "Comentar" within "form#comment"
-    Then I should see "Não comente duas vezes seguidas, edite o comentário anterior"
+    When I fill in "content" of "comment" with "Testing comment" within "form#comment"
+    And I press "Comentar" within "form#comment"
+    Then I should see translate for "dont_do_double_comment"
+    And I should not see a "form#comment" within "div#commentForm"
 
-  @comment_show_comment_of_11_lines_bit_a_bit
-  Scenario: I post a comment longer than 10 lines
-    Given I fill in "content" of "comment" with a text with "11" lines within "form#comment"
+  @comment_show_comment_of_801_characters_bit_a_bit
+  Scenario: I post a comment longer than 800 characters
+    Given I fill in "content" of "comment" with a text with "801" characters within "form#comment"
     When I press "Comentar" within "form#comment"
-    Then I should see "ver mais" within "div#comment1"
+    Then I should see "ler mais" within "div#comment1"
 
-  @comment_show_comment_of_21_lines_bit_a_bit
-  Scenario: I post a comment longer than 20 lines
-    Given I fill in "content" of "comment" with a text with "21" lines within "form#comment"
+  @comment_show_comment_of_1601_characters_bit_a_bit
+  Scenario: I post a comment longer than 1600 characters
+    Given I fill in "content" of "comment" with a text with "1601" characters within "form#comment"
     When I press "Comentar" within "form#comment"
-    And I follow "ver mais" within "div#comment1"
-    Then I should see "ver mais" within "div#comment1"
+    And I press "ler mais" within "div#comment1"
+    Then I should see "ler mais" within "div#comment1"
+
+  @comment_show_comment_of_2401_characters_bit_a_bit
+  Scenario: I post a comment longer than 2400 characters
+    Given I fill in "content" of "comment" with a text with "2401" characters within "form#comment"
+    When I press "Comentar" within "form#comment"
+    And I press "ler mais" within "div#comment1"
+    And I press "ler mais" within "div#comment1"
+    And I press "ler mais" within "div#comment1"
+    And I press "ler mais" within "div#comment1"
+    Then I should not see "ler mais" within "div#comment1"
