@@ -25,13 +25,15 @@ DONE IN 22-03-2011 ====================
 
 TODO =====================================
  FEATURES
-   - Trate to user can't overflow database.
-   - Move screen to bottom after user post a comment and server renderize comments again.
-   - Allow user to edit or delete your own comments.
-   - Redirect to origin url when a session is destroyed
-   - Use ajax to sign out Twitter
-   - Use ajax to sign in Twitter
-   - Put a window in bottom right of screen to user comment and sign in/out to/from twitter.
+  - Move screen to bottom after user post a comment and server renderize comments again.
+  - Allow user to edit or delete your own comments.
+  - Redirect to origin url when a session is destroyed
+  - Use ajax to sign out Twitter
+  - Use ajax to sign in Twitter
+  - Put a window in bottom right of screen to user comment and sign in/out to/from twitter.
  TECNICAL
-   - Tests for javascripts
-   - Refactor javascript again
+  - Refactor comment/show.js
+  - Trate show of an overlined comment.
+  - Trate to user can't overflow database.
+  - Tests for javascripts
+  - Refactor javascript again
