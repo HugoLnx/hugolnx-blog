@@ -31,9 +31,12 @@ TODO =====================================
   - Use ajax to sign out Twitter
   - Use ajax to sign in Twitter
   - Put a window in bottom right of screen to user comment and sign in/out to/from twitter.
+  - Change button CSS
  TECNICAL
   - Refactor comment/show.js
   - Trate show of an overlined comment.
   - Trate to user can't overflow database.
   - Tests for javascripts
   - Refactor javascript again
+  - Use steak
+  - Fix slider when access root

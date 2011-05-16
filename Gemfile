@@ -40,6 +40,7 @@ group :test, :development do
 end
 
 group :test do
+  gem 'rspec-rails-extra-routing'
   gem 'shoulda'
   gem 'cucumber-rails'
   gem 'capybara'

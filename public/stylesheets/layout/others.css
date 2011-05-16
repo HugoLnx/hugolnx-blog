@@ -1,13 +1,14 @@
-div.comment p.content {
+div.comment {
+  padding: 5px;
+  margin-bottom: 20px;
+  border: 3px solid white;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+}
+
+div.comment .content {
   margin-bottom: 0px;
   margin-top: 0px;
-}
-
-div.comment button.showMore {
-  margin-bottom: 10px;
-}
-
-div.comment p.content textarea.appear {
   width: 100%;
   overflow: auto;
   white-space: pre;
@@ -16,6 +17,6 @@ div.comment p.content textarea.appear {
   outline: none;
 }
 
-div.comment p.content span.not_appear {
-  display: none;
+div.comment .show_more {
+  margin-bottom: 10px;
 }

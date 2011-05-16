@@ -10,7 +10,6 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    pu
     session['user_id'] = nil
     redirect_to '/'
   end

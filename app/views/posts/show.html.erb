@@ -1,5 +1,4 @@
 <%= javascript_tag '$.syntax()' %>
-<%= javascript_include_tag "comments/show" %>
 
 <div id="post" class="box">
   <div class="title">
@@ -20,7 +19,7 @@
   </div>
 
   <div class="content">
-    <%= render @comments %>
+    <%= render 'comments/index' %>
   </div>
 
 </div>

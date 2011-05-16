@@ -1,4 +1,17 @@
 HugolnxBlog::Application.routes.draw do
+  match '/' => 'posts#master_layout'
+  match 'posts/show(/:id)' => 'posts#show'
+  resources :posts, :only => ['show'] do
+    resources :comments
+  end
+  match 'errors/show(/:id)' => 'errors#show'
+  match '/(:id)' => 'posts#call_ajax', :constraints => {:id => /\d+/}
+
+  match "/auth/failure" => "errors#call_ajax"
+  match "/auth/:provider" => "sessions#setup"
+  match "/auth/:provider/callback" => "sessions#create"
+  match "/signout" => "sessions#destroy", :as => :signout
+  match'/(*message)' => 'errors#call_ajax'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -55,17 +68,4 @@ HugolnxBlog::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
-  match '/' => 'posts#master_layout'
-  match 'posts/show(/:id)' => 'posts#show'
-  resources :posts, :only => ['show'] do
-    resources :comments
-  end
-  match 'errors/show(/:id)' => 'errors#show'
-  match '/(:id)' => 'posts#call_ajax', :constraints => {:id => /\d+/}
-
-  match "/auth/failure" => "errors#call_ajax"
-  match "/auth/:provider" => "sessions#setup"
-  match "/auth/:provider/callback" => "sessions#create"
-  match "/signout" => "sessions#destroy", :as => :signout
-  match'/(*message)' => 'errors#call_ajax'
 end

@@ -1,16 +1,20 @@
 <% if current_user %>
   <%= javascript_include_tag "comments/form" %>
-  <a href="/signout" id="signoutTwitter"><%= I18n.t :sign_out_from_twitter %></a></br>
-  <form id="comment" action="/posts/<%=@post.id%>/comments">
-    <input type="hidden" name="comment[user_id]" value="<%=current_user.id%>"></input>
-    <input type="hidden" name="comment[post_id]" value="<%=@post.id%>"></input>
-    <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>"></input>
+  <% if !@comments.empty? && @comments.last.user == current_user %>
+    <%= I18n.t :dont_do_double_comment %>
+  <% else %>
+    <form id="comment" action="/posts/<%=@post.id%>/comments">
+      <input type="hidden" name="comment[user_id]" value="<%=current_user.id%>"></input>
+      <input type="hidden" name="comment[post_id]" value="<%=@post.id%>"></input>
+      <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>"></input>
 
-    <label for="user_id"><%= I18n.t :commenting_as %>: <%=current_user.name%><b>(<%=current_user.nickname%>)</b></label></br>
-    <label for="content">Comentário</label></br>
-    <textarea name="comment[content]" rows="8" cols="80"></textarea></br>
-    <input type="submit" value="Comentar"></input>
-  </form>
+      <label for="user_id"><%= I18n.t :commenting_as %>: <%=current_user.name%><b>(<%=current_user.nickname%>)</b></label></br>
+      <label for="content">Comentário</label></br>
+      <textarea name="comment[content]" rows="8" cols="80"></textarea></br>
+      <input type="submit" value="Comentar"></input>
+    </form>
+  <% end %>
+  <a href="/signout" id="signoutTwitter" style="display:block"><%= I18n.t :sign_out_from_twitter %></a></br>
 
 <%else%>
 

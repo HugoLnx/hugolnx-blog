@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
     comment.save
     if comment.errors.empty?
       @comments = comment.post.comments
-      render @comments, :layout => false
+      render :partial => 'index', :layout => false
     else
       render :text => comment.errors.keys.join(';;'),
              :status => 500
