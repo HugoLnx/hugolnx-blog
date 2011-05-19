@@ -23,6 +23,10 @@ DONE IN 20-03-2011 =====================
 DONE IN 22-03-2011 ====================
    - Trate show of an oversized comment.
 
+DONE IN 15-05-2011
+  - Refactor comment/show.js
+  - Tests for javascripts
+
 TODO =====================================
  FEATURES
   - Move screen to bottom after user post a comment and server renderize comments again.
@@ -33,10 +37,9 @@ TODO =====================================
   - Put a window in bottom right of screen to user comment and sign in/out to/from twitter.
   - Change button CSS
  TECNICAL
-  - Refactor comment/show.js
+  - Use HistoryAPI
   - Trate show of an overlined comment.
   - Trate to user can't overflow database.
-  - Tests for javascripts
   - Refactor javascript again
   - Use steak
   - Fix slider when access root

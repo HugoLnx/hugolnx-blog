@@ -1,17 +1,23 @@
 HugolnxBlog::Application.routes.draw do
-  match '/' => 'posts#master_layout'
-  match 'posts/show(/:id)' => 'posts#show'
-  resources :posts, :only => ['show'] do
+  resources :posts, :only => [:index], :path => ''  do
     resources :comments
+    member do
+      get :show, :constraints => {:id => /\d+/}
+    end
   end
-  match 'errors/show(/:id)' => 'errors#show'
-  match '/(:id)' => 'posts#call_ajax', :constraints => {:id => /\d+/}
+  #match '/' => 'posts#master_layout'
+  #match 'posts/show(/:id)' => 'posts#show'
+  #resources :posts, :only => ['show'] do
+  #  resources :comments
+  #end
+  #match '/(:id)' => 'posts#call_ajax', :constraints => {:id => /\d+/}
+  #match 'errors/show(/:id)' => 'errors#show'
 
-  match "/auth/failure" => "errors#call_ajax"
+  match "/auth/failure" => "errors#show"
   match "/auth/:provider" => "sessions#setup"
   match "/auth/:provider/callback" => "sessions#create"
   match "/signout" => "sessions#destroy", :as => :signout
-  match'/(*message)' => 'errors#call_ajax'
+  match'/(*message)' => 'errors#show'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

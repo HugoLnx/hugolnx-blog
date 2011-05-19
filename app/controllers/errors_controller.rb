@@ -1,16 +1,16 @@
-#encoding: utf-8
+# encoding: utf-8
 class ErrorsController < ApplicationController
-  def call_ajax
-    redirect_to "/##{params[:message]}"
-  end
-
   def show
-    error_message = params[:id]
+    @id_max = Post.id_max_in 'app/views/posts/posts/'
+    @post = Post.find @id_max, :in => 'app/views/posts/posts/'
+    @titles = Post.all_post_titles_in 'app/views/posts/posts/'
+    error_message = params[:message]
     @message = select_pretty_message_for error_message
-    render :layout => false
+    render "errors/show"
   end
 
 private
+
   def select_pretty_message_for(error_message)
     case error_message
     when Infrastructure::PostException::PostNotFoundedMessage

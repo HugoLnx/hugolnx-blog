@@ -1,3 +1,16 @@
+$(document).ready(function() {
+  postSlider = new PostSlider(
+    {
+      element: $("#slider"),
+      noticeElement: $("#slider_subtitle span#notice"),
+      titleElement: $("#slider_subtitle span#title"),
+      max: id_max,
+      titles: titles
+    }
+  );
+  postSlider.updateValueWith(id);
+});
+
 PostSlider = function(args) {
   var element = args["element"];
   var noticeElement = args["noticeElement"];
@@ -20,7 +33,7 @@ PostSlider = function(args) {
   function onStop(event,ui){
     noticeElement.fadeIn(6000);
     titleElement.hide();
-    document.location.hash = "#"+ui.value;
+    document.location.href = ui.value;
   }
 
   function onSliderStartOrSlide(event,ui){

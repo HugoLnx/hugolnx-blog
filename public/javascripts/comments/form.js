@@ -15,7 +15,6 @@ function onInternalServerError (xmlHttpRequest) {
 
 function onSucess(responseText){
   resetForm();
-  console.log(responseText);
   updateCommentsWith(responseText);
   $("div#commentForm div.content form").replaceWith(i18n.dont_do_double_comment);
 }

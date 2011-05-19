@@ -7,6 +7,7 @@
   </head>
   
   <body>
+
     <div id="all">
 
       <div id="header" class='box'>
@@ -20,21 +21,24 @@
       </div>
       
 
-      <div id="contents"></div>
+      <div id="contents"><%= yield %></div>
 
       <div id="creative_commons" class='box'>
         <%=render 'layouts/creative_commons'%>
       </div>
 
     </div>
-  </body>
+    <% js_to_cache = %w{jquery.min jquery-ui.min post.slider} %> <!-- google.analitics application synchronized.hash  -->
+    <%= javascript_include_tag(js_to_cache, :cache => true) %>
 
-  <% js_to_cache = %w{jquery.min jquery-ui.min post.slider synchronized.hash ajax application google.analitics} %>
-  <%= javascript_include_tag(js_to_cache, :cache => true) %>
-  <%= javascript_include_tag "../jquery-syntax/jquery.syntax.min" %>
-  <%= javascript_tag do %>
-    var id_max = <%=@id_max%>;
-    var titles = <%=raw @titles%>;
-    i18n = <%=raw YAML.load_file(I18n.load_path.find{|path| path.include? I18n.locale.to_s})[I18n.locale.to_s].to_json%>;
-  <%end%>
+    <%= javascript_include_tag "../jquery-syntax/jquery.syntax.min" %>
+    <%= javascript_tag do %>
+      var id_max = <%=@id_max%>;
+      var id = <%=@post.id%>;
+      var titles = <%=raw @titles%>;
+      i18n = <%=raw YAML.load_file(I18n.load_path.find{|path| path.include? I18n.locale.to_s})[I18n.locale.to_s].to_json%>;
+    <%end%>
+    <%= yield :javascript %>
+
+  </body>
 </html>
