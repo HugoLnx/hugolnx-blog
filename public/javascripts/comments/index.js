@@ -89,18 +89,20 @@ CommentDiv.argsFrom = function(divElement) {
   return args;
 }
 
-$(".show_more").click(function() {
-  var args = CommentDiv.argsFrom($(this).parent());
-  commentDiv = new CommentDiv(args);
-  commentDiv.showMoreCharacters(800);
-});
+reloadCommentsIndex = function(){
+  $(".show_more").click(function() {
+    var args = CommentDiv.argsFrom($(this).parent());
+    commentDiv = new CommentDiv(args);
+    commentDiv.showMoreCharacters(800);
+  });
 
-$("div.comment").load(function(){
-  var args = CommentDiv.argsFrom($(this));
-  commentDiv = new CommentDiv(args);
-  commentDiv.showMoreCharacters(800);
-});
-$("div.comment").load();
+  $("div.comment").load(function(){
+    var args = CommentDiv.argsFrom($(this));
+    commentDiv = new CommentDiv(args);
+    commentDiv.showMoreCharacters(800);
+  });
+  $("div.comment").load();
+}
 
 /*
 $("button.showMore").click(function() {

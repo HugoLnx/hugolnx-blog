@@ -1,10 +1,12 @@
 <% if current_user %>
   <% content_for :javascript do %>
     <%= javascript_include_tag "comments/form" %>
+    <%= javascript_tag "setupCommentForm()" %>
   <%end%>
-  <% if !@comments.empty? && @comments.last.user == current_user %>
-    <%= I18n.t :dont_do_double_comment %>
-  <% else %>
+  <%= javascript_tag "if (window.setupCommentForm != null) setupCommentForm()" %>
+  <%# if !@comments.empty? && @comments.last.user == current_user %>
+    <%#= I18n.t :dont_do_double_comment %>
+  <%# else %>
     <form id="comment" action="<%=@post.id%>/comments">
       <input type="hidden" name="comment[user_id]" value="<%=current_user.id%>"></input>
       <input type="hidden" name="comment[post_id]" value="<%=@post.id%>"></input>
@@ -15,14 +17,11 @@
       <textarea name="comment[content]" rows="8" cols="80"></textarea></br>
       <input type="submit" value="Comentar"></input>
     </form>
-  <% end %>
+  <%# end %>
   <a href="/signout" id="signoutTwitter" style="display:block"><%= I18n.t :sign_out_from_twitter %></a></br>
 
 <%else%>
 
-  <% content_for :javascript do %>
-    <%= javascript_include_tag "comments/a.sign.twitter.click" %>
-  <%end%>
-  <a href="/auth/twitter/" id="signTwitter"><%= I18n.t :sign_in_twitter_to_comment %></a>
+  <a href="/auth/twitter/"><%= I18n.t :sign_in_twitter_to_comment %></a>
 
 <%end%>

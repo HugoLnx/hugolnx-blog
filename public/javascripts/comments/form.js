@@ -1,10 +1,12 @@
-$("form#comment").submit(function(){
-  $(this).children().removeClass("field_error");
-  $.post($(this).attr("action"),$(this).serialize())
-    .statusCode({ 500: onInternalServerError })
-    .success(onSucess);
-  return false;
-});
+setupCommentForm = function(){
+  $("form#comment").submit(function(){
+    $(this).children().removeClass("field_error");
+    $.post($(this).attr("action"),$(this).serialize())
+      .statusCode({ 500: onInternalServerError })
+      .success(onSucess);
+    return false;
+  });
+}
 
 function onInternalServerError (xmlHttpRequest) {
   var responseText = xmlHttpRequest.responseText;

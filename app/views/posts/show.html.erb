@@ -1,6 +1,13 @@
 <% content_for :javascript do %>
-  <%= javascript_tag '$.syntax()' %>
   <%= javascript_include_tag "comments/index" %>
+  <%= javascript_tag do %>
+    $.syntax()
+    reloadCommentsIndex();
+  <%end%>
+<%end%>
+<%= javascript_tag do %>
+  if (window.$ != null && $.syntax != null) $.syntax()
+  if (window.reloadCommentsIndex != null) reloadCommentsIndex();
 <%end%>
 
 <div id="post" class="box">
