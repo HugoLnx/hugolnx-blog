@@ -1,16 +1,14 @@
+$(document).ready(function(){
+  ajax = new AJAX();
+});
+
 AJAX = function() {
   this.changePostTo = function(argument) {
-    var url = "/errors/show";
-    
-    var path = document.location.pathname.slice(1);
-    var argumentIsAPostIdValid = (path == "" && document.location.hash.slice(1).match(/[^0-9]+/) == null) || path.match(/[0-9]+/) != null;
-    if (argumentIsAPostIdValid) url = "/posts/show";
-
     $.ajax({
       type: "GET",
-      url: url,
+      url: "/" + argument,
       dataType: "html",
-      data: {id: argument},
+      data: {without_layout: 'true'},
       async: true,
       complete: insertDataInContents
     });

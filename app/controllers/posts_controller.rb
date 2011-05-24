@@ -13,7 +13,11 @@ class PostsController < ApplicationController
     @comments = @post.comments
     @id_max = Post.id_max_in 'app/views/posts/posts/'
     @titles = Post.all_post_titles_in 'app/views/posts/posts/'
-    render 'show'
+    if params[:without_layout] == 'true'
+      render 'show', :layout => false
+    else
+      render 'show', :layout => true
+    end
   end
 
   #def master_layout

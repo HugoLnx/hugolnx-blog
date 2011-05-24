@@ -4,3 +4,4 @@ log/*.log
 tmp/
 *.swp
 *.swo
+apaga_backups_do_vim.rb
