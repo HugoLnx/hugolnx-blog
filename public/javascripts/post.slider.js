@@ -10,22 +10,27 @@ $(document).ready(function() {
     }
   );
 
-  setTimeout(function(){
-    console.log("timeout");
-    window.onpopstate = function(event) {
-      console.log("onpopstate");
-      var isHistoryApiEntry = event.state;
-      //console.log("entry: " + isHistoryApiEntry);
-      if (isHistoryApiEntry) {
-        var pathname = document.location.pathname.substring(1);
-        ajax.changePostTo(pathname);
-        var id = pathname.match(/^\d+$/) ? pathname : id_max;
-        postSlider.updateValueWith(id);
-      } else document.location.reload();
-    }
-  },1000);
+  if (supportHistoryAPI()) {
+    setTimeout(function(){
+        window.onpopstate = function(event) {
+          var isHistoryApiEntry = event.state;
+          if (isHistoryApiEntry) {
+            var pathname = document.location.pathname.substring(1);
+            ajax.changePostTo(pathname);
+            var id = pathname.match(/^\d+$/) ? pathname : id_max;
+            postSlider.updateValueWith(id);
+          } else {
+            document.location.reload();
+          }
+        }
+    },1000);
+  }
 
 });
+
+var supportHistoryAPI = function(){
+  return (window.history != null && history.pushState != null)
+}
 
 PostSlider = function(args) {
   var element = args["element"];
@@ -52,8 +57,12 @@ PostSlider = function(args) {
     console.log("onStop event");
     noticeElement.fadeIn(6000);
     titleElement.hide();
-    history.pushState(true,"Post "+titleFor(ui.value),ui.value);
-    ajax.changePostTo(ui.value);
+    if (supportHistoryAPI()) {
+      history.pushState(true,"Post "+titleFor(ui.value),ui.value);
+      ajax.changePostTo(ui.value);
+    } else {
+      document.location.href = ui.value;
+    }
   }
 
   function onSliderStartOrSlide(event,ui){
