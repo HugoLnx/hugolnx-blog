@@ -1,2 +1,4 @@
-<%= javascript_include_tag "comments/index" %>
+<%= javascript_tag do %>
+  reloadCommentsIndex();
+<%end%>
 <%= render @comments %>

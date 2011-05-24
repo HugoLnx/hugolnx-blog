@@ -56,13 +56,3 @@ Feature: Coment a post
     When I press "Comentar" within "form#comment"
     And I press "ler mais" within "div#comment1"
     Then I should see "ler mais" within "div#comment1"
-
-  @comment_show_comment_of_2401_characters_bit_a_bit
-  Scenario: I post a comment longer than 2400 characters
-    Given I fill in "content" of "comment" with a text with "2401" characters within "form#comment"
-    When I press "Comentar" within "form#comment"
-    And I press "ler mais" within "div#comment1"
-    And I press "ler mais" within "div#comment1"
-    And I press "ler mais" within "div#comment1"
-    And I press "ler mais" within "div#comment1"
-    Then I should not see "ler mais" within "div#comment1"
