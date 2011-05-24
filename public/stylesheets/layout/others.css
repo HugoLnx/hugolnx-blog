@@ -20,3 +20,9 @@ div.comment .content {
 div.comment .show_more {
   margin-bottom: 10px;
 }
+
+div.comment button {
+  color: #66f;
+  background-color: #ccf;
+  border: 1px #99c solid;
+}
