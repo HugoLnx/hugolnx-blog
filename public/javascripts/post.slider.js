@@ -11,7 +11,8 @@ $(document).ready(function() {
   );
 
   if (supportHistoryAPI()) {
-    setTimeout(function(){
+    window.onload = function(){
+      setTimeout(function(){
         window.onpopstate = function(event) {
           var isHistoryApiEntry = event.state;
           if (isHistoryApiEntry) {
@@ -23,9 +24,9 @@ $(document).ready(function() {
             document.location.reload();
           }
         }
-    },1000);
+      },1);
+    }
   }
-
 });
 
 var supportHistoryAPI = function(){
