@@ -50,10 +50,19 @@ div#header div#slider_subtitle span#title {
   font-weight: bolder;
 }
 
-div#contents {
-  width: 760px;
+div#middle {
   margin-left: auto;
   margin-right: auto;
+  width: 760px;
+}
+
+div#middle div#upcontents {
+  text-align: right;
+  margin-right: 40px;
+  margin-bottom: 2px;
+}
+
+div#middle div#contents {
 }
 
 div#creative_commons {

@@ -21,7 +21,15 @@
       </div>
       
 
-      <div id="contents"><%= yield %></div>
+      <div id="middle">
+        <div id="upcontents">
+          <a href="/feed.rss"><img src="images/rss.png"></a>
+          <a href="http://twitter.com/hugolnx"><img src="images/twitter.png"></a>
+          <a href="http://github.com/hugolnx"><img src="images/github.png"></a>
+          <a href="mailto:hugo.roque@caelum.com.br"><img src="images/email.png"></a>
+        </div>
+        <div id="contents"><%= yield %></div>
+      </div>
 
       <div id="creative_commons" class='box'>
         <%=render 'layouts/creative_commons'%>
