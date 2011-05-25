@@ -29,10 +29,9 @@ gem 'rails', '3.0.5'
 # end
 
 gem 'mysql2'
-
-group :development, :production, :test do
-  gem 'omniauth'
-end
+gem 'coderay'
+gem 'nokogiri'
+gem 'omniauth'
 
 group :test, :development do
   gem 'rspec-rails'

@@ -34,15 +34,20 @@ DONE IN 16-05~24-05
   - Refactor javascript again
   - Fix slider when access root
 
+DONE IN 25-05
+  - Allow user to edit or delete your own comments.
+  - RSS support and icons to contact
+
 TODO =====================================
  FEATURES
   - Move screen to bottom after user post a comment and server renderize comments again.
-  - Allow user to edit or delete your own comments.
   - Redirect to origin url when a session is destroyed
   - Use ajax to sign out Twitter
   - Use ajax to sign in Twitter
   - Put a window in bottom right of screen to user comment and sign in/out to/from twitter.
  TECNICAL
+  - Use coderay to syntax highlighting
+  - Take care of javascript/css caching and performance
   - Trate comment textarea overflow at font size variation
   - Show comment creation date
   - Trate to user can't overflow database.

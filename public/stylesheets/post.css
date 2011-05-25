@@ -19,14 +19,20 @@ h1 {font-size: 25px}
 h2 {font-size: 20px}
 h3 {font-size: 15px}
 
-code {
-  white-space: pre;
-  display: block;
+div.CodeRay {
+  border: 1px #ccc solid;
+  background-color: #dfdff5;
   font-size: 12px;
-  width: 90%;
+  padding-left: 10px;
+  margin-right: 15px;
   position: relative;
-  left: 25px;
-  right: 25px
+  left: 10px;
+}
+
+div.CodeRay table.CodeRay td.line_numbers {
+  color: #55f;
+  /*border-right: 1px #55f solid;*/
+  padding-right: 10px;
 }
 
 body {

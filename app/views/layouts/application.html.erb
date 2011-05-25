@@ -39,7 +39,6 @@
     <% js_to_cache = %w{jquery.min jquery-ui.min post.slider ajax} %> <!-- google.analitics application synchronized.hash  -->
     <%= javascript_include_tag(js_to_cache, :cache => true) %>
 
-    <%= javascript_include_tag "../jquery-syntax/jquery.syntax.min" %>
     <%= javascript_tag do %>
       var id_max = <%=@id_max%>;
       var id = <%=@post.id%>;
