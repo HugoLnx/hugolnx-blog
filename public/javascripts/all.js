@@ -99,19 +99,56 @@ if(k===1)c.range[e?"animate":"css"]({width:f-g+"%"},{queue:false,duration:a.anim
 1)[e?"animate":"css"]({width:f+"%"},a.animate);if(b==="max"&&this.orientation==="horizontal")this.range[e?"animate":"css"]({width:100-f+"%"},{queue:false,duration:a.animate});if(b==="min"&&this.orientation==="vertical")this.range.stop(1,1)[e?"animate":"css"]({height:f+"%"},a.animate);if(b==="max"&&this.orientation==="vertical")this.range[e?"animate":"css"]({height:100-f+"%"},{queue:false,duration:a.animate})}}});d.extend(d.ui.slider,{version:"1.8.10"})})(jQuery);
 ;
 
+$(document).ready(function() {
+  postSlider = new PostSlider(
+    {
+      element: $("#slider"),
+      noticeElement: $("#slider_subtitle span#notice"),
+      titleElement: $("#slider_subtitle span#title"),
+      max: id_max,
+      value: id,
+      titles: titles
+    }
+  );
+
+  if (supportHistoryAPI()) {
+    window.onload = function(){
+      setTimeout(function(){
+        window.onpopstate = function(event) {
+          var isHistoryApiEntry = event.state;
+          if (isHistoryApiEntry) {
+            var pathname = document.location.pathname.substring(1);
+            ajax.changePostTo(pathname);
+            var id = pathname.match(/^\d+$/) ? pathname : id_max;
+            postSlider.updateValueWith(id);
+          } else {
+            document.location.reload();
+          }
+        }
+      },1);
+    }
+  }
+});
+
+var supportHistoryAPI = function(){
+  return (window.history != null && history.pushState != null)
+}
+
 PostSlider = function(args) {
   var element = args["element"];
   var noticeElement = args["noticeElement"];
   var titleElement = args["titleElement"];
   var max = args["max"];
   var titles = args["titles"];
+  var value = args["value"];
 
   element.slider({
     min: 1,
     max: max,
     stop: onStop,
     slide: onSliderStartOrSlide,
-    start: onSliderStartOrSlide
+    start: onSliderStartOrSlide,
+    value: value
   });
 
   this.updateValueWith = function(newValue) {
@@ -119,9 +156,15 @@ PostSlider = function(args) {
   }
 
   function onStop(event,ui){
+    console.log("onStop event");
     noticeElement.fadeIn(6000);
     titleElement.hide();
-    document.location.hash = "#"+ui.value;
+    if (supportHistoryAPI()) {
+      history.pushState(true,"Post "+titleFor(ui.value),ui.value);
+      ajax.changePostTo(ui.value);
+    } else {
+      document.location.href = ui.value;
+    }
   }
 
   function onSliderStartOrSlide(event,ui){
@@ -136,46 +179,17 @@ PostSlider = function(args) {
 }
 
 
-SynchronizedHash = function(args) {
-  var delay = args["syncronizingEach"];
-
-  var lastHash = document.location.hash;
-  var onchangeFunction = function(){};
-  synchronizeWithDocumentHashEach(delay);
-
-  function synchronizeWithDocumentHashEach(delay) {
-    setInterval(checkHashChangeNow,delay);
-  }
-
-  function checkHashChangeNow(){
-    if (lastHash != document.location.hash){
-      lastHash = document.location.hash;
-      onChangeFunction();
-    }
-  }
-
-  this.getArgument = function(){
-    return lastHash.slice(1);
-  }
-
-  this.onChange = function(_onChangeFunction){
-    onChangeFunction = _onChangeFunction;
-  }
-}
-
-
+$(document).ready(function(){
+  ajax = new AJAX();
+});
 
 AJAX = function() {
-  this.changePostTo = function(id) {
-    var url = "/errors/show";
-    
-    var path = document.location.pathname.slice(1);
-    if ((path == "" && document.location.hash.slice(1).match(/[^0-9]+/) == null) || path.match(/[0-9]+/) != null) url = "/posts/show";
+  this.changePostTo = function(argument) {
     $.ajax({
       type: "GET",
-      url: url,
+      url: "/" + argument,
       dataType: "html",
-      data: {id: id},
+      data: {without_layout: 'true'},
       async: true,
       complete: insertDataInContents
     });
@@ -186,27 +200,3 @@ AJAX = function() {
   }
 }
 
-
-
-$(document).ready(function(){ 
-  hash = new SynchronizedHash({synchronizingEach: 500});
-  hash.onChange(refreshComponents);
-  ajax = new AJAX();
-  postSlider = new PostSlider(
-    {
-      element: $("#slider"),
-      noticeElement: $("#slider_subtitle span#notice"),
-      titleElement: $("#slider_subtitle span#title"),
-      max: id_max,
-      titles: titles
-    }
-  );
-  refreshComponents();
-});
-
-function refreshComponents() {
-  var argument = hash.getArgument();
-  if((argument == "" || argument.match(/[^0-9]+/) != null)) argument = id_max;
-  ajax.changePostTo(argument);
-  postSlider.updateValueWith(argument);
-}
