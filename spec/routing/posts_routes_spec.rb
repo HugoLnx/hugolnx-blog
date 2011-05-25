@@ -12,9 +12,8 @@ describe "Posts Routes" do
     :id => '4'
   )
 
-  #get("/posts/show/4").should route_to(
-  #  :controller => 'posts',
-  #  :action => 'show',
-  #  :id => '4'
-  #)
+  get("/feed").should route_to(
+    :controller => 'posts',
+    :action => 'feed',
+  )
 end

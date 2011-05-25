@@ -3,9 +3,8 @@ HugolnxBlog::Application.routes.draw do
 
   resources :posts, :only => [:index], :path => ''  do
     resources :comments
-    member do
-      get :show, :constraints => {:id => /\d+/}
-    end
+    get :show, :constraints => {:id => /\d+/}, :on => :member
+    get 'feed', :controller => :posts, :action => :feed, :on => :collection
   end
   #match '/' => 'posts#master_layout'
   #match 'posts/show(/:id)' => 'posts#show'

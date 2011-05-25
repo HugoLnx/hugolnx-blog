@@ -2,6 +2,5 @@
 db/*.sqlite3
 log/*.log
 tmp/
-*.swp
-*.swo
+.*.sw?
 script/apaga_backups_do_vim.rb
