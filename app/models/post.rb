@@ -19,7 +19,7 @@ class Post < ActiveRecord::Base
       classes = code_tag['class'].split(' ')
       classes.delete 'syntax'
       language = classes.first
-      language = 'scheme' unless CodeRay::Encoders.list.include? classes.first
+      language = 'scheme' unless CodeRay::Scanners.list.include? classes.first
       node = code_tag.parse "<div class='CodeRay'>#{CodeRay.scan(code_tag.text,language).div(:line_numbers => :table)}</div>"
       code_tag.after node.to_html
       code_tag.remove
