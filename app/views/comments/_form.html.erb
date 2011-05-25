@@ -4,24 +4,18 @@
     <%= javascript_tag "setupCommentForm()" %>
   <%end%>
   <%= javascript_tag "if (window.setupCommentForm != null) setupCommentForm()" %>
-  <% if !@comments.empty? && @comments.last.user == current_user %>
+  <% if !@comments.nil? && !@comments.empty? && @comments.last.user == current_user %>
     <%= I18n.t :dont_do_double_comment %>
   <% else %>
-    <form id="comment" action="<%=@post.id%>/comments">
-      <input type="hidden" name="comment[user_id]" value="<%=current_user.id%>"></input>
-      <input type="hidden" name="comment[post_id]" value="<%=@post.id%>"></input>
-      <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>"></input>
+    <%url = action_name == 'edit' ? "comments/#{@comment.id}" : "#{@post.id}/comments" %>
+    <%= form_for(@comment, :url => url, :html => {:id=>"#{action_name}CommentForm"}) do |f| %>
+      <%= f.hidden_field :user_id, :value => current_user.id %> 
+      <%= f.hidden_field :post_id, :value => @post.id %> 
 
-      <label for="user_id"><%= I18n.t :commenting_as %>: <%=current_user.name%><b>(<%=current_user.nickname%>)</b></label></br>
-      <label for="content">Comentário</label></br>
-      <textarea name="comment[content]" rows="8" cols="80"></textarea></br>
-      <input type="submit" value="Comentar"></input>
-    </form>
-  <% end %>
-  <a href="/signout" id="signoutTwitter" style="display:block"><%= I18n.t :sign_out_from_twitter %></a></br>
-
-<%else%>
-
-  <a href="/auth/twitter/"><%= I18n.t :sign_in_twitter_to_comment %></a>
-
+      <img src="<%=current_user.avatar_path%>"></img>
+      <span class="user"><b><%=current_user.name%></b> (<%=current_user.nickname%>)</span>
+      <%= f.text_area :content, :rows => 8, :cols => 80 %>
+      <%= f.submit "Comentar" %>
+    <%end%>
+  <%end%>
 <%end%>

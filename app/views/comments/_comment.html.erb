@@ -1,4 +1,7 @@
 <div class="comment" id="comment<%=comment.id%>">
+  <% if comment.user == current_user %>
+    <a style="display:block" class="commentEdit" data-commentId="<%=comment.id%>" href="comments/<%=comment.id%>/editar">Editar</a>
+  <%end%>
   <img src="<%=comment.user.avatar_path%>"></img>
   <span class="user"><b><%=comment.user.name%></b> (<%=comment.user.nickname%>)</span>
   <textarea readonly="true" cols="80" class="content"><%=comment.content%></textarea>

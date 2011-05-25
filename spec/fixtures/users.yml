@@ -1,0 +1,6 @@
+user1:
+  provider: "twitter"
+  uid: "123"
+  name: "User Name"
+  nickname: "user_nickname"
+  avatar_path: "http://some-path.com/some-image.jpg"

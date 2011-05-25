@@ -11,6 +11,16 @@ reloadCommentsIndex = function(){
     commentDiv.showMoreCharacters(800);
   });
   $("div.comment").load();
+
+  $(".comment a.commentEdit").click(function(event){
+    event.preventDefault();
+    var anchor = $(this);
+    $.get($(this).attr("href"),{without_layout: "true"},function(textResponse){
+      var commentId = anchor.attr("data-commentId");
+      $("div#comment"+commentId).html(textResponse);
+    });
+    return false;
+  });
 }
 
 MyMath = {

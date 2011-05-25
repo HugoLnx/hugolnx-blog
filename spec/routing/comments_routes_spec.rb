@@ -19,4 +19,16 @@ describe 'Comments Routes' do
     :action => 'create', 
     :post_id => '4'
   )
+
+  get("comments/2/editar").should route_to(
+    :controller => 'comments', 
+    :action => 'edit', 
+    :id => '2'
+  )
+
+  put("comments/2").should route_to(
+    :controller => 'comments', 
+    :action => 'update', 
+    :id => '2'
+  )
 end

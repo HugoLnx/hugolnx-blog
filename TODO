@@ -43,5 +43,7 @@ TODO =====================================
   - Use ajax to sign in Twitter
   - Put a window in bottom right of screen to user comment and sign in/out to/from twitter.
  TECNICAL
+  - Trate comment textarea overflow at font size variation
+  - Show comment creation date
   - Trate to user can't overflow database.
   - Use steak

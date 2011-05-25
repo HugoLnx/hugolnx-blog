@@ -1,5 +1,5 @@
 setupCommentForm = function(){
-  $("form#comment").submit(function(){
+  $("form[id$='CommentForm']").submit(function(){
     $(this).children().removeClass("field_error");
     $.post($(this).attr("action"),$(this).serialize())
       .statusCode({ 500: onInternalServerError })
@@ -25,13 +25,13 @@ function fieldsOf(attributes) {
   var fields = $();
   attributes.forEach(function(attribute){
     var fieldName = "comment[" + attribute + "]";
-    fields = fields.add("form#comment [name='"+fieldName+"']");
+    fields = fields.add("form[id$='CommentForm'] [name='"+fieldName+"']");
   });
   return fields;
 }
 
 function resetForm() {
-  $("form#comment [name^='comment[']").val("");
+  $("form[id$='CommentForm'] [name^='comment[']").val("");
 }
 
 function updateCommentsWith(commentsDivs) {

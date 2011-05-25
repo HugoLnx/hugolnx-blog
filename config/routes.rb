@@ -1,4 +1,6 @@
 HugolnxBlog::Application.routes.draw do
+  resources :comments, :path_names => {:edit => :editar}, :only => [:edit,:update]
+
   resources :posts, :only => [:index], :path => ''  do
     resources :comments
     member do

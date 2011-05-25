@@ -10,7 +10,8 @@ class PostsController < ApplicationController
   def show
     id = params[:id].to_i
     @post = Post.find id, :in => 'app/views/posts/posts/'
-    @comments = @post.comments
+    @comments = Comment.find_all_by_post_id(@post.id)
+    @comment = Comment.new
     @id_max = Post.id_max_in 'app/views/posts/posts/'
     @titles = Post.all_post_titles_in 'app/views/posts/posts/'
     if params[:without_layout] == 'true'
@@ -19,12 +20,6 @@ class PostsController < ApplicationController
       render 'show', :layout => true
     end
   end
-
-  #def master_layout
-  #  @id_max = Post.id_max_in 'app/views/posts/posts/'
-  #  @titles = Post.all_post_titles_in 'app/views/posts/posts/'
-  #  render :nothing => true, :layout => true
-  #end
 
 private
   def to_error(exception)

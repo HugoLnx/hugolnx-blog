@@ -1,5 +1,6 @@
 <% content_for :javascript do %>
   <%= javascript_include_tag "comments/index" %>
+
   <%= javascript_tag do %>
     $.syntax()
     reloadCommentsIndex();
@@ -29,7 +30,7 @@
   </div>
 
   <div class="content">
-    <%= render @comments %>
+    <%= @comments.empty? ? "Esse post nao foi comentado ainda" : render(@comments) %>
   </div>
 
 </div>
@@ -41,5 +42,10 @@
 
   <div class="content">
     <%= render "comments/form" %>
+    <% if current_user %>
+      <a href="/signout" id="signoutTwitter" style="display:block"><%= I18n.t :sign_out_from_twitter %></a></br>
+    <%else%>
+      <a href="/auth/twitter/"><%= I18n.t :sign_in_twitter_to_comment %></a>
+    <%end%>
   </div>
 </div>
