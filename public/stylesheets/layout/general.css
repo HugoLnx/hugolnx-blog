@@ -3,10 +3,10 @@ body {
   background-repeat: repeat;
 }
 
-#rss_image {background-image: url("/images/embed/rss.png")}
-#twitter {background-image: url("/images/embed/twitter.png")}
-#github_image {background-image: url("/images/embed/github.png")}
-#email_image {background-image: url("/images/embed/email.png")}
+#rss_image {background: url("/images/embed/rss.png") no-repeat center}
+#twitter_image {background: url("/images/embed/twitter.png") no-repeat center}
+#github_image {background: url("/images/embed/github.png") no-repeat center}
+#email_image {background: url("/images/embed/email.png") no-repeat center}
 
 .field_error {
   border: 3px solid red;
@@ -62,9 +62,16 @@ div#middle {
 }
 
 div#middle div#upcontents {
-  text-align: right;
+  height: 32px;
   margin-right: 40px;
   margin-bottom: 2px;
+}
+
+div#middle div#upcontents div.icon {
+  float: right;
+  width: 32px;
+  height: 32px;
+  margin-right: 2px;
 }
 
 div#creative_commons {
