@@ -4,7 +4,8 @@ class ApplicationController < ActionController::Base
   before_filter :check_domain
 private
   def check_domain
-    head :moved_permanently, :location => "http://hugolnx.com/" if Rails.env == :production || request.host.match(/test/)
+    p request.host
+    head :moved_permanently, :location => "http://hugolnx.com/" if request.host == 'hugolnxtest.heroku'
   end
   
   def current_user
