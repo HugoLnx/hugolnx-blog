@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 private
   def check_domain
     p request.host
-    head :moved_permanently, :location => "http://hugolnx.com/" if request.host == 'hugolnxtest.heroku'
+    head :moved_permanently, :location => "http://hugolnx.com/" if request.host == 'hugolnxtest.heroku.com'
   end
   
   def current_user
