@@ -1,7 +1,7 @@
 <html>
   <head>
     <title>HugoLnx::Blog beta</title>
-    <%= stylesheet_link_tag :all, :recursive => true, :cache => true %>
+    <%= include_stylesheets :all_minified %>
     <%= favicon_link_tag %>
     <%= csrf_meta_tag %>
   </head>
@@ -23,10 +23,10 @@
 
       <div id="middle">
         <div id="upcontents">
-          <a href="/feed.rss"><img src="images/rss.png"></a>
-          <a href="http://twitter.com/hugolnx"><img src="images/twitter.png"></a>
-          <a href="http://github.com/hugolnx"><img src="images/github.png"></a>
-          <a href="mailto:hugo.roque@caelum.com.br"><img src="images/email.png"></a>
+          <a href="/feed.rss"><div id="rss_image"></div></a>
+          <a href="http://twitter.com/hugolnx"><div id="twitter_image"></div></a>
+          <a href="http://github.com/hugolnx"><div id="github_image"></div></a>
+          <a href="mailto:hugo.roque@caelum.com.br"><div id="email_image"></div></a>
         </div>
         <div id="contents"><%= yield %></div>
       </div>
@@ -36,8 +36,7 @@
       </div>
 
     </div>
-    <% js_to_cache = %w{jquery.min jquery-ui.min post.slider ajax} %> <!-- google.analitics application synchronized.hash  -->
-    <%= javascript_include_tag(js_to_cache, :cache => true) %>
+    <%= include_javascripts :all_minified %>
 
     <%= javascript_tag do %>
       var id_max = <%=@id_max%>;

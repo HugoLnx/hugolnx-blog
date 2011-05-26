@@ -1,7 +1,12 @@
 body {
-  background-image: url("/images/back.png");
+  background-image: url("/images/embed/back.png");
   background-repeat: repeat;
 }
+
+#rss_image {background-image: url("/images/embed/rss.png")}
+#twitter {background-image: url("/images/embed/twitter.png")}
+#github_image {background-image: url("/images/embed/github.png")}
+#email_image {background-image: url("/images/embed/email.png")}
 
 .field_error {
   border: 3px solid red;
@@ -60,9 +65,6 @@ div#middle div#upcontents {
   text-align: right;
   margin-right: 40px;
   margin-bottom: 2px;
-}
-
-div#middle div#contents {
 }
 
 div#creative_commons {

@@ -28,10 +28,11 @@ gem 'rails', '3.0.5'
 #   gem 'webrat'
 # end
 
-gem 'mysql2'
+gem 'mysql2', '< 0.3.0'
 gem 'coderay'
 gem 'nokogiri'
 gem 'omniauth'
+gem 'jammit'
 
 group :test, :development do
   gem 'rspec-rails'
