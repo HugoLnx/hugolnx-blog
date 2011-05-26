@@ -55,7 +55,6 @@ PostSlider = function(args) {
   }
 
   function onStop(event,ui){
-    console.log("onStop event");
     noticeElement.fadeIn(6000);
     titleElement.hide();
     if (supportHistoryAPI()) {

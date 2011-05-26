@@ -37,6 +37,8 @@ DONE IN 16-05~24-05
 DONE IN 25-05
   - Allow user to edit or delete your own comments.
   - RSS support and icons to contact
+  - Use coderay to syntax highlighting
+  - Take care of javascript/css caching and performance
 
 TODO =====================================
  FEATURES
@@ -46,8 +48,7 @@ TODO =====================================
   - Use ajax to sign in Twitter
   - Put a window in bottom right of screen to user comment and sign in/out to/from twitter.
  TECNICAL
-  - Use coderay to syntax highlighting
-  - Take care of javascript/css caching and performance
+  - check features on firefox
   - Trate comment textarea overflow at font size variation
   - Show comment creation date
   - Trate to user can't overflow database.
