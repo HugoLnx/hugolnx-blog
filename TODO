@@ -39,16 +39,18 @@ DONE IN 25-05
   - RSS support and icons to contact
   - Use coderay to syntax highlighting
   - Take care of javascript/css caching and performance
+  - check features on firefox
 
 TODO =====================================
  FEATURES
+  - be indexed by google
   - Move screen to bottom after user post a comment and server renderize comments again.
   - Redirect to origin url when a session is destroyed
   - Use ajax to sign out Twitter
   - Use ajax to sign in Twitter
   - Put a window in bottom right of screen to user comment and sign in/out to/from twitter.
  TECNICAL
-  - check features on firefox
+  - fix blog on IE
   - Trate comment textarea overflow at font size variation
   - Show comment creation date
   - Trate to user can't overflow database.
