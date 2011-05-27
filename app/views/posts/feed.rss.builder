@@ -8,7 +8,7 @@ xml.rss :version => "2.0" do
     for post in @posts
       xml.item do
         xml.title post.title
-        xml.description post.body
+        xml.description post.body_with_syntax_highlighting
         xml.pubDate post.creation_date.strftime("%a, %d %b %Y %H:%M:%S %z")
         xml.link post_url(post)
         xml.guid post_url(post)
