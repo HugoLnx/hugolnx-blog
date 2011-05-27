@@ -44,6 +44,7 @@ DONE IN 25-05
 TODO =====================================
  FEATURES
   - implement tag and categories
+  - implement title unique
   - be indexed by google
   - Move screen to bottom after user post a comment and server renderize comments again.
   - Redirect to origin url when a session is destroyed

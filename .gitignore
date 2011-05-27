@@ -4,3 +4,4 @@ log/*.log
 tmp/
 .*.sw?
 script/apaga_backups_do_vim.rb
+public/requests.log
