@@ -35,6 +35,10 @@ div.CodeRay table.CodeRay td.line_numbers {
   padding-right: 10px;
 }
 
-body {
-  font-size: 13px;
+div #middle div#contents {
+  font-size: 16px;
+}
+
+div #middle div#contents div#post p {
+  text-indent: 30px
 }

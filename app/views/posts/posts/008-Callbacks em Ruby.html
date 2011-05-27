@@ -1,0 +1,90 @@
+Creation Date: 27/05/2011
+<h1 class="first">Introdu&ccedil;&atilde;o</h1>
+<p>Programadores ruby experientes conhecem o quase m&aacute;gico method_missing(). Por&eacute;m n&atilde;o s&atilde;o todos que conhecem os v&aacute;rios outros callbacks que ruby nos tras e nos permitem fazer manipula&ccedil;&otilde;es quase milagrosas na linguagem.</p>
+
+<h1 class="first">Os Callbacks</h1>
+<h2 class="first">O bom e velho method_missing()</h2>
+<p>O m&eacute;todo method_missing() &eacute; invocado quando chamamos um m&eacute;todo que n&atilde;o existe, por padr&atilde;o ele lan&ccedil;a um NoMethodError.</p>
+<p>Por&eacute;m, podemos alterar esse comportamento padr&atilde;o sobreescrevendo-o:</p>
+<code class="syntax ruby">class Qualquer
+  def method_missing(nome_do_metodo,*argumentos,&bloco)
+    info_bloco = "#{block_given? ? 'com' : 'sem'} bloco"
+    puts "#{nome_do_metodo}(#{argumentos.join(',')}) [#{info_bloco}]"
+  end
+end
+Qualquer.new.metodo_que_nao_existe
+  # => metodo_que_nao_existe() [sem bloco]
+
+Qualquer.new.metodo_que_nao_existe("arg1","arg2") do
+end
+  # => metodo_que_nao_existe(arg1,arg2) [com bloco]
+</code>
+
+<h2 class="first">const_missing()</h2>
+<p>&Eacute; acionado quando invocamos uma constante que n&atilde;o existe:</p>
+<code class="syntax ruby">class Qualquer
+  def self.const_missing(nome_da_constante)
+    puts "A constante #{nome_da_constante} n&atilde;o existe"
+  end
+end
+Qualquer::Imaginaria
+  # => A constante Imaginaria n&atilde;o existe
+</code>
+
+<h2>method_added()</h2>
+<p>Esse callback &eacute; acionado sempre que definimos um m&eacute;todo:</p>
+<code class="syntax ruby">class Qualquer
+  def self.method_added(nome_do_metodo)
+    puts "o m&eacute;todo #{nome_do_metodo} foi definido"
+  end
+
+  def teste;end
+end
+  # => o m&eacute;todo teste foi definido
+</code>
+
+<h2>singleton_method_added()</h2>
+<p>Esse callback &eacute; acionado sempre que definimos um m&eacute;todo numa singleton class:</p>
+<code class="syntax ruby">class Qualquer
+  def self.singleton_method_added(nome_do_metodo)
+    puts "o m&eacute;todo singleton #{nome_do_metodo} foi definido"
+  end
+
+  def self.teste;end
+end
+  # => o m&eacute;todo singleton_method_added foi definido
+  # => o m&eacute;todo teste foi definido
+</code>
+
+<h2>included()/extended()</h2>
+<p>Esses callbacks s&atilde;o acionados sempre que incluimos/estendemos um m&oacute;dulo:</p>
+<code class="syntax ruby">module Qualquer
+  def self.included(onde_sera_incluido)
+    p "#{self} foi incluido em #{onde_sera_incluido}"
+  end
+
+  def self.extended(por_quem_sera_estendido)
+    p "#{self} foi estendido por #{por_quem_sera_estendido}"
+  end
+end
+
+class ClasseQueIncluira
+  include Qualquer
+end
+  # => Qualquer foi incluido em ClasseQueIncluira
+
+module ModuloQueEstendera
+  extend Qualquer
+end
+  # => Qualquer foi estendido por ModuloQueEstendera
+</code>
+
+<h1>Conclus&atilde;o</h1>
+<p>Callbacks em Ruby s&atilde;o muito poderosos, neste post foi mostrado de forma bem r&aacute;pida os principais. Cada um desses recursos merece um post individual, muitos aspectos interessantes ficaram implicitos. Mas fica o empurr&atilde;o de est&iacute;mulo para os curiosos.</p>
+
+<h1>Refer&ecirc;ncias</h1>
+<ul>
+  <li><a href="http://www.ruby-doc.org/core/">RubyDoc</a></li>
+  <li><a href="http://www.amazon.com/Metaprogramming-Ruby-Program-Like-Pros/dp/1934356476">Livro Metaprogramming Ruby</a> by Paolo Perrota</li>
+  <li><a href="https://github.com/rspec/rspec-core">C&oacute;digo Fonte do RSpec</a></li>
+</ul>
