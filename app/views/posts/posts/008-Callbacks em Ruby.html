@@ -24,36 +24,36 @@ end
 <p>&Eacute; acionado quando invocamos uma constante que n&atilde;o existe:</p>
 <code class="syntax ruby">class Qualquer
   def self.const_missing(nome_da_constante)
-    puts "A constante #{nome_da_constante} n&atilde;o existe"
+    puts "A constante #{nome_da_constante} nao existe"
   end
 end
 Qualquer::Imaginaria
-  # => A constante Imaginaria n&atilde;o existe
+  # => A constante Imaginaria nao existe
 </code>
 
 <h2>method_added()</h2>
 <p>Esse callback &eacute; acionado sempre que definimos um m&eacute;todo:</p>
 <code class="syntax ruby">class Qualquer
   def self.method_added(nome_do_metodo)
-    puts "o m&eacute;todo #{nome_do_metodo} foi definido"
+    puts "o metodo #{nome_do_metodo} foi definido"
   end
 
   def teste;end
 end
-  # => o m&eacute;todo teste foi definido
+  # => o metodo teste foi definido
 </code>
 
 <h2>singleton_method_added()</h2>
 <p>Esse callback &eacute; acionado sempre que definimos um m&eacute;todo numa singleton class:</p>
 <code class="syntax ruby">class Qualquer
   def self.singleton_method_added(nome_do_metodo)
-    puts "o m&eacute;todo singleton #{nome_do_metodo} foi definido"
+    puts "o metodo singleton #{nome_do_metodo} foi definido"
   end
 
   def self.teste;end
 end
-  # => o m&eacute;todo singleton_method_added foi definido
-  # => o m&eacute;todo teste foi definido
+  # => o metodo singleton_method_added foi definido
+  # => o metodo teste foi definido
 </code>
 
 <h2>included()/extended()</h2>
