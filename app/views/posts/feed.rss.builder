@@ -3,6 +3,7 @@ xml.rss :version => "2.0" do
   xml.channel do
     xml.title "HugoLnx::Blog"
     xml.description "O blog com tudo sobre programacao"
+    xml.lastBuildDate "Fri, 27 May 2011 00:00:00 +0000"
     xml.link posts_url
 
     for post in @posts
