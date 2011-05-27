@@ -9,7 +9,7 @@ private
   end
 
   def log_request
-    logger = Logger.new('public/requests.log')
+    logger = Logger.new('log/requests.log')
     logger.info "#{request.ip.inspect}|#{Time.now.inspect}|#{request.host.inspect}|#{request.method.inspect}|#{request.fullpath}"
   end
   
