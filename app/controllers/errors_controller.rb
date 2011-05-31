@@ -5,6 +5,7 @@ class ErrorsController < ApplicationController
     @post = Post.find @id_max, :in => 'app/views/posts/posts/'
     @titles = Post.all_post_titles_in 'app/views/posts/posts/'
     error_message = params[:message]
+    @title_complement = 'Error'
     @message = select_pretty_message_for error_message
     render "errors/show"
   end

@@ -12,6 +12,7 @@ class PostsController < ApplicationController
     @post = Post.find id, :in => 'app/views/posts/posts/'
     @keywords = @post.keywords.join(',')
     @description = @post.description
+    @title_complement = @post.title
     @comments = Comment.find_all_by_post_id(@post.id)
     @comment = Comment.new
     @id_max = Post.id_max_in 'app/views/posts/posts/'
@@ -42,6 +43,8 @@ private
     @titles = Post.all_post_titles_in 'app/views/posts/posts/'
     error_message = exception.message
     @message = select_pretty_message_for error_message
+    @robots_metatag = 'noindex'
+    @title_complement = 'Error'
     render "errors/show"
   end
 

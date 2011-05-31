@@ -58,7 +58,10 @@ PostSlider = function(args) {
     noticeElement.fadeIn(6000);
     titleElement.hide();
     if (supportHistoryAPI()) {
-      history.pushState(true,"Post "+titleFor(ui.value),ui.value);
+      var title_base = document.title.split(' ')[0];
+      var full_title = title = title_base + " " + titleFor(ui);
+      document.title = full_title;
+      history.pushState(true,full_title,ui.value);
       ajax.changePostTo(ui.value);
     } else {
       document.location.href = ui.value;
