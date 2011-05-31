@@ -5,6 +5,7 @@ HugolnxBlog::Application.routes.draw do
     resources :comments
     get :show, :constraints => {:id => /\d+/}, :on => :member
     get 'feed', :controller => :posts, :action => :feed, :on => :collection
+    get 'sitemap', :controller => :posts, :action => :sitemap, :on => :collection
   end
   #match '/' => 'posts#master_layout'
   #match 'posts/show(/:id)' => 'posts#show'

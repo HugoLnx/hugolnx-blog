@@ -36,6 +36,18 @@ class PostsController < ApplicationController
     end
   end
 
+  def sitemap
+    @posts = []
+    id_max = Post.id_max_in('app/views/posts/posts/')
+    (1..id_max).each do |id|
+      @posts << Post.find(id, :in => 'app/views/posts/posts')
+    end
+
+    respond_to do |format|
+      format.xml { render 'sitemap', :layout => false }
+    end
+  end
+
 private
   def to_error(exception)
     @id_max = Post.id_max_in 'app/views/posts/posts/'

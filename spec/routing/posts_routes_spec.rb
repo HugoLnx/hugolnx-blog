@@ -16,4 +16,9 @@ describe "Posts Routes" do
     :controller => 'posts',
     :action => 'feed',
   )
+
+  get("/sitemap").should route_to(
+    :controller => 'posts',
+    :action => 'sitemap',
+  )
 end
