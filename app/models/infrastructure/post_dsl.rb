@@ -7,13 +7,12 @@ module Infrastructure
       path = PostfileFinder.find(id,directory)
       postfile = Postfile.new(path)
       postfile_content = PostfileContent.new(path)
-      title = postfile.title
-      creation_date = postfile_content.creation_date
-      body = postfile_content.body
-      Post.new :id => id,
-               :title => title, 
-               :creation_date => creation_date,
-               :body => body
+      attributes = {
+        :id => id,
+        :title => postfile.title
+      }.merge!(postfile_content.catch_attributes)
+
+      Post.new attributes
     end
 
     def find_all_post_titles_in(directory)

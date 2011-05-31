@@ -1,22 +1,50 @@
 module Infrastructure
   class PostfileContent
-    attr_reader :creation_date
-    attr_reader :body
+    ANNOTATION_REGEXPS = {
+      :creation_date => /[cC]reation [dD]ate:/,
+      :keywords => /[kK]eywords:/,
+      :tags => /[tT]ags:/
+    }
 
     def initialize(path)
-      content = File.read(path).strip
-      @creation_date = creation_date_from(content)
-      @body = body_from(content)
+      @content = File.read(path).strip
     end
 
-    def creation_date_from(content)
-      first_line = content.lines.first
-      match = first_line.match(/^[cC]reation [dD]ate:(.*)$/)
-      creation_date = match[1].strip.to_date
+    def catch_attributes
+      all_attributes = {:body => catch_body}
+      ANNOTATION_REGEXPS.each do |attribute,regexp|
+        data = extract_data regexp
+        value = trate_data_of(attribute,data)
+        all_attributes[attribute] = value
+      end
+      return all_attributes
     end
 
-    def body_from(content)
-      content.without_first_line.strip
+  private
+    def catch_body
+      body = @content.clone
+      ANNOTATION_REGEXPS.each_value do |regexp|
+        body.slice!(/#{regexp}.*\n/)
+      end
+      return body
     end
+
+    def extract_data(regexp)
+      match = @content.match(/#{regexp}([^\n]*)/)
+      return $1 || ""
+    end
+
+    def trate_data_of(attribute,data)
+      return send("trate_#{attribute}_data",data.strip)
+    end
+
+    def trate_creation_date_data(data)
+      data.to_date
+    end
+
+    def trate_keywords_data(data)
+      data.split ' '
+    end
+    alias trate_tags_data trate_keywords_data
   end
 end
