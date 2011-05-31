@@ -3,7 +3,8 @@ module Infrastructure
     ANNOTATION_REGEXPS = {
       :creation_date => /[cC]reation [dD]ate:/,
       :keywords => /[kK]eywords:/,
-      :tags => /[tT]ags:/
+      :tags => /[tT]ags:/,
+      :description => /[Dd]escription:/
     }
 
     def initialize(path)
@@ -46,5 +47,9 @@ module Infrastructure
       data.split ' '
     end
     alias trate_tags_data trate_keywords_data
+
+    def trate_description_data(data)
+      data.strip
+    end
   end
 end

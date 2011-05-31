@@ -7,6 +7,7 @@ class Post < ActiveRecord::Base
   attr_reader :body
   attr_reader :keywords
   attr_reader :tags
+  attr_reader :description
 
   def initialize(options = {})
     @id = options[:id]
@@ -15,6 +16,7 @@ class Post < ActiveRecord::Base
     @body = options[:body]
     @keywords = options[:keywords]
     @tags = options[:tags]
+    @description = options[:description]
   end
 
   def body_with_syntax_highlighting

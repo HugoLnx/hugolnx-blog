@@ -29,6 +29,7 @@ module Infrastructure
           end
         end
       end
+
       describe 'tags wrapping' do
         specify 'catch Tags: tag1 tag2 tag3' do 
           all_attributes[:tags].should be == %w{tag1 tag2 tag3}
@@ -42,6 +43,11 @@ module Infrastructure
         end
       end
 
+      describe 'description wrapping' do
+        specify 'catch Description: description here' do 
+          all_attributes[:description].should be == 'description here'
+        end
+      end
 
       it 'catch body' do 
         all_attributes[:body].should be == 'Testing Body 1'
