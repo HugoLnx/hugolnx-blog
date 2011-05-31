@@ -20,6 +20,9 @@ $(document).ready(function() {
             ajax.changePostTo(pathname);
             var id = pathname.match(/^\d+$/) ? pathname : id_max;
             postSlider.updateValueWith(id);
+            var title_base = document.title.split(' ')[0];
+            var full_title = title_base + " " + titles[id-1];
+            document.title = full_title;
           } else {
             document.location.reload();
           }
@@ -59,7 +62,7 @@ PostSlider = function(args) {
     titleElement.hide();
     if (supportHistoryAPI()) {
       var title_base = document.title.split(' ')[0];
-      var full_title = title = title_base + " " + titleFor(ui);
+      var full_title = title_base + " " + titleFor(ui);
       document.title = full_title;
       history.pushState(true,full_title,ui.value);
       ajax.changePostTo(ui.value);
