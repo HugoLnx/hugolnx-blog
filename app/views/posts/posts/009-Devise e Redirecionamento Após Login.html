@@ -1,0 +1,78 @@
+Creation Date: 01/06/2011
+Description: Mostrando uma alternativa aos métodos descritos na documentação do Devise, para mudar a path padrão para qual o usuário será redirecionado após o login.
+Keywords: devise redirecionar sign_in after_sign_in_path_for
+Tags: ruby devise
+<h1 class="first">Introdu&ccedil;&atilde;o</h1>
+<p>Durante 2 dias eu e <a href="http://twitter.com/fabiopimentel">Fábio</a> passamos por um problema com o Devise, que foi um tanto complicado de resolver. O que, teoricamente, levaria alguns segundos, acabou levando horas.</p>
+<p>O objetivo era simples, mudar a path para qual o devise direcionava o usuário depois que ele logava, porém nós não conseguimos fazer isso através dos <a href="https://github.com/plataformatec/devise/wiki/How-to:-redirect-to-a-specific-page-on-successful-sign-in">métodos descritos na documentação do devise</a>.</p>
+<p>Felizmente, com a ajuda do grande <a href="http://twitter.com/#!/vinibaggio">Vinicius Baggio</a> foi possivel desenvolver outro método, muito menos elegante, porém com efeito semelhante.</p>
+
+<h1>Explicando algumas coisas antes da solução</h1>
+<p>Antes de iniciar a solução em si, é interessante destacar esses dois pedaços do código fonte do devise:</p>
+<code class="syntax ruby"># app/controllers/devise/sessions_controller.rb
+class Devise::SessionsController &lt; ApplicationController
+  # ...
+  def create
+    resource = warden.authenticate!(:scope => resource_name,
+                                    :recall => "#{controller_path}#new")
+    set_flash_message(:notice, :signed_in) if is_navigational_format?
+    sign_in(resource_name, resource)
+    respond_with resource, 
+                 :location => redirect_location(resource_name, resource)
+  end
+  # ...
+end
+</code>
+<code class="syntax ruby"># lib/devise/controllers/helpers.rb
+module Devise::Controllers::Helpers
+  # ...
+  def redirect_location(scope, resource)
+    stored_location_for(scope) || after_sign_in_path_for(resource)
+  end
+  # ...
+  def stored_location_for(resource_or_scope)
+    scope = Devise::Mapping.find_scope!(resource_or_scope)
+    session.delete("#{scope}_return_to") # retorno é o valor da tupla deletada
+  end
+  # ...
+end
+</code>
+
+<p>No primeiro snippet dá para perceber que após ele criar a sessão, é chamado o método <span class="snippet">redirect_location</span> que está definido no segundo snippet.</p>
+<p>O <span class="snippet">redirect_location</span> chama o método <span class="snippet">stored_location_for</span> que, caso exista na session hash, deleta a tupla de chave {scope}_return_to e retorna seu valor.</p>
+
+<h1>A Solução</h1>
+<p>A solução que resolveu nosso problema foi setar manualmente um valor para <span class="snippet">session[:usuario_return_to]</span> sendo "usuario" o nome do nosso scope (você define ele nas suas rotas através do <span class="snippet">devise_for</span>):</p>
+<code class="syntax ruby"># app/controllers/devise/sessions_controller.rb
+class DeviseDaApplicacao::SessionsController &lt; Devise::SessionsController
+  # ...
+  alias old_create create
+  def create
+    session[:usuario_return_to] = '/path/qualquer'
+    old_create
+  end
+  # ...
+end
+</code>
+<p>Foi necessário utilizar o alias por que nós criamos um controller novo que estendia do controller do devise (por ser menos intrusivo), mas caso você queira abrir diretamente o controller do devise, pode ser feito:</p>
+<code class="syntax ruby"># app/controllers/devise/sessions_controller.rb
+class Devise::SessionsController &lt; ApplicationController
+  # ...
+  def create
+    resource = warden.authenticate!(:scope => resource_name,
+                                    :recall => "#{controller_path}#new")
+    set_flash_message(:notice, :signed_in) if is_navigational_format?
+    sign_in(resource_name, resource)
+    respond_with resource, :location => 'path/qualquer'
+  end
+  # ...
+end
+</code>
+
+<h1>Conclus&atilde;o</h1>
+<p>Apesar de não ser muito elegante, é uma forma diferente das apresentadas na documentação.</p>
+
+<h1>Refer&ecirc;ncias</h1>
+<ul>
+  <li><a href="http://twitter.com/#!/vinibaggio">Vinicius Baggio</a></li>
+</ul>
