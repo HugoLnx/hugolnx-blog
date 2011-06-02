@@ -17,6 +17,21 @@ module Infrastructure
         end
       end
 
+      describe 'last modification date wrapping' do
+        context 'have last modification date annotation' do
+          specify 'catch Last Modification Date: dd/mm/yyyy' do 
+            all_attributes[:last_modification_date].should be == Date.new(1993,03,22)
+          end
+        end
+
+        context 'have\'n last modification date annotation' do
+          specify 'is nil' do 
+            @path = 'spec/fixtures/postfile_content/with_minimum_of_annotations.html'
+            all_attributes[:last_modification_date].should be_nil
+          end
+        end
+      end
+
       describe 'keywords wrapping' do
         specify 'catch Keywords: key1 key2 key3' do 
           all_attributes[:keywords].should be == %w{key1 key2 key3}
@@ -24,7 +39,7 @@ module Infrastructure
 
         context "haven't keywords annotation" do
           specify 'is an empty array' do
-            @path = 'spec/fixtures/postfile_content/without_keywords.html'
+            @path = 'spec/fixtures/postfile_content/with_minimum_of_annotations.html'
             all_attributes[:keywords].should be == []
           end
         end
@@ -37,7 +52,7 @@ module Infrastructure
 
         context "haven't tags annotation" do
           specify 'is an empty array' do
-            @path = 'spec/fixtures/postfile_content/without_tags.html'
+            @path = 'spec/fixtures/postfile_content/with_minimum_of_annotations.html'
             all_attributes[:tags].should be == []
           end
         end

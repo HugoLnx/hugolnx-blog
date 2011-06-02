@@ -4,6 +4,7 @@ class Post < ActiveRecord::Base
   attr_reader :id
   attr_reader :title
   attr_reader :creation_date
+  attr_reader :last_modification_date
   attr_reader :body
   attr_reader :keywords
   attr_reader :tags
@@ -13,6 +14,7 @@ class Post < ActiveRecord::Base
     @id = options[:id]
     @title = options[:title]
     @creation_date = options[:creation_date]
+    @last_modification_date = options[:last_modification_date]
     @body = options[:body]
     @keywords = options[:keywords]
     @tags = options[:tags]

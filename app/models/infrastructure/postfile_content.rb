@@ -2,6 +2,7 @@ module Infrastructure
   class PostfileContent
     ANNOTATION_REGEXPS = {
       :creation_date => /[cC]reation [dD]ate:/,
+      :last_modification_date => /[lL]ast [mM]odification [dD]ate:/,
       :keywords => /[kK]eywords:/,
       :tags => /[tT]ags:/,
       :description => /[Dd]escription:/
@@ -41,6 +42,10 @@ module Infrastructure
 
     def trate_creation_date_data(data)
       data.to_date
+    end
+
+    def trate_last_modification_date_data(data)
+      data.empty? ? nil : data.to_date
     end
 
     def trate_keywords_data(data)
