@@ -4,15 +4,18 @@ class PostsController < ApplicationController
 
   def index
     params[:id] = Post.id_max_in 'app/views/posts/posts/'
+    @keywords = ['hugolnx','hugo','roque'].join(',')
+    @description = "Um blog de Hugo Roque (a.k.a HugoLnx) que foi criado com a intenção de compartilhar conhecimentos adquiridos durante seus estudos pessoais e profissionais."
+    @title_complement = 'Index' 
     show
   end
   
   def show
     id = params[:id].to_i
     @post = Post.find id, :in => 'app/views/posts/posts/'
-    @keywords = @post.keywords.join(',')
-    @description = @post.description
-    @title_complement = @post.title
+    @keywords ||= @post.keywords.join(',')
+    @description ||= @post.description
+    @title_complement ||= @post.title
     @comments = Comment.find_all_by_post_id(@post.id)
     @comment = Comment.new
     @id_max = Post.id_max_in 'app/views/posts/posts/'
