@@ -1,5 +1,6 @@
 Creation Date: 27/05/2011
-Description: Explicando vários dos diversos callbacks como o method_missing.
+Last Modification Date: 03/06/2011
+Description: Explicando v&aacute;rios dos diversos callbacks como o method_missing.
 Keywords: ruby callback
 Tags: ruby
 <h1 class="first">Introdu&ccedil;&atilde;o</h1>
@@ -80,6 +81,19 @@ module ModuloQueEstendera
   extend Qualquer
 end
   # => Qualquer foi estendido por ModuloQueEstendera
+</code>
+
+<h2>inherited()</h2>
+<p>Esse callback &eacute; acionado sempre que estendemos uma classe:</p>
+<code class="syntax ruby">class Qualquer
+  def self.inherited(quem_estendera)
+    p "#{self} foi estendida por #{quem_estendera}"
+  end
+end
+
+class ClasseQueEstendera &lt; Qualquer
+end
+  # => Qualquer foi estendido por ClasseQueEstendera
 </code>
 
 <h1>Conclus&atilde;o</h1>

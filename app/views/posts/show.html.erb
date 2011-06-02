@@ -16,7 +16,10 @@
   </div>
 
   <div class="footer">
-    <%= @post.creation_date.to_s :portuguese %>
+    <span style="display: block;">Criado em: <%= @post.creation_date.to_s :portuguese %></span>
+    <% unless @post.last_modification_date.nil? %>
+      <span style="display: block;">&Uacute;ltima Atualiza&ccedil;&atilde;o em: <%= @post.last_modification_date.to_s :portuguese %></span>
+    <%end%>
   </div>
 </div>
 

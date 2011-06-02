@@ -2,7 +2,9 @@ xml.instruct! :xml, :version => "1.0"
 xml.urlset :xmlns => "http://www.sitemaps.org/schemas/sitemap/0.9" do
   xml.url do
     xml.loc "http://#{request.host}"
-    xml.lastmod @posts.last.creation_date.strftime("%Y-%m-%d")
+    post = @posts.last
+    last_mod = post.last_modification_date || post.creation_date
+    xml.lastmod last_mod.strftime("%Y-%m-%d")
     xml.changefreq 'daily'
     xml.priority '0.8'
   end
@@ -10,7 +12,8 @@ xml.urlset :xmlns => "http://www.sitemaps.org/schemas/sitemap/0.9" do
   for post in @posts
     xml.url do
       xml.loc post_url(post)
-      xml.lastmod post.creation_date.strftime("%Y-%m-%d")
+      last_mod = post.last_modification_date || post.creation_date
+      xml.lastmod last_mod.strftime("%Y-%m-%d")
     end
   end
 end
