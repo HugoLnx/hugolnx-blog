@@ -1,4 +1,4 @@
 require 'jammit'
 task :jammit do
-  Jammit.package!
+  Jammit.package!(:base_url => 'http://hugolnx.com')
 end
