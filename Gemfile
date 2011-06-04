@@ -33,6 +33,7 @@ gem 'coderay'
 gem 'nokogiri'
 gem 'omniauth'
 gem 'jammit'
+gem 'babosa'
 
 group :test, :development do
   gem 'rspec-rails'

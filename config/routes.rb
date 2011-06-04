@@ -3,7 +3,9 @@ HugolnxBlog::Application.routes.draw do
 
   resources :posts, :only => [:index], :path => ''  do
     resources :comments
-    get :show, :constraints => {:id => /\d+/}, :on => :member
+    get ':id(-:friendly_title)', :constraints => {:id => /\d+/},
+                                 :action => :show,
+                                 :on => :collection
     get 'feed', :controller => :posts, :action => :feed, :on => :collection
     get 'sitemap', :controller => :posts, :action => :sitemap, :on => :collection
   end

@@ -34,6 +34,7 @@ GEM
     activesupport (3.0.5)
     addressable (2.2.4)
     arel (2.0.9)
+    babosa (0.3.4)
     bind (0.2.8)
       commander (>= 4.0.0)
     builder (2.1.2)
@@ -206,6 +207,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  babosa
   capybara
   coderay
   cucumber-rails

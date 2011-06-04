@@ -3,16 +3,30 @@ class PostsController < ApplicationController
   rescue_from Infrastructure::PostException, :with => :to_error
 
   def index
-    params[:id] = Post.id_max_in 'app/views/posts/posts/'
+    id = Post.id_max_in 'app/views/posts/posts/'
+    post = Post.find id, :in => 'app/views/posts/posts/'
+    params[:id] = id
+    params[:friendly_title] = post.friendly_title
     @keywords = ['hugolnx','hugo','roque'].join(',')
     @description = "Um blog de Hugo Roque (a.k.a HugoLnx) que foi criado com a intenção de compartilhar conhecimentos adquiridos durante seus estudos pessoais e profissionais."
     @title_complement = 'Index' 
     show
   end
   
+  # TODO: Improve this action
   def show
+    friendly_title = params[:friendly_title]
     id = params[:id].to_i
+    with_layout = params[:without_layout] != 'true'
     @post = Post.find id, :in => 'app/views/posts/posts/'
+    # TODO: Improve this crap
+    if with_layout
+      if friendly_title.nil?
+        return redirect_to "/#{@post.to_url}"
+      elsif friendly_title != @post.friendly_title
+        raise Infrastructure::PostException, Infrastructure::PostException::PostNotFoundedMessage
+      end
+    end
     @keywords ||= @post.keywords.join(',')
     @description ||= @post.description
     @title_complement ||= @post.title
@@ -20,11 +34,7 @@ class PostsController < ApplicationController
     @comment = Comment.new
     @id_max = Post.id_max_in 'app/views/posts/posts/'
     @titles = Post.all_post_titles_in 'app/views/posts/posts/'
-    if params[:without_layout] == 'true'
-      render 'show', :layout => false
-    else
-      render 'show', :layout => true
-    end
+    render 'show', :layout => with_layout
   end
 
   def feed

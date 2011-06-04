@@ -35,6 +35,14 @@ class Post < ActiveRecord::Base
     doc.to_html
   end
 
+  def friendly_title
+    @title.to_slug.normalize.to_s
+  end
+
+  def to_url
+    "#{@id}-#{friendly_title}"
+  end
+
   class << self
     def find(*args)
       Infrastructure::PostDsl.find_and_build(*args)

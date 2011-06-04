@@ -26,4 +26,18 @@ describe Post do
                               .with('spec/fixtures/')
     end
   end
+
+  describe '#friendly_title' do
+    it 'returns a title without space or special characters' do
+      post = Post.find(1, :in => 'spec/fixtures')
+      post.friendly_title.should be == "testing-post-1"
+    end
+  end
+
+  describe '#to_url' do
+    it 'returns a url based on id and title' do
+      post = Post.find(1, :in => 'spec/fixtures')
+      post.to_url.should be == "1-testing-post-1"
+    end
+  end
 end

@@ -6,10 +6,4 @@ describe 'requests to show the latest post:' do
     it {should render_template 'posts/show'}
     it {should render_template 'layouts/application'}
   end
-
-  describe 'GET /4' do
-    before(:each) {get '/4'}
-    it {should render_template 'posts/show'}
-    it {should render_template 'layouts/application'}
-  end
 end
