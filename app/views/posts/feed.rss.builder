@@ -13,8 +13,8 @@ xml.rss :version => "2.0" do
         xml.description post.body_with_syntax_highlighting
         xml.pubDate post.creation_date.strftime("%a, %d %b %Y %H:%M:%S %z")
         xml.lastBuildDate post.last_modification_date.strftime("%a, %d %b %Y %H:%M:%S %z") unless post.last_modification_date.nil?
-        xml.link post_url(post)
-        xml.guid post_url(post)
+        xml.link "http://#{request.host}/#{post.to_url}"
+        xml.guid "http://#{request.host}/#{post.to_url}"
       end
     end
   end
