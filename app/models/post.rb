@@ -39,8 +39,12 @@ class Post < ActiveRecord::Base
     @title.to_slug.normalize.to_s
   end
 
-  def to_url
+  def friendly_id
     "#{@id}-#{friendly_title}"
+  end
+
+  def to_param
+    friendly_id
   end
 
   class << self

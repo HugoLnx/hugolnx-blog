@@ -1,40 +1,35 @@
 #encoding: utf-8
-class PostsController < ApplicationController
+class PostsController < PostsBaseController
   rescue_from Infrastructure::PostException, :with => :to_error
 
   def index
     id = Post.id_max_in 'app/views/posts/posts/'
     post = Post.find id, :in => 'app/views/posts/posts/'
-    params[:id] = id
-    params[:friendly_title] = post.friendly_title
+    params[:id] = post.friendly_id
     @keywords = ['hugolnx','hugo','roque'].join(',')
     @description = "Um blog de Hugo Roque (a.k.a HugoLnx) que foi criado com a intenção de compartilhar conhecimentos adquiridos durante seus estudos pessoais e profissionais."
     @title_complement = 'Index' 
     show
+    render :show
+  end
+
+  def redirect_to_right_path
+    id = params[:id]
+    post = Post.find id, :in => 'app/views/posts/posts/'
+    redirect_to post
   end
   
-  # TODO: Improve this action
   def show
-    friendly_title = params[:friendly_title]
-    id = params[:id].to_i
-    with_layout = params[:without_layout] != 'true'
+    friendly_id = params[:id]
+    id = friendly_id[/\d+/]
     @post = Post.find id, :in => 'app/views/posts/posts/'
-    # TODO: Improve this crap
-    if with_layout
-      if friendly_title.nil?
-        return redirect_to "/#{@post.to_url}"
-      elsif friendly_title != @post.friendly_title
-        raise Infrastructure::PostException, Infrastructure::PostException::PostNotFoundedMessage
-      end
-    end
+    redirect_to @post if friendly_id != @post.friendly_id
+    
+    prepare_to_render_show_with @post
+
     @keywords ||= @post.keywords.join(',')
     @description ||= @post.description
     @title_complement ||= @post.title
-    @comments = Comment.find_all_by_post_id(@post.id)
-    @comment = Comment.new
-    @id_max = Post.id_max_in 'app/views/posts/posts/'
-    @titles = Post.all_post_titles_in 'app/views/posts/posts/'
-    render 'show', :layout => with_layout
   end
 
   def feed

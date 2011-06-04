@@ -34,10 +34,18 @@ describe Post do
     end
   end
 
-  describe '#to_url' do
-    it 'returns a url based on id and title' do
+  describe '#friendly_id' do
+    it 'returns a friendly id based on id and title' do
       post = Post.find(1, :in => 'spec/fixtures')
-      post.to_url.should be == "1-testing-post-1"
+      post.friendly_id.should be == "1-testing-post-1"
+    end
+  end
+
+  describe '#to_param' do
+    it 'calls friendly_id' do
+      post = Post.find(1, :in => 'spec/fixtures')
+      post.should_receive :friendly_id
+      post.to_param
     end
   end
 end

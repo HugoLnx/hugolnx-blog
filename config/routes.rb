@@ -1,21 +1,17 @@
 HugolnxBlog::Application.routes.draw do
   resources :comments, :path_names => {:edit => :editar}, :only => [:edit,:update]
 
+  namespace :without_layout do
+    resources :posts, :only => [:show], :path => ''
+  end
+
   resources :posts, :only => [:index], :path => ''  do
     resources :comments
-    get ':id(-:friendly_title)', :constraints => {:id => /\d+/},
-                                 :action => :show,
-                                 :on => :collection
+    get :show, :constraints => {:id => /\d+\-[\w-]+/}, :on => :member
+    get '', :action => :redirect_to_right_path, :constraints => {:id => /\d+/}, :on => :member
     get 'feed', :controller => :posts, :action => :feed, :on => :collection
     get 'sitemap', :controller => :posts, :action => :sitemap, :on => :collection
   end
-  #match '/' => 'posts#master_layout'
-  #match 'posts/show(/:id)' => 'posts#show'
-  #resources :posts, :only => ['show'] do
-  #  resources :comments
-  #end
-  #match '/(:id)' => 'posts#call_ajax', :constraints => {:id => /\d+/}
-  #match 'errors/show(/:id)' => 'errors#show'
 
   match "/auth/failure" => "errors#show"
   match "/auth/:provider" => "sessions#setup"
