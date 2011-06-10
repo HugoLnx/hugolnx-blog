@@ -42,6 +42,14 @@ span.snippet {
   -moz-border-radius: 5px;
 }
 
+span.comentario {
+  background-color: #d0d0d0;
+  font-size: 12px;
+  padding: 0px 2px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+
 div #middle div#contents {
   font-size: 16px;
 }
