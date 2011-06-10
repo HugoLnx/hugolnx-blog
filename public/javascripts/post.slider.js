@@ -24,11 +24,12 @@ $(document).ready(function() {
           var isHistoryApiEntry = event.state;
           if (isHistoryApiEntry) {
             var pathname = document.location.pathname.substring(1);
-            ajax.changePostTo(pathname);
             var id = pathname.match(/^\d+$/) ? pathname : id_max;
+            ajax.changePostTo(id);
+            var sliderKey = sliderKeys[id];
             postSlider.updateValueWith(id);
             var title_base = document.title.split(' ')[0];
-            var full_title = title_base + " " + titles[id-1];
+            var full_title = title_base + " " + sliderKey.title;
             document.title = full_title;
           } else {
             document.location.reload();
