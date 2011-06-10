@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "WithoutLayout/Posts Routes" do
   get("/without_layout/4").should route_to(
-    :controller => 'without_layout/posts',
+    :controller => 'without_layout_posts',
     :action => 'show',
     :id => '4'
   )
