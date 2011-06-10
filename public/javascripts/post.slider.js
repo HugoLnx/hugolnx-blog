@@ -24,7 +24,7 @@ $(document).ready(function() {
           var isHistoryApiEntry = event.state;
           if (isHistoryApiEntry) {
             var pathname = document.location.pathname.substring(1);
-            var id = pathname.match(/^\d+$/) ? pathname : id_max;
+            var id = pathname.match(/^\d+-/) ? pathname.split("-")[0] : id_max;
             ajax.changePostTo(id);
             var sliderKey = sliderKeys[id];
             postSlider.updateValueWith(id);
