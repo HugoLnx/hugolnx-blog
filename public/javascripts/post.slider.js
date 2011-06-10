@@ -1,12 +1,19 @@
 $(document).ready(function() {
+  var sliderKeys = [null];
+  for (var i = 1; i <= id_max; i+=1) {
+    sliderKeys.push({
+      title: titles[i-1],
+      link: "/" + i
+    });
+  }
+
   postSlider = new PostSlider(
     {
       element: $("#slider"),
       noticeElement: $("#slider_subtitle span#notice"),
       titleElement: $("#slider_subtitle span#title"),
-      max: id_max,
-      value: id,
-      titles: titles
+      keys: sliderKeys,
+      initialKey: id
     }
   );
 
@@ -40,9 +47,9 @@ PostSlider = function(args) {
   var element = args["element"];
   var noticeElement = args["noticeElement"];
   var titleElement = args["titleElement"];
-  var max = args["max"];
-  var titles = args["titles"];
-  var value = args["value"];
+  var keys = args["keys"];
+  var initialKey = args["initialKey"]
+  var max = keys.length - 1;
 
   element.slider({
     min: 1,
@@ -50,7 +57,7 @@ PostSlider = function(args) {
     stop: onStop,
     slide: onSliderStartOrSlide,
     start: onSliderStartOrSlide,
-    value: value
+    value: initialKey
   });
 
   this.updateValueWith = function(newValue) {
@@ -58,26 +65,24 @@ PostSlider = function(args) {
   }
 
   function onStop(event,ui){
+    var key = keys[ui.value];
     noticeElement.fadeIn(6000);
     titleElement.hide();
     if (supportHistoryAPI()) {
       var title_base = document.title.split(' ')[0];
-      var full_title = title_base + " " + titleFor(ui);
+      var full_title = title_base + " " + key.title;
       document.title = full_title;
-      history.pushState(true,full_title,ui.value);
+      history.pushState(true,full_title,key.link);
       ajax.changePostTo(ui.value);
     } else {
-      document.location.href = ui.value;
+      document.location.href = key.link;
     }
   }
 
   function onSliderStartOrSlide(event,ui){
+    var key = keys[ui.value];
     noticeElement.hide();
     titleElement.show();
-    titleElement.text(titleFor(ui));
-  }
-
-  function titleFor(ui) {
-    return titles[ui.value-1];
+    titleElement.text(key.title);
   }
 }

@@ -3,12 +3,11 @@ $(document).ready(function(){
 });
 
 AJAX = function() {
-  this.changePostTo = function(argument) {
+  this.changePostTo = function(id) {
     $.ajax({
       type: "GET",
-      url: "/" + argument,
+      url: "/without_layout/" + id,
       dataType: "html",
-      data: {without_layout: 'true'},
       async: true,
       complete: insertDataInContents
     });

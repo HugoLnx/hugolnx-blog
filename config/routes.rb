@@ -1,9 +1,7 @@
 HugolnxBlog::Application.routes.draw do
   resources :comments, :path_names => {:edit => :editar}, :only => [:edit,:update]
 
-  namespace :without_layout do
-    resources :posts, :only => [:show], :path => ''
-  end
+  match '/without_layout/:id', :controller => :without_layout_posts, :action => 'show'
 
   resources :posts, :only => [:index], :path => ''  do
     resources :comments
