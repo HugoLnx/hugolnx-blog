@@ -61,6 +61,7 @@ private
     @id_max = Post.id_max_in 'app/views/posts/posts/'
     @post = Post.find @id_max, :in => 'app/views/posts/posts/'
     @titles = Post.all_post_titles_in 'app/views/posts/posts/'
+    @links = links_from(@titles)
     error_message = exception.message
     @message = select_pretty_message_for error_message
     @robots_metatag = 'noindex'

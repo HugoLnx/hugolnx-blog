@@ -3,7 +3,7 @@ $(document).ready(function() {
   for (var i = 1; i <= id_max; i+=1) {
     sliderKeys.push({
       title: titles[i-1],
-      link: "/" + i
+      link: links[i-1]
     });
   }
 
