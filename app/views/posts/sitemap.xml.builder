@@ -11,7 +11,7 @@ xml.urlset :xmlns => "http://www.sitemaps.org/schemas/sitemap/0.9" do
 
   for post in @posts
     xml.url do
-      xml.loc "http://#{request.host}/#{post.to_url}"
+      xml.loc post_url(post)
       last_mod = post.last_modification_date || post.creation_date
       xml.lastmod last_mod.strftime("%Y-%m-%d")
     end
