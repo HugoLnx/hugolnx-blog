@@ -8,7 +8,7 @@ xml.rss :version => "2.0" do
     xml.link posts_url
 
     for post in @posts
-      xml.item dommit, Minificação de javascript e css fácil com rails
+      xml.item do
         xml.title post.title
         xml.description post.body_with_syntax_highlighting
         xml.pubDate post.creation_date.strftime("%a, %d %b %Y %H:%M:%S %z")
