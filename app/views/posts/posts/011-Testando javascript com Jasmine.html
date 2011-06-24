@@ -1,0 +1,97 @@
+Creation Date: 24/06/2011
+Description: Testando javascript usando Jasmine.
+Keywords: teste javascript jasmine
+Tags: javascript teste jasmine
+<h1 class="first">Introdu&ccedil;&atilde;o</h1>
+<p>Após fazer uma série de pesquisas sobre ferramentas para testar javascript descobri <a href="http://pivotal.github.com/jasmine/">Jasmine</a>, uma ferramenta com uma DSL parecida com a do <a href="https://github.com/rspec/rspec">RSpec</a>, e que até agora não me faltou funcionalidades.</p>
+
+<h1>Instalando</h1>
+<p>O Jasmine pode ser instalado como uma gem:</p>
+<code class="syntax shell">gem install jasmine
+cd your/project/path/
+jasmine init</code>
+<p>Ou pode ser <a href="http://pivotal.github.com/jasmine/download.html">baixado como zip</a> e descompactado na pasta do seu projeto.</p>
+
+<h1>Estrutura</h1>
+<p>Após instalar o Jasmine no seu projeto, ele terá uma estrutura parecida com essa:</p>
+<code class="syntax shell">sua_app/
+  src/   (codigo-fonte)
+  spec/  (testes)
+  lib/   (bibliotecas externas)
+  SpecRunner.html
+</code>
+<span class="comentario">Apague os arquivos-exemplo da pasta src e spec caso exista algum.</span>
+
+<p>A pasta <span class="snippet">src</span> é onde fica o seu código fonte, a pasta <span class="snippet">spec</span> onde ficam seus testes, a pasta <span class="snippet">lib</span> onde ficam suas bibliotecas externas (o próprio Jasmine fica aí) e o <span class="snippet">SpecRunner.html</span> é o arquivo que irá carregar seu código fonte, bibliotecas externas e os testes, para depois rodá-los.</p>
+
+<p>Como o <span class="snippet">SpecRunner.html</span> não passa de um arquivo html qualquer, os nomes das pastas podem ser mudados de acordo com a preferencia de cada um. Além de ser possível separar os testes para serem rodados em arquivos diferentes: <span class="snippet">IntegrationSpecRunner.html</span> e <span class="snippet">UnitSpecRunner.html</span> por exemplo.</p>
+
+<h1>Escrevendo Um Teste Simples</h1>
+<p>Vamos escrever um teste simples, como diz o bom TDD: "teste antes":</p>
+<code class="syntax javascript">// spec/pessoa.spec.js
+describe("Pessoa", function(){
+  it("tem um nome", function() {
+    var pessoa = new Pessoa("Jose","Bonifacio");
+    expect(pessoa.nome()).toEqual("Jose");
+  });
+
+  it("tem um sobrenome", function() {
+    var pessoa = new Pessoa("Jose","Bonifacio");
+    expect(pessoa.sobrenome()).toEqual("Bonifacio");
+  });
+});
+</code>
+
+<p>Lembrando que ao criar arquivos de teste temos que dizer para o <span class="snippet">SpecRunner.html</span> carrega-los:</p>
+<code class="syntax html">&lt;!-- SpecRunner.html --&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;!-- ... --&gt;
+    &lt;script type="text/javascript" src="spec/pessoa.spec.js"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;!-- ... --&gt;
+&lt;/html&gt;
+</code>
+
+<p>Agora podemos abrir os testes com um browser qualquer:</p>
+<img src="/images/posts/011/001.jpg"/>
+
+<p>Naturalmente todos os testes falham pois não há nada implementado (<span style="color: #f00">RED</span>).</p>
+<p>Vamos implementar o que falta para eles passarem:</p>
+<code class="syntax javascript">// src/pessoa.js
+Pessoa = function(nome,sobrenome) {
+  this.nome = function() {
+    return nome;
+  };
+
+  this.sobrenome = function() {
+    return sobrenome;
+  };
+};
+</code>
+<p>Devemos novamente adicionar o novo arquivo ao <span class="snippet">SpecRunner.html</span>:</p>
+<code class="syntax html">&lt;!-- SpecRunner.html --&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;!-- ... --&gt;
+    &lt;script type="text/javascript" src="spec/pessoa.spec.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" src="src/pessoa.js"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;!-- ... --&gt;
+&lt;/html&gt;
+</code>
+<p>Se recarregarmos o <span class="snippet">SpecRunner.html</span>:</p>
+<img src="/images/posts/011/002.jpg"/>
+
+<p>Agora nossos testes passam (<span style="color: green">GREEN</span>).</p>
+
+<h1>Conclusão</h1>
+<p>Jasmine é uma ferramenta incrível de testes, e ele tem muito mais do que foi mostrado aqui, para aprender mais basta seguir os links de referência abaixo (os dois primeiros são os mais interessantes).</p>
+
+<h1>Refer&ecirc;ncias</h1>
+<ul>
+  <li><a href="http://pivotal.github.com/jasmine/">Site do Jasmine</a></li>
+  <li><a href="https://github.com/pivotal/jasmine/wiki">Wiki do Jasmine (Muito Bom)</a></li>
+  <li><a href="http://pivotal.github.com/jasmine/jsdoc/index.html">Documentação do Jasmine</a></li>
+  <li><a href="https://github.com/pivotal/jasmine">Código do Jasmine no Github</a></li>
+</ul>
