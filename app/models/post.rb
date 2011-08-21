@@ -10,6 +10,8 @@ class Post < ActiveRecord::Base
   attr_reader :tags
   attr_reader :description
 
+  @@posts_directory = ""
+
   def initialize(options = {})
     @id = options[:id]
     @title = options[:title]
@@ -59,6 +61,10 @@ class Post < ActiveRecord::Base
 
     def id_max_in(directory)
       Infrastructure::PostDsl.find_id_max_in directory
+    end
+
+    def config(args)
+      @@posts_directory = args[:posts_directory]
     end
   end
 end

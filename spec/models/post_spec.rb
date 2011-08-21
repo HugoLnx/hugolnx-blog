@@ -27,6 +27,13 @@ describe Post do
     end
   end
 
+  describe ".config(configurations)" do
+    it "configure the default directory of posts" do
+      Post.config :posts_directory => "/testing/dir"
+      Post.class_variable_get("@@posts_directory").should == "/testing/dir"
+    end
+  end
+
   describe '#friendly_title' do
     it 'returns a title without space or special characters' do
       post = Post.find(1, :in => 'spec/fixtures')
