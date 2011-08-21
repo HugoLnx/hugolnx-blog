@@ -3,8 +3,8 @@ class PostsController < PostsBaseController
   rescue_from Infrastructure::PostException, :with => :to_error
 
   def index
-    id = Post.id_max_in 'app/views/posts/posts/'
-    post = Post.find id, :in => 'app/views/posts/posts/'
+    id = Post.id_max
+    post = Post.find id
     params[:id] = post.friendly_id
     @pagehead = PageHead.of_index
     show
@@ -13,14 +13,14 @@ class PostsController < PostsBaseController
 
   def redirect_to_right_path
     id = params[:id]
-    post = Post.find id, :in => 'app/views/posts/posts/'
+    post = Post.find id
     redirect_to post
   end
   
   def show
     friendly_id = params[:id]
     id = friendly_id[/\d+/]
-    @post = Post.find id, :in => 'app/views/posts/posts/'
+    @post = Post.find id
     redirect_to @post if friendly_id != @post.friendly_id
     
     prepare_to_render_show_with @post
@@ -33,9 +33,9 @@ class PostsController < PostsBaseController
 
   def feed
     @posts = []
-    id_max = Post.id_max_in('app/views/posts/posts/')
+    id_max = Post.id_max
     (1..id_max).each do |id|
-      @posts << Post.find(id, :in => 'app/views/posts/posts')
+      @posts << Post.find(id)
     end
 
     respond_to do |format|
@@ -45,9 +45,9 @@ class PostsController < PostsBaseController
 
   def sitemap
     @posts = []
-    id_max = Post.id_max_in('app/views/posts/posts/')
+    id_max = Post.id_max
     (1..id_max).each do |id|
-      @posts << Post.find(id, :in => 'app/views/posts/posts')
+      @posts << Post.find(id)
     end
 
     respond_to do |format|

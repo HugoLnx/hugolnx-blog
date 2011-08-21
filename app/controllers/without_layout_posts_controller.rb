@@ -4,7 +4,7 @@ class WithoutLayoutPostsController < PostsBaseController
 
   def show
     id = params[:id]
-    @post = Post.find id, :in => 'app/views/posts/posts/'
+    @post = Post.find id
     prepare_to_render_show_with @post
     render 'posts/show'
   end

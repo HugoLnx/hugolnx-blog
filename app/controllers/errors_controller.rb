@@ -1,9 +1,9 @@
 # encoding: utf-8
 class ErrorsController < ApplicationController
   def show
-    @id_max = Post.id_max_in 'app/views/posts/posts/'
-    @post = Post.find @id_max, :in => 'app/views/posts/posts/'
-    @titles = Post.all_post_titles_in 'app/views/posts/posts/'
+    @id_max = Post.id_max
+    @post = Post.find @id_max
+    @titles = Post.all_post_titles
     error_message = params[:message]
     @message = select_pretty_message_for error_message
     @pagehead = PageHead.of_error
