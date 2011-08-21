@@ -15,9 +15,8 @@ describe Post do
     context "when called without posts directory argument" do
       after(:each) {Post.find 1 }
       it "calls PostDsl.find_and_build(id,POSTS_DIRECTORY)" do
-        Post::POSTS_DIRECTORY = "spec/fixtures/"
         Infrastructure::PostDsl.should_receive('find_and_build')
-                               .with(1 ,:in => 'spec/fixtures/')
+                               .with(1 ,:in => Post::POSTS_DIRECTORY)
       end
     end
   end
@@ -30,6 +29,14 @@ describe Post do
     end
   end
 
+  describe '.all_post_titles' do
+    after(:each){Post.all_post_titles}
+    it "calls PostDsl.find_all_post_titles_in(POSTS_DIRECTORY)" do
+      Infrastructure::PostDsl.should_receive('find_all_post_titles_in')
+                              .with(Post::POSTS_DIRECTORY)
+    end
+  end
+
   describe ".id_max_in(path)" do
     after(:each){Post.id_max_in 'spec/fixtures/'}
     it 'calls PostDsl.find_id_max_in(path)' do
@@ -38,10 +45,11 @@ describe Post do
     end
   end
 
-  describe ".config(configurations)" do
-    it "configure the default directory of posts" do
-      Post.config :posts_directory => "/testing/dir"
-      Post.class_variable_get("@@posts_directory").should == "/testing/dir"
+  describe ".id_max" do
+    after(:each){Post.id_max}
+    it 'calls PostDsl.find_id_max_in(POSTS_DIRECTORY)' do
+      Infrastructure::PostDsl.should_receive('find_id_max_in')
+                              .with(Post::POSTS_DIRECTORY)
     end
   end
 
