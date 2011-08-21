@@ -6,9 +6,7 @@ class PostsController < PostsBaseController
     id = Post.id_max_in 'app/views/posts/posts/'
     post = Post.find id, :in => 'app/views/posts/posts/'
     params[:id] = post.friendly_id
-    @keywords = ['hugolnx','hugo','roque'].join(',')
-    @description = "Um blog de Hugo Roque (a.k.a HugoLnx) que foi criado com a intenção de compartilhar conhecimentos adquiridos durante seus estudos pessoais e profissionais."
-    @title_complement = 'Index' 
+    @pagehead = PageHead.of_index
     show
     render :show
   end
@@ -27,9 +25,10 @@ class PostsController < PostsBaseController
     
     prepare_to_render_show_with @post
 
-    @keywords ||= @post.keywords.join(',')
-    @description ||= @post.description
-    @title_complement ||= @post.title
+    @pagehead = PageHead.new :keywords => @post.keywords.join(','),
+                             :description => @post.description,
+                             :title_complement => @post.title,
+                             :robots => @robots_metatag
   end
 
   def feed
@@ -64,8 +63,7 @@ private
     @links = links_from(@titles)
     error_message = exception.message
     @message = select_pretty_message_for error_message
-    @robots_metatag = 'noindex'
-    @title_complement = 'Error'
+    @pagehead = PageHead.of_error
     render "errors/show"
   end
 
