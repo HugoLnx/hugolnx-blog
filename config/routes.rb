@@ -11,6 +11,7 @@ HugolnxBlog::Application.routes.draw do
     get 'sitemap', :controller => :posts, :action => :sitemap, :on => :collection
   end
 
+  match "/nao-encontrado" => "errors#show", :message => Infrastructure::PostException::PostNotFoundedMessage
   match "/auth/failure" => "errors#show"
   match "/auth/:provider" => "sessions#setup"
   match "/auth/:provider/callback" => "sessions#create"

@@ -7,6 +7,13 @@ describe "Errors Routes" do
 #    :id => '4'
 #  )
 #
+
+  get("/nao-encontrado").should route_to(
+    :controller => 'errors',
+    :action => 'show',
+    :message => Infrastructure::PostException::PostNotFoundedMessage
+  )
+
   describe 'GET to unknown routes' do
     get("/lol").should route_to(
       :controller => 'errors',
