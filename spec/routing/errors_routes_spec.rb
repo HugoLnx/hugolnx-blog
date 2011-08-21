@@ -1,13 +1,6 @@
 require 'spec_helper'
 
 describe "Errors Routes" do
-#  get("/errors/show/4").should route_to(
-#    :controller => 'errors',
-#    :action => 'show',
-#    :id => '4'
-#  )
-#
-
   get("/nao-encontrado").should route_to(
     :controller => 'errors',
     :action => 'show',
