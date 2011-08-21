@@ -10,7 +10,7 @@ class Post < ActiveRecord::Base
   attr_reader :tags
   attr_reader :description
 
-  @@posts_directory = ""
+  POSTS_DIRECTORY = 'app/views/posts/posts/'
 
   def initialize(options = {})
     @id = options[:id]
@@ -51,8 +51,9 @@ class Post < ActiveRecord::Base
   end
 
   class << self
-    def find(*args)
-      Infrastructure::PostDsl.find_and_build(*args)
+    def find(id,args={})
+      posts_directory = args[:in] || POSTS_DIRECTORY
+      Infrastructure::PostDsl.find_and_build(id,:in => posts_directory)
     end
 
     def all_post_titles_in(directory)
