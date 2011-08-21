@@ -47,9 +47,12 @@ DONE IN 26-05~04-06
   - be indexed by google
   - expressive urls
 
+DONE BEFORE 21-08
+  - slider use expressive urls
+
 TODO =====================================
  FEATURES
-  - slider use expressive urls
+  - Fix slider in error pages
   - Move screen to bottom after user post a comment and server renderize comments again.
   - Redirect to origin url when a session is destroyed
   - Use ajax to sign out Twitter
