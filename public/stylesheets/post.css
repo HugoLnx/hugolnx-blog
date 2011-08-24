@@ -29,9 +29,15 @@ div.CodeRay table.CodeRay td.line_numbers {
   padding-right: 10px;
 }
 
+div.CodeRay * {
+  background-color: #111;
+}
+
 span.snippet {
-  background-color: #d0d0ff;
+  background-color: rgb(20,20,20);
   padding: 0px 2px;
+  font-family: monospace;
+  font-size: 12px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
 }
