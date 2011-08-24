@@ -1,16 +1,15 @@
 embed_assets: on
 stylesheets:
   all_minified:
-    - "public/stylesheets/jquery-ui-1.8.10.custom.css"
+    - "public/stylesheets/my-style.css"
     - "public/stylesheets/post.css"
-    - "public/stylesheets/layout/box.css"
+    - "public/stylesheets/superfish.css"
     - "public/stylesheets/layout/comment.css"
-    - "public/stylesheets/layout/general.css"
 javascripts:
   all_minified:
     - 'public/javascripts/jquery.min.js'
-    - 'public/javascripts/jquery-ui.min.js'
-    - 'public/javascripts/ajax.js'
-    - 'public/javascripts/post.slider.js'
     - 'public/javascripts/google.analitics.js'
+    - 'public/javascripts/superfish.js'
     - 'public/javascripts/comments/index.js'
+    #- 'public/javascripts/ajax.js'
+    #- 'public/javascripts/post.slider.js'
