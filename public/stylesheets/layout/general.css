@@ -1,0 +1,84 @@
+body {
+  background-image: url("/images/embed/back.png");
+  background-repeat: repeat;
+}
+
+#rss_image {background: url("/images/embed/rss.png") no-repeat center}
+#twitter_image {background: url("/images/embed/twitter.png") no-repeat center}
+#github_image {background: url("/images/embed/github.png") no-repeat center}
+#email_image {background: url("/images/embed/email.png") no-repeat center}
+
+.field_error {
+  border: 3px solid red;
+}
+
+textarea {
+  resize: none;
+}
+
+div#header {
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  text-align: center;
+  -webkit-border-radius: 100px;
+}
+
+div#header div#banner {
+  height: 149px;
+  width: 791px;
+  background-image: url("/images/banner.png");
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div#header div#slider {
+  margin-top: 20px;
+  width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div#header div#slider_subtitle {
+  text-align: center;
+  height: 15px;
+}
+
+div#header div#slider_subtitle span#warning {
+  opacity: 0.4;
+}
+
+div#header div#slider_subtitle span#title {
+  color: #369;
+  font-weight: bolder;
+}
+
+div#middle {
+  margin-left: auto;
+  margin-right: auto;
+  width: 760px;
+}
+
+div#middle div#upcontents {
+  height: 32px;
+  margin-right: 40px;
+  margin-bottom: 2px;
+}
+
+div#middle div#upcontents div.icon {
+  float: right;
+  width: 32px;
+  height: 32px;
+  margin-right: 2px;
+}
+
+div#creative_commons {
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
+  text-align: center;
+  padding-top: 10px;
+  margin-bottom: 0px;
+}

@@ -1,11 +1,12 @@
-div#post-comments div.comment {
+div.comment {
   padding: 5px;
   margin-bottom: 20px;
-  border-left: 5px solid #222;
-  background-color: #111;
+  border: 3px solid white;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
 }
 
-div#post-comments div.comment .content {
+div.comment .content {
   margin-bottom: 0px;
   margin-top: 0px;
   width: 100%;
@@ -13,17 +14,15 @@ div#post-comments div.comment .content {
   white-space: pre;
   background-color: transparent;
   border: none;
-  border-top: 1px solid #222;
   outline: none;
-  color: #777;
 }
 
-div#post-comments div.comment .show_more {
+div.comment .show_more {
   margin-bottom: 10px;
 }
 
-div#post-comments div.comment button {
-  color: #444;
-  background-color: #ccc;
+div.comment button {
+  color: #66f;
+  background-color: #ccf;
   border: 1px #99c solid;
 }
