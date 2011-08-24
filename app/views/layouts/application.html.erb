@@ -1,3 +1,4 @@
+<!DOCTYPE html> 
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -11,35 +12,38 @@
   </head>
   
   <body>
-
-    <div id="all">
-
-      <div id="header" class='box'>
-        <a href="/"><div id="banner"></div></a>
-        <center style="opacity:0.3;color:#f0f">Em Produção</center>
-        <div id="slider"></div>
-        <div id="slider_subtitle">
-          <span id="title"></span>
-          <span id="notice"><%=I18n.t :drag_it_to_roll_from_posts%></span>
-        </div>
+    <header>
+      <div id="header" class="center">
+        <img src="images/banner.jpg"/>
+        <nav>
+          <div id="menu" class="main center">
+            <ul>
+              <li class="right"><a href="mailto:hugo.roque@caelum.com.br"><div class="icon" id="email_image"></div></a></li>
+              <li class="right"><a href="http://github.com/hugolnx"><div class="icon" id="github_image"></div></a></li>
+              <li class="right"><a href="http://twitter.com/hugolnx"><div class="icon" id="twitter_image"></div></a></li>
+              <li class="right"><a href="/feed.rss"><div class="icon" id="rss_image"></div></a></li>
+              <li class="no-sf"><a class="botao" href="#">Sobre Mim</a></li>
+              <li><%= render :partial => 'layouts/menu-selecionavel' %></li>
+              <li class="last-post"><span class="title">Última Postagem:</span> <a class="post-name" href="#last-post">Importando bytecode para s...<a></li>
+            </ul>
+          </div>
+        </nav>
       </div>
-      
+    </header>
 
-      <div id="middle">
-        <div id="upcontents">
-          <a href="mailto:hugo.roque@caelum.com.br"><div class="icon" id="email_image"></div></a>
-          <a href="http://github.com/hugolnx"><div class="icon" id="github_image"></div></a>
-          <a href="http://twitter.com/hugolnx"><div class="icon" id="twitter_image"></div></a>
-          <a href="/feed.rss"><div class="icon" id="rss_image"></div></a>
-        </div>
-        <div id="contents"><%= yield %></div>
+    <article>
+      <div id="main" class="center main">
+        <%= yield %>
       </div>
+    </article>
 
-      <div id="creative_commons" class='box'>
+    <footer>
+      <div id="footer" class="center">
         <%=render 'layouts/creative_commons'%>
       </div>
+    </footer>
 
-    </div>
+
     <%= include_javascripts :all_minified %>
 
     <%= javascript_tag do %>
@@ -48,6 +52,9 @@
       var titles = <%=raw @titles %>;
       var links = <%= raw @links %>;
       i18n = <%=raw YAML.load_file(I18n.load_path.find{|path| path.include? I18n.locale.to_s})[I18n.locale.to_s].to_json%>;
+			$(function(){
+        $('div#menu ul#menu-selecionavel').superfish();
+			});
     <%end%>
     <%= yield :javascript %>
 
