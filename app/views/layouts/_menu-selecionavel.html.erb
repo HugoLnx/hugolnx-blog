@@ -4,7 +4,7 @@
     <ul>
       <% @tagged_posts.each do |tag,posts| %>
       <li>
-        <%= tag %>
+        <a href="#<%=tag%>"><%= tag %></a>
         <ul>
           <% posts.each do |post| %>
             <li><%= link_to post.title, post %></a></li>
