@@ -4,7 +4,7 @@
     <ul>
       <% @tagged_posts.each do |tag,posts| %>
       <li>
-        <%= (tag <= 12) ? "#{Date::MONTHNAMES[tag]}/#{Date.today.year}" : tag %>
+        <%= tag %>
         <ul>
           <% posts.each do |post| %>
             <li><a href=""><%= post.title %></a></li>
