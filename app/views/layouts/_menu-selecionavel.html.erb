@@ -2,20 +2,16 @@
   <li class="botao postagens">
     <a href="todos-os-posts">Postagens</a>
     <ul>
+      <% @tagged_posts.each do |tag,posts| %>
       <li>
-        <a href="agosto2010">Agosto/2010</a>
+        <%= (tag <= 12) ? "#{Date::MONTHNAMES[tag]}/#{Date.today.year}" : tag %>
         <ul>
-          <li><a href="post12">Post 12</a></li>
-          <li><a href="post11">Post 11</a></li>
+          <% posts.each do |post| %>
+            <li><a href=""><%= post.title %></a></li>
+          <% end %>
         </ul>
       </li>
-      <li>
-        <a href="maio2010">Maio/2010</a>
-        <ul>
-          <li><a href="post10">Post 10</a></li>
-          <li><a href="post09">Post 09</a></li>
-        </ul>
-      </li>
+      <% end %>
     </ul>
   </li>
   <li class="botao">
