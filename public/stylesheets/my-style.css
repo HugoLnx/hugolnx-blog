@@ -38,22 +38,6 @@ div#menu ul li ul#menu-selecionavel li ul li {
   margin-left: 3px;
 }
 
-div#menu ul li.last-post {
-  background-color: #111;
-  border: 3px solid #222;
-  padding: 0px 10px;
-  text-align: left;
-}
-
-div#menu ul li.last-post span.title {
-  font-weight: bold;
-}
-
-div#menu ul li.last-post a.post-name {
-  font-size: 13px;
-  font-style: italic;
-}
-
 div#menu ul li.right {
   float: right;
 }
@@ -74,7 +58,8 @@ div#menu ul li.botao {
 }
 
 div#menu ul li.botao.postagens {
-  padding: 0px 8px;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 div#menu ul li img {
