@@ -30,5 +30,13 @@ module Infrastructure
       postfiles = paths.collect{|path| Postfile.new path}
       PostfileArray.new postfiles
     end
+
+    def find_all_in(directory)
+      id_max = find_id_max_in directory
+      posts = (1..id_max).collect do |id|
+        find_and_build id, :in => directory
+      end
+      return posts
+    end
   end
 end

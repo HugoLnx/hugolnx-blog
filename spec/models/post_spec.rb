@@ -21,6 +21,24 @@ describe Post do
     end
   end
 
+  describe ".all_in(path)" do
+    context "when called with all arguments" do
+      after(:each) {Post.all_in 'spec/fixtures/'}
+      it "calls PostDsl.find_all_in(path)" do
+        Infrastructure::PostDsl.should_receive('find_all_in')
+                               .with('spec/fixtures/')
+      end
+    end
+  end
+
+  describe ".all" do
+    after(:each) {Post.all}
+    it "calls PostDsl.find_all_in(POSTS_DIRECTORY)" do
+      Infrastructure::PostDsl.should_receive('find_all_in')
+                             .with(Post::POSTS_DIRECTORY)
+    end
+  end
+
   describe '.all_post_titles_in(path)' do
     after(:each){Post.all_post_titles_in 'spec/fixtures/'}
     it "calls PostDsl.find_all_post_titles_in(path)" do
