@@ -56,6 +56,14 @@ class Post < ActiveRecord::Base
       Infrastructure::PostDsl.find_and_build(id,:in => posts_directory)
     end
 
+    def all_in(directory)
+      Infrastructure::PostDsl.find_all_in(directory)
+    end
+
+    def all
+      Infrastructure::PostDsl.find_all_in POSTS_DIRECTORY
+    end
+
     def all_post_titles
       all_post_titles_in POSTS_DIRECTORY
     end

@@ -7,6 +7,14 @@ module Infrastructure
       post.should be_a Post
     end
 
+    describe '.find_all_in' do
+      it 'find all posts in some directory' do
+        posts = PostDsl.find_all_in 'spec/fixtures/posts'
+        posts.should be_all {|post| post.is_a? Post}
+        posts.should have(2).posts
+      end
+    end
+
     context 'delegates find of informations in postfiles' do
       it 'should delegate find of all titles' do
         postfiles = mock(:postfiles)
