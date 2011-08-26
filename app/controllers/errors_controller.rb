@@ -1,8 +1,7 @@
 # encoding: utf-8
 class ErrorsController < PostsBaseController
   def show
-    prepare_for_slider
-    @post = Post.find @id_max
+    prepare_for_layout
     error_message = params[:message]
     @message = select_pretty_message_for error_message
     @pagehead = PageHead.of_error

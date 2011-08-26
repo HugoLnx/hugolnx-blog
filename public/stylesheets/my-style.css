@@ -141,6 +141,10 @@ div#post div#post-title h1 {
   margin-top: 10px;
 }
 
+div#error div#error-title h1 {
+  margin-top: 5px;
+}
+
 div.top-title h1 {
   text-decoration: underline;
   padding-top: 10px;
