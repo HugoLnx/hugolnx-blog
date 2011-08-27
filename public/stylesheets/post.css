@@ -25,12 +25,7 @@ div.CodeRay {
 
 div.CodeRay table.CodeRay td.line_numbers {
   color: #55f;
-  /*border-right: 1px #55f solid;*/
   padding-right: 10px;
-}
-
-div.CodeRay * {
-  background-color: #111;
 }
 
 span.snippet {
