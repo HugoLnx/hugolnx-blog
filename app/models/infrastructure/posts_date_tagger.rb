@@ -5,7 +5,7 @@ module Infrastructure
     def to_hash(posts)
       tagged_by_year = posts.group_by{|post| post.creation_date.year}
       tagged_by_year = split_bigger_years(tagged_by_year)
-      return tagged_by_year
+      return arrange(tagged_by_year)
     end
 
    private
@@ -31,6 +31,41 @@ module Infrastructure
         posts = posts.drop size
       end
       return splited_posts
+    end
+
+    def arrange(tags_hash)
+      arranged = arrange_decreasingly(tags_hash)
+      arranged = arrange_semesters_ascending(arranged)
+      return arranged
+    end
+
+    def arrange_decreasingly(tags_hash)
+      arranged = {}
+      tags_hash.reverse_each do |key,value|
+        arranged[key] = value
+      end
+      return arranged
+    end
+
+    def arrange_semesters_ascending(tags_hash)
+      arranged = {}
+      tags_acumulated = []
+      tags_hash.each_pair do |tag,value|
+        if tag.is_a? Fixnum
+          arranged[tag] = value
+        elsif tag =~ /^\d+\/(\d+)$/
+          semester = $1
+          if semester == "1"
+            arranged[tag] = value
+            tags_acumulated.reverse_each do |(tag,value)|
+              arranged[tag] = value
+            end
+          else
+            tags_acumulated << [tag,value]
+          end
+        end
+      end
+      return arranged
     end
   end
 end
