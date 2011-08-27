@@ -104,6 +104,72 @@ module Infrastructure
           "#{Date.today.year}/3" => actual_year_posts[12..-1]
         }
       end
+
+      it 'orders by year decreasingly' do
+        # given
+        last_year = Date.today.year-1
+        last_year_post = stub(:creation_date => Date.new(last_year,9,12))
+        actual_year_post = stub(:creation_date => Date.new(Date.today.year,9,12))
+        posts = [last_year_post,actual_year_post]
+
+        # when
+        tagged_posts = PostsDateTagger.to_hash posts
+
+        # then
+        tagged_posts.first.first.should be == Date.today.year
+      end
+
+      it 'orders by year decreasingly, keeping semester ordered increasingly' do
+        # given
+        last_year_posts = [
+          stub(:creation_date => Date.new(Date.today.year-1,1,10)),
+          stub(:creation_date => Date.new(Date.today.year-1,1,20)),
+          stub(:creation_date => Date.new(Date.today.year-1,2,20)),
+          stub(:creation_date => Date.new(Date.today.year-1,2,25)),
+          stub(:creation_date => Date.new(Date.today.year-1,3,10)),
+          stub(:creation_date => Date.new(Date.today.year-1,3,30)),
+          stub(:creation_date => Date.new(Date.today.year-1,4,10)),
+          stub(:creation_date => Date.new(Date.today.year-1,4,20)),
+          stub(:creation_date => Date.new(Date.today.year-1,5,5)),
+          stub(:creation_date => Date.new(Date.today.year-1,5,12)),
+          stub(:creation_date => Date.new(Date.today.year-1,6,3)),
+          stub(:creation_date => Date.new(Date.today.year-1,6,12))
+        ]
+
+        actual_year_posts = [
+          stub(:creation_date => Date.new(Date.today.year,1,10)),
+          stub(:creation_date => Date.new(Date.today.year,1,20)),
+          stub(:creation_date => Date.new(Date.today.year,2,20)),
+          stub(:creation_date => Date.new(Date.today.year,2,25)),
+          stub(:creation_date => Date.new(Date.today.year,3,10)),
+          stub(:creation_date => Date.new(Date.today.year,3,30)),
+          stub(:creation_date => Date.new(Date.today.year,4,10)),
+          stub(:creation_date => Date.new(Date.today.year,4,20)),
+          stub(:creation_date => Date.new(Date.today.year,5,5)),
+          stub(:creation_date => Date.new(Date.today.year,5,12)),
+          stub(:creation_date => Date.new(Date.today.year,6,3)),
+          stub(:creation_date => Date.new(Date.today.year,6,12)),
+          stub(:creation_date => Date.new(Date.today.year,7,12)),
+          stub(:creation_date => Date.new(Date.today.year,7,25)),
+          stub(:creation_date => Date.new(Date.today.year,8,10)),
+          stub(:creation_date => Date.new(Date.today.year,8,12)),
+          stub(:creation_date => Date.new(Date.today.year,9,11)),
+          stub(:creation_date => Date.new(Date.today.year,9,12))
+        ]
+
+        posts = last_year_posts + actual_year_posts
+
+        # when
+        tagged_posts = PostsDateTagger.to_hash posts
+
+        # then
+        tagged_posts.keys[0].should be == "#{Date.today.year}/1"
+        tagged_posts.keys[1].should be == "#{Date.today.year}/2"
+        tagged_posts.keys[2].should be == "#{Date.today.year}/3"
+        tagged_posts.keys[3].should be == "#{Date.today.year-1}/1"
+        tagged_posts.keys[4].should be == "#{Date.today.year-1}/2"
+      end
     end
+    
   end
 end
