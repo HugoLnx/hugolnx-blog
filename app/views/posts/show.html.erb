@@ -5,17 +5,19 @@
   <script type="text/javascript">
     window.___gcfg = {lang: 'pt-BR'};
   </script>
+  <script src="http://connect.facebook.net/pt_BR/all.js#appId=169086613168321&amp;xfbml=1"></script>
 <%end%>
 <%= javascript_tag do %>
   if (window.reloadCommentsIndex != null) reloadCommentsIndex();
 <%end%>
 
 <div id="post" class="top">
-  <div id="post-social">
+  <div id="post-social" class="addthis_toolbox addthis_default_style">
+
     <ul class="left-aligned">
-      <li><a href="http://twitter.com/share?lang=pt-BR" class="twitter-share-button"></a></li>
+      <li><a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="hugolnx" data-lang="pt"></a></li>
       <li><div class="g-plusone" data-size="medium" data-annotation="bubble" data-width="130px"></div></li>
-      <li><iframe src="http://www.facebook.com/plugins/like.php?app_id=169086613168321&href&send=false&layout=button_count&width=130&show_faces=true&action=like&colorscheme=light&font&height=21" scrolling="no" frameborder="0" style="border:none; overflow:visible; width:130px; height:21px;" allowTransparency="true"></iframe></li>
+      <li><div id="fb-root"></div><fb:like href="" send="false" layout="button_count" width="130" show_faces="false" font=""></fb:like></li>
     </ul>
   </div>
 
