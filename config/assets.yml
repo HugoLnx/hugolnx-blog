@@ -9,8 +9,9 @@ javascripts:
   all_minified:
     - 'public/javascripts/jquery.min.js'
     - 'public/javascripts/google.analitics.js'
-    - 'public/javascripts/superfish.js'
     - 'public/javascripts/comments/index.js'
+    - 'public/javascripts/superfish.js'
+    - 'public/javascripts/twitter-widgets.js'
     - 'public/javascripts/plusone.js'
     #- 'public/javascripts/ajax.js'
     #- 'public/javascripts/post.slider.js'
