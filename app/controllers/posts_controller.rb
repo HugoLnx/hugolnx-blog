@@ -6,8 +6,8 @@ class PostsController < PostsBaseController
     id = Post.id_max
     post = Post.find id
     params[:id] = post.friendly_id
-    @pagehead = PageHead.of_index
     show
+    @pagehead = PageHead.of_index
     render :show
   end
 
