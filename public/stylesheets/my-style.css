@@ -109,20 +109,29 @@ div#main div.top {
 }
 
 div#post-related {
-  line-height: 11px;
-  font-size: 11px;
+  line-height: 15px;
+  font-size: 14px;
   background-color: rgb(20,20,20);
   border: 2px solid rgb(10,10,10);
+  margin-top:10px;
 }
 
-div#post-related ul {
+div#post-related span {
+    margin-right: 10px;
+}
+
+div#post-social {
+  padding-top: 5px;
+}
+
+ul.left-aligned {
   display: inline-block;
   margin: 0px;
   padding: 0px 10px;
   list-style-type: none;
 }
 
-div#post-related ul li {
+ul.left-aligned li {
   float: left;
   margin-right: 10px;
 }
@@ -138,7 +147,7 @@ div#post-related span {
 }
 
 div#post div#post-title h1 {
-  margin-top: 10px;
+  margin-top: 0px;
 }
 
 div#error div#error-title h1 {
@@ -160,10 +169,11 @@ div.top-title {
   background-color: #111;
 }
 
-div#post-footer {
+div#post-date span {
   font-size: 11px;
   color: #999;
-  float: right;
+  text-align: right;
+  width: 100%;
 }
 
 div#footer {

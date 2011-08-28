@@ -2,18 +2,20 @@
   <%= javascript_tag do %>
     reloadCommentsIndex();
   <%end%>
+  <script type="text/javascript">
+    window.___gcfg = {lang: 'pt-BR'};
+  </script>
 <%end%>
 <%= javascript_tag do %>
   if (window.reloadCommentsIndex != null) reloadCommentsIndex();
 <%end%>
 
 <div id="post" class="top">
-  <div id="post-related">
-    <span>Postagens relacionadas:</span>
-    <ul>
-      <li><a href="#">Post qualquer número 1</a></li>
-      <li><a href="#">Post qualquer número 2</a></li>
-      <li><a href="#">Post qualquer número 3</a></li>
+  <div id="post-social">
+    <ul class="left-aligned">
+      <li><a href="http://twitter.com/share?lang=pt-BR" class="twitter-share-button"></a></li>
+      <li><div class="g-plusone" data-size="medium" data-annotation="bubble" data-width="130px"></div></li>
+      <li><iframe src="http://www.facebook.com/plugins/like.php?app_id=169086613168321&href&send=false&layout=button_count&width=130&show_faces=true&action=like&colorscheme=light&font&height=21" scrolling="no" frameborder="0" style="border:none; overflow:visible; width:130px; height:21px;" allowTransparency="true"></iframe></li>
     </ul>
   </div>
 
@@ -25,11 +27,21 @@
     <%= render :inline => @post.body_with_syntax_highlighting %>
   </div>
 
-  <div id="post-footer">
-    <span style="display: block;">Criado em: <%= @post.creation_date.to_s :portuguese %></span>
+
+  <div id="post-date">
+    <span>Criado em: <%= @post.creation_date.to_s :portuguese %></span>
     <% unless @post.last_modification_date.nil? %>
-      <span style="display: block;">&Uacute;ltima Atualiza&ccedil;&atilde;o em: <%= @post.last_modification_date.to_s :portuguese %></span>
+      <span>&Uacute;ltima Atualiza&ccedil;&atilde;o em: <%= @post.last_modification_date.to_s :portuguese %></span>
     <%end%>
+  </div>
+
+  <div id="post-related">
+    <ul class="left-aligned">
+      <span>Postagens relacionadas:</span>
+      <li><a href="#">Post qualquer número 1</a></li>
+      <li><a href="#">Post qualquer número 2</a></li>
+      <li><a href="#">Post qualquer número 3</a></li>
+    </ul>
   </div>
 </div>
 
