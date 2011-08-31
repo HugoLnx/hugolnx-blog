@@ -1,3 +1,4 @@
+#logo_image {background: url("../images/embed/logo.png") no-repeat center;}
 #rss_image {background: url("../images/embed/rss.png") no-repeat center;}
 #twitter_image {background: url("../images/embed/twitter.png") no-repeat center;}
 #github_image {background: url("../images/embed/github.png") no-repeat center;}
@@ -26,11 +27,6 @@ div#menu ul li {
 
 div#menu ul li.no-sf {
   padding-top: 1px;
-}
-
-div#menu ul li div.icon {
-  width: 24px;
-  height: 24px;
 }
 
 /* Espaçamento nas opções do menu */
@@ -82,7 +78,36 @@ div#menu ul li a.botao:hover, div#menu ul li.botao a:hover {
 }
 
 div#header {
-  text-align: center;
+  width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 128px;
+}
+
+div#header div#logo_image {
+  display: block-inline;
+  width:128px;
+  height:128px;
+  float: left;
+  padding: 0px;
+  margin: 0px;
+}
+
+div#header div.icon {
+  display: block-inline;
+  width: 32px;
+  height: 32px;
+}
+
+div#header ul#social, div#header ul#social li{
+  display: inline;
+}
+
+div#header ul#social {
+  float: left;
+  list-style-type: none;
+  padding: 0px 10px;
+  margin: 0px;
 }
 
 div.center {

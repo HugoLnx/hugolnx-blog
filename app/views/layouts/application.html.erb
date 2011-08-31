@@ -20,16 +20,17 @@
   
   <body>
     <header>
-      <div id="header" class="center">
-        <img alt="logo" src="<%= request.protocol + request.host + ":"+ request.port.to_s %>/images/logo.png"/>
+      <div id="header">
+        <div id="logo_image"></div>
+        <ul id="social">
+          <li><a href="mailto:hugo.roque@caelum.com.br"><div class="icon" id="email_image"></div></a></li>
+          <li><a href="http://github.com/hugolnx"><div class="icon" id="github_image"></div></a></li>
+          <li><a href="http://twitter.com/hugolnx"><div class="icon" id="twitter_image"></div></a></li>
+          <li><a href="/feed.rss"><div class="icon" id="rss_image"></div></a></li>
+        </ul>
         <nav>
           <div id="menu" class="main center">
             <ul>
-              <li class="right"><a href="mailto:hugo.roque@caelum.com.br"><div class="icon" id="email_image"></div></a></li>
-              <li class="right"><a href="http://github.com/hugolnx"><div class="icon" id="github_image"></div></a></li>
-              <li class="right"><a href="http://twitter.com/hugolnx"><div class="icon" id="twitter_image"></div></a></li>
-              <li class="right"><a href="/feed.rss"><div class="icon" id="rss_image"></div></a></li>
-              <li class="no-sf"><a class="botao" href="#">Sobre Mim</a></li>
               <li><%= render :partial => 'layouts/menu-selecionavel' %></li>
             </ul>
           </div>
