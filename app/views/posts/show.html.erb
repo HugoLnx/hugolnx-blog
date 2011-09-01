@@ -12,63 +12,59 @@
 <%end%>
 
 <div id="post" class="top">
-  <div id="post-social" class="addthis_toolbox addthis_default_style">
+  <div id="post-left">
+    <div id="post-title" class="top-title">
+      <h1><%= @post.title %></h1>
+    </div>
 
-    <ul class="left-aligned">
-      <li><a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="hugolnx" data-lang="pt"></a></li>
-      <li><div class="g-plusone" data-size="medium" data-annotation="bubble" data-width="130px"></div></li>
-      <li><div id="fb-root"></div><fb:like href="" send="false" layout="button_count" width="130" show_faces="false" font=""></fb:like></li>
-    </ul>
+    <div id="post-content">
+      <%= render :inline => @post.body_with_syntax_highlighting %>
+    </div>
+
+
+    <div id="post-date">
+      <span>Criado em: <%= @post.creation_date.to_s :portuguese %></span>
+      <% unless @post.last_modification_date.nil? %>
+        <span>&Uacute;ltima Atualiza&ccedil;&atilde;o em: <%= @post.last_modification_date.to_s :portuguese %></span>
+      <%end%>
+    </div>
+
+    <div id="post-related">
+      <ul class="left-aligned">
+        <span>Postagens relacionadas:</span>
+        <li><a href="#">Post qualquer número 1</a></li>
+        <li><a href="#">Post qualquer número 2</a></li>
+        <li><a href="#">Post qualquer número 3</a></li>
+      </ul>
+    </div>
+
+    <div id="post-comments" class="top">
+      <div id="post-comments-title" class="top-title">
+        <h1>Comentários</h1>
+      </div>
+
+      <div id="post-comments-content">
+        <%= @comments.empty? ? "Esse post nao foi comentado ainda" : render(@comments) %>
+      </div>
+
+    </div>
+
+    <div id="commentForm" class="top">
+      <div id="commentForm-title" class="top-title">
+        <h1>Deixe seu Comentário</h1>
+      </div>
+
+      <div id="commentForm-content">
+        <%= render "comments/form" %>
+        <% if current_user %>
+          <a href="/signout" id="signoutTwitter" style="display:block"><%= I18n.t :sign_out_from_twitter %></a></br>
+        <%else%>
+          <a href="/auth/twitter/"><%= I18n.t :sign_in_twitter_to_comment %></a>
+        <%end%>
+      </div>
+    </div>
   </div>
-
-  <div id="post-title" class="top-title">
-    <h1><%= @post.title %></h1>
-  </div>
-
-  <div id="post-content">
-    <%= render :inline => @post.body_with_syntax_highlighting %>
-  </div>
-
-
-  <div id="post-date">
-    <span>Criado em: <%= @post.creation_date.to_s :portuguese %></span>
-    <% unless @post.last_modification_date.nil? %>
-      <span>&Uacute;ltima Atualiza&ccedil;&atilde;o em: <%= @post.last_modification_date.to_s :portuguese %></span>
-    <%end%>
-  </div>
-
-  <div id="post-related">
-    <ul class="left-aligned">
-      <span>Postagens relacionadas:</span>
-      <li><a href="#">Post qualquer número 1</a></li>
-      <li><a href="#">Post qualquer número 2</a></li>
-      <li><a href="#">Post qualquer número 3</a></li>
-    </ul>
-  </div>
-</div>
-
-<div id="post-comments" class="top">
-  <div id="post-comments-title" class="top-title">
-    <h1>Comentários</h1>
-  </div>
-
-  <div id="post-comments-content">
-    <%= @comments.empty? ? "Esse post nao foi comentado ainda" : render(@comments) %>
-  </div>
-
-</div>
-
-<div id="commentForm" class="top">
-  <div id="commentForm-title" class="top-title">
-    <h1>Deixe seu Comentário</h1>
-  </div>
-
-  <div id="commentForm-content">
-    <%= render "comments/form" %>
-    <% if current_user %>
-      <a href="/signout" id="signoutTwitter" style="display:block"><%= I18n.t :sign_out_from_twitter %></a></br>
-    <%else%>
-      <a href="/auth/twitter/"><%= I18n.t :sign_in_twitter_to_comment %></a>
-    <%end%>
+  <div id="post-right">
+    Social Right
   </div>
 </div>
