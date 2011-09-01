@@ -5,7 +5,7 @@
 #email_image {background: url("../images/embed/email.png") no-repeat center;}
 
 body {
-  background-color: black;
+  background-color: #ccf;
 }
 
 body a {
@@ -81,7 +81,14 @@ div#header {
   width: 960px;
   margin-left: auto;
   margin-right: auto;
-  height: 128px;
+  height: 138px;
+  background-color: #fff;
+  border: 2px solid #36f;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  border-radius: 10px;
+  margin-bottom: 5px;
 }
 
 div#header div#logo_image {
@@ -90,7 +97,7 @@ div#header div#logo_image {
   height:128px;
   float: left;
   padding: 0px;
-  margin: 0px;
+  margin: 5px;
 }
 
 div#header div.icon {
@@ -104,10 +111,11 @@ div#header ul#social, div#header ul#social li{
 }
 
 div#header ul#social {
-  float: left;
   list-style-type: none;
   padding: 0px 10px;
   margin: 0px;
+  position: fixed;
+  right: 0px;
 }
 
 div.center {
@@ -116,12 +124,17 @@ div.center {
 }
 
 div.main {
-  background-color: rgb(12,12,12);
-  width: 770px;
+  background-color: #fff;
+  border: 2px solid #36f;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  border-radius: 10px;
 }
 
 div#main {
   padding: 30px 0px;
+  width: 960px;
 }
 
 div#main div.top {
@@ -130,23 +143,18 @@ div#main div.top {
   margin-right: 10px;
   padding-right: 10px;
   color: #777;
-  border-left: 3px solid #222;
 }
 
 div#post-related {
   line-height: 15px;
   font-size: 14px;
-  background-color: rgb(20,20,20);
-  border: 2px solid rgb(10,10,10);
+  background-color: #eee;
+  border: 2px solid #9cf;
   margin-top:10px;
 }
 
 div#post-related span {
     margin-right: 10px;
-}
-
-div#post-social {
-  padding-top: 5px;
 }
 
 ul.left-aligned {
@@ -191,7 +199,24 @@ div.top-title h1 {
 }
 
 div.top-title {
-  background-color: #111;
+  background-color: #ddf;
+}
+
+div#post-left {
+  width: 800px;
+  border-right: 2px solid #def;
+  padding-right: 5px;
+  display: inline-block;
+}
+
+div#post-right {
+  width: 100px;
+  margin-left: 5px;
+  border: 2px solid #acf;
+  height: 300px;
+  display: inline-block;
+  vertical-align: top;
+  position: fixed;
 }
 
 div#post-date span {
@@ -203,10 +228,15 @@ div#post-date span {
 
 div#footer {
   padding: 15px 0px;
-  border-top: 1px solid #444;
-  background-color: rgb(10,10,10);
+  background-color: #fff;
   font-size: 11px;
   color: #999;
   text-align: center;
-  width: 790px;
+  width: 960px;
+  border: 2px solid #36f;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  margin-top: 5px;
 }
