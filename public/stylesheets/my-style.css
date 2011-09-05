@@ -12,82 +12,13 @@ body a {
   color: #777;
 }
 
-div#menu ul {
-  margin: 0px;
-  padding: 0px;
-  list-style-type: none;
-}
-
-div#menu ul li {
-  color: #444;
-  float: left;
-  font-size: 12px;
-  text-align: center;
-}
-
-div#menu ul li.no-sf {
-  padding-top: 1px;
-}
-
-/* Espaçamento nas opções do menu */
-div#menu ul li ul#menu-selecionavel li ul li {
-  margin-left: 3px;
-}
-
-div#menu ul li.right {
-  float: right;
-}
-
-div#menu ul li a.botao {
-  margin-right: 2px;
-  padding: 0px 6px;
-  line-height: 20px;
-  background-color: rgb(15,15,15);
-  border: 3px solid #222;
-}
-
-div#menu ul li.botao {
-  margin-right: 2px;
-  line-height: 10px;
-  background-color: rgb(15,15,15);
-  border: 3px solid #222;
-}
-
-div#menu ul li.botao.postagens {
-  padding-left: 8px;
-  padding-right: 8px;
-}
-
-div#menu ul li img {
-  width: 26px;
-  height: 26px;
-}
-
-div#menu ul li a.botao:link, div#menu ul li.botao a:link  {
-  color: #444;
-  text-decoration: none;
-}
-
-div#menu ul li a.botao:visited, div#menu ul li.botao a:visited {
-  color: #444;
-}
-
-div#menu ul li a.botao:hover, div#menu ul li.botao a:hover {
-  color: #999;
-  background-color: rgb(25,25,25);
+div#menu {
+  margin-top: 93px;
 }
 
 div#header {
   width: 960px;
-  margin-left: auto;
-  margin-right: auto;
   height: 138px;
-  background-color: #fff;
-  border: 2px solid #36f;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -khtml-border-radius: 10px;
-  border-radius: 10px;
   margin-bottom: 5px;
 }
 
@@ -124,8 +55,8 @@ div.center {
 }
 
 div.main {
-  background-color: #fff;
-  border: 2px solid #36f;
+  background-color: #eef;
+  border: 2px solid #aaf;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -khtml-border-radius: 10px;
@@ -204,7 +135,7 @@ div.top-title {
 
 div#post-left {
   width: 800px;
-  border-right: 2px solid #def;
+  border-right: 2px solid #cdf;
   padding-right: 5px;
   display: inline-block;
 }
@@ -228,15 +159,9 @@ div#post-date span {
 
 div#footer {
   padding: 15px 0px;
-  background-color: #fff;
   font-size: 11px;
   color: #999;
   text-align: center;
   width: 960px;
-  border: 2px solid #36f;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -khtml-border-radius: 5px;
-  border-radius: 5px;
   margin-top: 5px;
 }

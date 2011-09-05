@@ -1,5 +1,6 @@
 <ul class="sf-menu" id="menu-selecionavel">
-  <li class="botao postagens">
+  <li><a href="sobre-hugolnx">Sobre mim</a></li>
+  <li>
     <a href="todos-os-posts">Postagens</a>
     <ul>
       <% @tagged_posts.each do |tag,posts| %>
@@ -14,7 +15,7 @@
       <% end %>
     </ul>
   </li>
-  <li class="botao">
+  <li>
     <a href="#categorias">Categorias</a>
     <ul>
       <li><a href="#ruby">Ruby</a></li>
@@ -22,7 +23,7 @@
       <li><a href="#retrospectivas">Retrospectivas</a></li>
     </ul>
   </li>
-  <li class="botao">
+  <li>
     <a href="#meu-codigo">Meu Código</a>
     <ul>
       <li>
@@ -45,7 +46,7 @@
       </li>
     </ul>
   </li>
-  <li class="botao">
+  <li>
     <a href="#comunidade">Desenvolvimento no Rio</a>
     <ul>
       <li><a href="#rubyonrio">Ruby on Rio</a></li>

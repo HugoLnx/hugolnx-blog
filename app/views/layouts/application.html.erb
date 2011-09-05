@@ -20,7 +20,7 @@
   
   <body>
     <header>
-      <div id="header">
+      <div id="header" class="center main">
         <div id="logo_image"></div>
         <ul id="social">
           <li><a href="mailto:hugo.roque@caelum.com.br"><div class="icon" id="email_image"></div></a></li>
@@ -29,10 +29,8 @@
           <li><a href="/feed.rss"><div class="icon" id="rss_image"></div></a></li>
         </ul>
         <nav>
-          <div id="menu" class="main center">
-            <ul>
-              <li><%= render :partial => 'layouts/menu-selecionavel' %></li>
-            </ul>
+          <div id="menu">
+            <%= render :partial => 'layouts/menu-selecionavel' %>
           </div>
         </nav>
       </div>
@@ -45,7 +43,7 @@
       </div>
 
     <footer>
-      <div id="footer" class="center">
+      <div id="footer" class="center main">
         <%=render 'layouts/creative_commons'%>
       </div>
     </footer>
