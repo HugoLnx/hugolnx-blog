@@ -130,21 +130,21 @@ div.top-title {
 }
 
 div#post-left {
-  width: 840px;
-  border-right: 2px solid #cdf;
-  padding-right: 5px;
+  width: 60px;
+  float: left;
+  margin-right: 5px;
+  vertical-align: top;
   display: inline-block;
 }
 
 div#post-right {
-  width: 60px;
-  margin-left: 5px;
-  float: right;
+  width: 840px;
+  border-left: 2px solid #cdf;
+  padding-left: 5px;
   display: inline-block;
-  vertical-align: top;
 }
 
-div#post-right ul {
+div#post-left ul {
   list-style-type: none;
   padding: 0px;
 }
