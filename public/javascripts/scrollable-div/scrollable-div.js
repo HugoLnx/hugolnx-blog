@@ -1,11 +1,11 @@
 ScrollableDiv = function() {
-  var POST_DIV_SELECTOR = "div#post";
+  var PARENT_DIV_SELECTOR = "div#post";
   var CHILDREN_DIV_SELECTOR = "div#post-left";
   var SIDE_CHILDREN_DIV_SELECTOR = "div#post-right";
 
   var myWindow = $(window);
   var myDocument = $(document);
-  var myParent = $("section#mainSection " + POST_DIV_SELECTOR);
+  var myParent = $("section#mainSection " + PARENT_DIV_SELECTOR);
   var me = myParent.find(CHILDREN_DIV_SELECTOR);
   var mySideDiv = myParent.find(SIDE_CHILDREN_DIV_SELECTOR);
   var relativeTop;
