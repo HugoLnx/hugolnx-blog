@@ -13,5 +13,6 @@ javascripts:
     - 'public/javascripts/superfish.js'
     - 'public/javascripts/twitter-button.js'
     - 'public/javascripts/plusone-button.js'
+    - 'public/javascripts/fixed-right-div.js'
     #- 'public/javascripts/ajax.js'
     #- 'public/javascripts/post.slider.js'

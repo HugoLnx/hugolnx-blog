@@ -37,10 +37,6 @@ div#header div.icon {
   height: 32px;
 }
 
-div#header ul#social, div#header ul#social li{
-  display: inline;
-}
-
 div#header ul#social {
   list-style-type: none;
   padding: 0px 10px;
@@ -143,11 +139,11 @@ div#post-left {
 div#post-right {
   width: 100px;
   margin-left: 5px;
+  float: right;
   border: 2px solid #acf;
-  height: 300px;
   display: inline-block;
   vertical-align: top;
-  position: fixed;
+  height: 200px;
 }
 
 div#post-date span {
