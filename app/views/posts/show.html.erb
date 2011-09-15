@@ -5,7 +5,6 @@
   <script type="text/javascript">
     window.___gcfg = {lang: 'pt-BR'};
   </script>
-  <script src="http://connect.facebook.net/pt_BR/all.js#appId=169086613168321&amp;xfbml=1"></script>
 <%end%>
 <%= javascript_tag do %>
   if (window.reloadCommentsIndex != null) reloadCommentsIndex();
@@ -65,6 +64,19 @@
     </div>
   </div>
   <div id="post-right">
-    Social Right
+    <ul>
+      <li><g:plusone size="tall"></g:plusone></li>
+      <li><a href="http://twitter.com/share" class="twitter-share-button" data-count="vertical" data-via="hugolnx">Tweet</a></li>
+      <li><div id="fb-root"></div>
+      <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+              js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/pt_BR/all.js#appId=175389192539275&xfbml=1";
+                  fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+      
+      <div class="fb-like" data-send="false" data-layout="box_count" data-width="130" data-show-faces="false"></div></li>
+    </ul>
   </div>
 </div>
