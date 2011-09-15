@@ -131,8 +131,6 @@ div.top-title {
 
 div#post-left {
   width: 60px;
-  float: left;
-  margin-right: 5px;
   vertical-align: top;
   display: inline-block;
 }
