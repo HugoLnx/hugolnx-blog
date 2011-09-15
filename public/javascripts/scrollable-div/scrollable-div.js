@@ -1,33 +1,56 @@
 ScrollableDiv = function() {
   var POST_DIV_SELECTOR = "div#post";
   var CHILDREN_DIV_SELECTOR = "div#post-left";
+  var SIDE_CHILDREN_DIV_SELECTOR = "div#post-right";
 
   var myWindow = $(window);
   var myDocument = $(document);
   var myParent = $("section#mainSection " + POST_DIV_SELECTOR);
   var me = myParent.find(CHILDREN_DIV_SELECTOR);
-  var initialTop = me.offset().top;
-  var initialLeft = me.offset().left;
+  var mySideDiv = myParent.find(SIDE_CHILDREN_DIV_SELECTOR);
+  var relativeTop;
+  var relativeLeft;
+  var sideRelativeLeft = mySideDiv.offset().left;
+  updateRelativePosition();
+  var self = this;
 
-  this.fixInInitialPosition = function(){
-    me.css("position","relative");
-    updateTop();
-    myWindow.scroll(updateTop);
+  this.fixInRelativePosition = function(){
+    me.css("position","fixed");
+    updatePosition();
+    mySideDiv.css("margin-left",sideRelativeLeft-mySideDiv.offset().left);
   };
 
   this.activeAutoLenghtAdjust = function() {
     updateLenght();
-    myWindow.resize(updateLenght());
   };
 
-  function updateTop(){
-    me.css("top",myWindow.scrollTop());
+  this.prepareForWindowResize = function() {
+    myWindow.resize(adjustForResizement);
+  };
+
+  function adjustForResizement() {
+    updateRelativePosition();
+    updatePosition();
+    updateLenght();
+  }
+
+  function updatePosition() {
+    me.css("top",relativeTop);
+    me.css("left",relativeLeft);
+  };
+
+  function updateRelativePosition(){
+    var lastPosition = me.css("position");
+    me.css("position","static");
+    relativeTop = me.offset().top;
+    relativeLeft = me.offset().left;
+    me.css("position",lastPosition);
   };
 
   function updateLenght(){
     var parentBottom = myParent.offset().top + myParent.height();
     var parentBottomToBase = myDocument.height() - parentBottom;
-    var height = myWindow.height() - (initialTop + parentBottomToBase);
+    var height = myWindow.height() - (relativeTop + parentBottomToBase);
     me.height(height);
   };
 };
