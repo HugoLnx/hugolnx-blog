@@ -130,20 +130,23 @@ div.top-title {
 }
 
 div#post-left {
-  width: 800px;
+  width: 840px;
   border-right: 2px solid #cdf;
   padding-right: 5px;
   display: inline-block;
 }
 
 div#post-right {
-  width: 100px;
+  width: 60px;
   margin-left: 5px;
   float: right;
-  border: 2px solid #acf;
   display: inline-block;
   vertical-align: top;
-  height: 200px;
+}
+
+div#post-right ul {
+  list-style-type: none;
+  padding: 0px;
 }
 
 div#post-date span {
