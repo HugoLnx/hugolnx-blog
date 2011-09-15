@@ -1,11 +1,11 @@
-PostRightDiv = function() {
+ScrollableDiv = function() {
   var POST_DIV_SELECTOR = "div#post";
-  var POST_RIGHT_DIV_SELECTOR = "div#post-right";
+  var CHILDREN_DIV_SELECTOR = "div#post-left";
 
   var myWindow = $(window);
   var myDocument = $(document);
   var myParent = $("section#mainSection " + POST_DIV_SELECTOR);
-  var me = myParent.find(POST_RIGHT_DIV_SELECTOR);
+  var me = myParent.find(CHILDREN_DIV_SELECTOR);
   var initialTop = me.offset().top;
   var initialLeft = me.offset().left;
 
