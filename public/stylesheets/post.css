@@ -1,17 +1,17 @@
-h1,h2,h3 {
+h2,h3,h4 {
   margin: 0px;
   margin-top: 50px;
   font-weight: normal;
-  color: #888;
+  color: #555;
 }
 
-h1.first,h2.first,h3.first {
+h2.first,h3.first,h4.first {
   margin-top: 0px;
 }
 
-h1 {font-size: 22px}
-h2 {font-size: 18px}
-h3 {font-size: 16px}
+h2 {font-size: 22px}
+h3 {font-size: 18px}
+h4 {font-size: 16px}
 
 div.CodeRay {
   border: 1px #69f solid;

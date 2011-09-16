@@ -3,14 +3,14 @@ Description: Como simular named parameter em ruby através de uma gem criada por
 Keywords: named parameter ruby
 Tags: ruby named parameter
 
-<h1 class="first">Introdu&ccedil;&atilde;o</h1>
+<h2 class="first">Introdu&ccedil;&atilde;o</h2>
 <p>Depois de me cansar daquela gambiarra de usar hash para simular named parameter em ruby, decidi criar uma gem para amenizar a trabalhosa gambiarra.</p>
 
-<h1>Instalando</h1>
+<h2>Instalando</h2>
 <p>Antes de qualquer coisa temos que instalar a gem named_parameter:</p>
 <code class="syntax shell">gem install named_parameter</code>
 
-<h1>Como Usar</h1>
+<h2>Como Usar</h2>
 <h2 class="first">O B&aacute;sico</h2>
 <p>Ap&oacute;s instalar a gem, s&oacute; o que precisamos fazer &eacute; extender o m&oacute;dulo NamedParameter e em troca ganharemos o m&eacute;todo <span class="snippet">named</span> que usaremos antes da defini&ccedil;&atilde;o do m&eacute;todo para dizer que este ter&aacute; par&acirc;metros nomeados, dessa maneira:</p>
 <code class="syntax ruby">require 'rubygems'
@@ -68,13 +68,13 @@ end
 Ponto.new.mover_para(y: 30,x: 50) # => Movido para: [50,30,0]
 Ponto.new.mover_para(z: 10, y: 30,x: 50) # => Movido para: [50,30,10]</code>
 
-<h1>Cuidado!</h1>
+<h2>Cuidado!</h2>
 <p>Antes de usar esta gem, lembre-se que ao extender o m&oacute;dulo NamedParameter, o callback <a href="http://ruby-doc.org/core/classes/Module.html#M000460">method_added</a> &eacute; sobreescrito. Caso seja necess&aacute;rio sobreescrever esse callback e usar o NamedParameter na mesma classe &eacute; necess&aacute;rio utilizar <a href="https://gist.github.com/534772#file_around_alias.rb">around alias</a>!</p>
 
-<h1>Conclus&atilde;o</h1>
+<h2>Conclus&atilde;o</h2>
 <p>O c&oacute;digo fonte da gem est&aacute; no github: <a href="https://github.com/HugoLnx/named_parameter">https://github.com/HugoLnx/named_parameter</a>. Os testes foram escritos utilizando RSpec. Quem quiser contribuir pode mandar um pull request (com testes por favor).</p>
 
-<h1>Refer&ecirc;ncias</h1>
+<h2>Refer&ecirc;ncias</h2>
 <ul>
   <li><a href="http://ruby-doc.org/core/classes/Module.html#M000460">Documenta&ccedil;&atilde;o do callback method_added</a></li>
   <li><a href="https://gist.github.com/534772#file_around_alias.rb">Exemplo de uso do around_alias</a></li>

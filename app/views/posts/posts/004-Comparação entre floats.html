@@ -2,11 +2,11 @@ Creation Date: 20/07/2010
 Description: Comentando sobre o grande dilema de comparação de floats, exemplificando com ruby.
 Keywords: float comparação ruby
 Tags: geral
-<h1 class="first">Introdução</h1>
+<h2 class="first">Introdução</h2>
 Olá a todos novamente =D
 Pra variar um pouco, nesse post eu não vou falar de JRuby, vou falar de um problema que eu tive hoje quando estava trabalhando no meu projeto <a href="http://github.com/HugoLnx/Ondas-2.0">Ondas2.0</a> e que eu gostei da solução.xD
 
-<h1>Desvendando o Problema</h1>
+<h2>Desvendando o Problema</h2>
 Não vou explicar o problema que eu tive, é meio que difícil de explicar, mas vou explicar a solução através do problema descrito <a href="http://forum.rubyonbr.org/forums/1/topics/2447">neste tópico</a> que eu acabei "esbarrando" quando procurava a solução para o meu problema.</br>
 No tópico o Neves mostra um problema que meu deixou um pouco confuso, de acordo com ele isso ocorreria...
 <code class="syntax ruby">1.8 == (1.8/3)*3
@@ -52,7 +52,7 @@ Ou seja, eu queria que se isso ocorresse...
 1.8.eh_igual?((1.8/3)*3, 16)
 #=&gt; false</code>
 
-<h1>Resolvendo o Problema</h1>
+<h2>Resolvendo o Problema</h2>
 A melhor maneira que eu encontrei de fazer isso, seria, diminuindo uma float da outra, e testando se o modulo do resultado era maior que 0 e menor que "10 elevado à precisão negativa". Ou seja, se eu quero comparar 10.0 com 10.1, eu faria...</br>
 10.0 - 10.1 = -0.1 ( módulo de -0.1 = 0.1 )</br>
 ...nesse momento entra a precisão... "um décimo de diferença é pequeno o suficiente para que eu o desconsidere?"
@@ -64,12 +64,12 @@ E assim eu implementei...
   end
 end</code>
 
-<h1>Concluindo</h1>
+<h2>Concluindo</h2>
 Esse foi um problema que eu até gostei de resolver, pode até ser algo trivial para muitos, mas para alguns não deve ser, então não custa nada postar.xD</br>
 Se alguém souber um modo melhor de fazer isso eu adoraria que me mandasse um email, ou algo assim.</br>
 Qualquer dúvida, conselho, sugestão, chingamento, etc, contate através de um dos meios abaixo.</br>
 Espero ter ajudado xD
 
-<h1>Fontes</h1>
+<h2>Fontes</h2>
 <a href="http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm">http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm</a></br>
 <a href="http://forum.rubyonbr.org/forums/1/topics/2447">http://forum.rubyonbr.org/forums/1/topics/2447</a>

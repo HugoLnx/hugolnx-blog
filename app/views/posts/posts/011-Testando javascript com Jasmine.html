@@ -2,17 +2,17 @@ Creation Date: 24/06/2011
 Description: Testando javascript usando Jasmine.
 Keywords: teste javascript jasmine
 Tags: javascript teste jasmine
-<h1 class="first">Introdu&ccedil;&atilde;o</h1>
+<h2 class="first">Introdu&ccedil;&atilde;o</h2>
 <p>Após fazer uma série de pesquisas sobre ferramentas para testar javascript descobri <a href="http://pivotal.github.com/jasmine/">Jasmine</a>, uma ferramenta com uma DSL parecida com a do <a href="https://github.com/rspec/rspec">RSpec</a>, e que até agora não me faltou funcionalidades.</p>
 
-<h1>Instalando</h1>
+<h2>Instalando</h2>
 <p>O Jasmine pode ser instalado como uma gem:</p>
 <code class="syntax shell">gem install jasmine
 cd your/project/path/
 jasmine init</code>
 <p>Ou pode ser <a href="http://pivotal.github.com/jasmine/download.html">baixado como zip</a> e descompactado na pasta do seu projeto.</p>
 
-<h1>Estrutura</h1>
+<h2>Estrutura</h2>
 <p>Após instalar o Jasmine no seu projeto, ele terá uma estrutura parecida com essa:</p>
 <code class="syntax shell">sua_app/
   src/   (codigo-fonte)
@@ -26,7 +26,7 @@ jasmine init</code>
 
 <p>Como o <span class="snippet">SpecRunner.html</span> não passa de um arquivo html qualquer, os nomes das pastas podem ser mudados de acordo com a preferencia de cada um. Além de ser possível separar os testes para serem rodados em arquivos diferentes: <span class="snippet">IntegrationSpecRunner.html</span> e <span class="snippet">UnitSpecRunner.html</span> por exemplo.</p>
 
-<h1>Escrevendo Um Teste Simples</h1>
+<h2>Escrevendo Um Teste Simples</h2>
 <p>Vamos escrever um teste simples, como diz o bom TDD: "teste antes":</p>
 <code class="syntax javascript">// spec/pessoa.spec.js
 describe("Pessoa", function(){
@@ -85,10 +85,10 @@ Pessoa = function(nome,sobrenome) {
 
 <p>Agora nossos testes passam (<span style="color: green">GREEN</span>).</p>
 
-<h1>Conclusão</h1>
+<h2>Conclusão</h2>
 <p>Jasmine é uma ferramenta incrível de testes, e ele tem muito mais do que foi mostrado aqui, para aprender mais basta seguir os links de referência abaixo (os dois primeiros são os mais interessantes).</p>
 
-<h1>Refer&ecirc;ncias</h1>
+<h2>Refer&ecirc;ncias</h2>
 <ul>
   <li><a href="http://pivotal.github.com/jasmine/">Site do Jasmine</a></li>
   <li><a href="https://github.com/pivotal/jasmine/wiki">Wiki do Jasmine (Muito Bom)</a></li>
