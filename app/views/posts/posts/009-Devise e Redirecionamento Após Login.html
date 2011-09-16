@@ -2,13 +2,13 @@ Creation Date: 03/06/2011
 Description: Mostrando uma alternativa aos m&eacute;todos descritos na documenta&ccedil;&atilde;o do Devise, para mudar a path padr&atilde;o para qual o usu&aacute;rio ser&aacute; redirecionado ap&oacute;s o login.
 Keywords: devise redirecionar sign_in after_sign_in_path_for
 Tags: ruby devise
-<h1 class="first">Introdu&ccedil;&atilde;o</h1>
+<h2 class="first">Introdu&ccedil;&atilde;o</h2>
 <p><a href="https://github.com/plataformatec/devise/">Devise</a> &eacute; uma gem para ruby, que auxilia na parte de autentica&ccedil;&atilde;o numa aplica&ccedil;&atilde;o rails.</p>
 <p>Durante 2 dias eu e <a href="http://twitter.com/fabiopimentel">F&aacute;bio</a> passamos por um problema com o Devise, que foi um tanto complicado de resolver. O que, teoricamente, levaria alguns segundos, acabou levando horas.</p>
 <p>O objetivo era simples, mudar a path para qual o devise direcionava o usu&aacute;rio depois que ele logava, por&eacute;m n&oacute;s n&atilde;o conseguimos fazer isso atrav&eacute;s dos <a href="https://github.com/plataformatec/devise/wiki/How-to:-redirect-to-a-specific-page-on-successful-sign-in">m&eacute;todos descritos na documenta&ccedil;&atilde;o do devise</a>.</p>
 <p>Felizmente, com a ajuda do grande <a href="http://twitter.com/#!/vinibaggio">Vinicius Baggio</a> foi possivel desenvolver outro m&eacute;todo, muito menos elegante, por&eacute;m com efeito semelhante.</p>
 
-<h1>Explicando algumas coisas antes da solu&ccedil;&atilde;o</h1>
+<h2>Explicando algumas coisas antes da solu&ccedil;&atilde;o</h2>
 <p>Antes de iniciar a solu&ccedil;&atilde;o em si, &eacute; interessante destacar esses dois peda&ccedil;os do c&oacute;digo fonte do devise:</p>
 <code class="syntax ruby"># app/controllers/devise/sessions_controller.rb
 class Devise::SessionsController &lt; ApplicationController
@@ -42,7 +42,7 @@ end
 <p>No primeiro snippet d&aacute; para perceber que ap&oacute;s ele criar a sess&atilde;o, &eacute; chamado o m&eacute;todo <span class="snippet">redirect_location</span> que est&aacute; definido no segundo snippet.</p>
 <p>O <span class="snippet">redirect_location</span> chama o m&eacute;todo <span class="snippet">stored_location_for</span> que, caso exista na session hash, deleta a tupla de chave {scope}_return_to e retorna seu valor.</p>
 
-<h1>A Solu&ccedil;&atilde;o</h1>
+<h2>A Solu&ccedil;&atilde;o</h2>
 <p>A solu&ccedil;&atilde;o que resolveu nosso problema foi setar manualmente um valor para <span class="snippet">session[:usuario_return_to]</span> sendo "usuario" o nome do nosso scope (voc&ecirc; define ele nas suas rotas atrav&eacute;s do <span class="snippet">devise_for</span>):</p>
 <code class="syntax ruby"># app/controllers/devise/sessions_controller.rb
 class DeviseDaApplicacao::SessionsController &lt; Devise::SessionsController
@@ -70,10 +70,10 @@ class Devise::SessionsController &lt; ApplicationController
 end
 </code>
 
-<h1>Conclus&atilde;o</h1>
+<h2>Conclus&atilde;o</h2>
 <p>Apesar de n&atilde;o ser muito elegante, &eacute; uma forma diferente das apresentadas na documenta&ccedil;&atilde;o.</p>
 
-<h1>Refer&ecirc;ncias</h1>
+<h2>Refer&ecirc;ncias</h2>
 <ul>
   <li><a href="http://twitter.com/#!/vinibaggio">Vinicius Baggio</a></li>
 </ul>

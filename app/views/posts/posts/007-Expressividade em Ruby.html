@@ -2,9 +2,9 @@ Creation Date: 08/03/2011
 Description: Exemplificando a grande facilidade com que é possivel escrever código fluente com ruby.
 Keywords: ruby sintaxe fluencia
 Tags: ruby
-<h1 class="first">Introdu&ccedil;&atilde;o</h1>
+<h2 class="first">Introdu&ccedil;&atilde;o</h2>
 <p>Quinta passada teve dojo na CaelumRJ, e n&oacute;s discutimos sobre expressividade em ruby, alguns discordaram quanto a sintaxe de ruby ser indicativa e talz. Pensando nisso, eu implementei a solu&ccedil;&atilde;o pro problema de ontem, separando tudo em pequenos m&eacute;todos, pra podermos observar o resultado.</p>
-<h1>Mini Interpretador de Scheme - O Problema</h1>
+<h2>Mini Interpretador de Scheme - O Problema</h2>
 <p>Dentre os 3 problemas propostos escolhemos o mini interpretador de Scheme(dialeto de Lisp), que visava criar um interpretador para listas com operadores matem&aacute;ticos (soma, subtracao, multiplicacao, divisao) e com operadores l&oacute;gicos (maior, menor).</p>
 <p>Scheme trabalha com o conceito de listas(programa&ccedil;&atilde;o funcional), onde o primeiro elemento &eacute; o operador que ser&aacute; aplicado aos demais elementos da lista. Abaixo tempos alguns exemplos de <b>Entrada => Saida:</b></p>
 <code class="syntax lisp">(+ 1 2) => 3
@@ -19,7 +19,7 @@ Tags: ruby
 (> 1 0) => true
 (= 1 1) => true
 </code>
-<h1>Resolvendo o Problema</h1>
+<h2>Resolvendo o Problema</h2>
 <p>A primeiramente, eu escrevi uma resolu&ccedil;&atilde;o r&aacute;pida, com expressivamente prec&aacute;ria, mas que resolvia o problema, para depois refatorar e observar a diferen&ccedil;a.</p>
 <p>Minha solu&ccedil;&atilde;o rapida foi essa:</p>
 <code class="syntax ruby">def interpretar(list)
@@ -31,7 +31,7 @@ Tags: ruby
 end
 </code>
 <p>Observe como o c&oacute;digo &eacute; pouco expressivo, e somente quem conhece algumas peculiaridades da linguagem conseguiria entender, assim como foi discutido, ruby abre espa&ccedil;o para escrevermos codigos ileg&iacute;veis, por&eacute;m n&atilde;o quer dizer que s&oacute; da para escrever c&oacute;digos ilegiveis.</p>
-<h1>Refatorando</h1>
+<h2>Refatorando</h2>
 <p>A primeira coisa que eu fiz foi criar uma classe chamada List, mantendo o metodo interpretar para poder continuar rodando os testes que implementamos no dojo.</p>
 <p>Inicialmente passamos a lista em string no construtor, e repartimos ela dentro do construtor. E criamos um metodo solve, que ira resolver a lista.</p>
 <code class="syntax ruby"># dsl.rb
@@ -54,7 +54,7 @@ class List
   end
 end
 </code>
-<h1>Constru&ccedil;&atilde;o Complexa Demais</h1>
+<h2>Constru&ccedil;&atilde;o Complexa Demais</h2>
 <p>Nesse momento eu pergunto, ser&aacute; que a Lista tem que se preocupar em extrair o operador e os numeros de dentro da string? Acho que n&atilde;o, afinal a Lista simplesmente aplica um operador a v&aacute;rios numeros. Nossas classes devem ter responsabilidade &uacute;nica, portanto a lista deve receber o operador, os numeros e saber trabalhar com eles para chegar ao resultado. Nossa classe List ficaria assim...</p>
 <code class="syntax ruby"># list.rb
 class List
@@ -89,7 +89,7 @@ def interpretar(list_in_string)
   list.solve
 end
 </code>
-<h1>M&eacute;todos com Multiplas Responsabilidades</h1>
+<h2>M&eacute;todos com Multiplas Responsabilidades</h2>
 <p>Atualmente eu estou lendo o Clean Code(Uncle Bob) e no capitulo sobre fun&ccedil;&otilde;es ele fala que cada fun&ccedil;&atilde;o(metodo) deve fazer algo espec&iacute;fico, ent&atilde;o vamos seguir seu conselho. O m&eacute;todo build_from, conter&aacute; uma descri&ccedil;&atilde;o abstrata do processo de constru&ccedil;&atilde;o da lista, portanto extrair os elementos da string, deve ser delegado para uma fun&ccedil;&atilde;o que fa&ccedil;a somente isso.</p>
 <p>Portanto criemos um metodo extract_elements_from(list_in_string), que ir&aacute; extrair os elementos da string de uma lista. Mas como ele far&aacute; isso? Dever&aacute; estar descrito no corpo do m&eacute;todo. Ent&atilde;o implementando o m&eacute;todo, ficaria:</p>
 <code class="syntax ruby"># list_factory.rb
@@ -100,7 +100,7 @@ end
 </code>
 <p>Observe como est&aacute; explicitamente descrito no corpo do m&eacute;todo como ele ir&aacute; extrair os elementos, primeiro ele ir&aacute; deletar os parentesis e depois ir&aacute; partir a string pelos espa&ccedil;os em branco.</p>
 <p>Processo: "(+ 1 2)" => "+ 1 2" => ["+","1"."2"]</p>
-<h1>Classes Abertas</h1>
+<h2>Classes Abertas</h2>
 <p>Agora iremos extrair o operador, sabemos que o operador ser&aacute; sempre o primeiro dos elementos, e a array, por padr&atilde;o j&aacute; tem um m&eacute;todo que nos retorna o primeiro elemento, portanto us&aacute;-lo d&aacute; a expressividade que queremos ao c&oacute;digo, n&atilde;o ser&aacute; necess&aacute;rio criar um metodo para isso.</p>
 <p>A extra&ccedil;&atilde;o dos n&uacute;meros por outro lado, &eacute; um pouco mais complexa. Criaremos, ent&atilde;o, um m&eacute;todo para ela:</p>
 <code class="syntax ruby"># list_factory.rb
@@ -137,7 +137,7 @@ def build_from(list_in_string)
 end
 </code>
 <p>Observe como o m&eacute;todo d&aacute; uma descri&ccedil;&atilde;o por alto de como &eacute; realizada a constru&ccedil;&atilde;o de uma lista.</p>
-<h1>O M&eacute;todo Inject</h1>
+<h2>O M&eacute;todo Inject</h2>
 <p>Bem, vamos ver como ficou a nossa classe List agora:</p>
 <code class="syntax ruby">class List
   def initialize(operator,numbers)
@@ -169,9 +169,9 @@ def solve
 end
 </code>
 <p>Agora podemos ler pelo m&eacute;todo solve, entender o que est&aacute; ocorrendo, sem saber que o m&eacute;todo inject existe.</p>
-<h1>Conclus&atilde;o</h1>
+<h2>Conclus&atilde;o</h2>
 <p>Ruby &eacute; uma linguagem expressivamente poderosa, por&eacute;m extremamente perigosa, a liberdade que ele d&aacute;, pode nos condenar &agrave; um c&oacute;digo extremamente sujo. A pr&oacute;pria metaprograma&ccedil;&atilde;o pode ser um tiro no p&eacute; (j&aacute; esfolei o meu por causa de metaprograma&ccedil;&atilde;o). Por&eacute;m com o tempo, e lendo livros como o Clean Code ou Growing Object-Oriented Software, aprendemos &agrave; evitar esses horrores n&atilde;o s&oacute; em Ruby, mas em qualquer outra linguagem.</p>
 <p>Muitos devem estar se perguntando por que eu escrevi o c&oacute;digo em ingl&ecirc;s, acontece que os m&eacute;todos de ruby s&atilde;o todos em ingl&ecirc;s, ent&atilde;o para chegar mais perto daquela famosa impress&atilde;o de estar lendo um texto ao inv&eacute;s de um c&oacute;digo, eu optei por escrever o c&oacute;digo em ingl&ecirc;s.</p>
 <p>O <a href="https://github.com/DojoCaelumRio/Mini-Interpretador-de-Scheme/tree/master/lib/solution">c&oacute;digo produzido</a> aqui pode ser encontrado no github, dentro do <a href="https://github.com/DojoCaelumRio/Mini-Interpretador-de-Scheme/">reposit&oacute;rio do c&oacute;digo do dojo</a>.</p>
-<h1>Referências</h1>
+<h2>Referências</h2>
 <p>Clean Code e <a href="http://www.ruby-doc.org/core/">RubyDoc</a>

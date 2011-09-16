@@ -2,15 +2,15 @@ Creation Date: 10/06/2011
 Description: Como compactar recursos como javascript e css em rails através do Jammit, melhorando a performance do seu website.
 Keywords: minificar compactar javascript css gem
 Tags: ruby rails performance
-<h1 class="first">Introdu&ccedil;&atilde;o</h1>
+<h2 class="first">Introdu&ccedil;&atilde;o</h2>
 <p>Muitos de nós desenvolvedores temos de nos preocupar com a compactação e minificação de javascripts e css, devido a quantidade e peso dos requests que eles provocam. Como grande salvador de nossos problemas, foi criada a <a href="http://documentcloud.github.com/jammit/">gem Jammit</a>, que além de minificar javascript e css, consegue compactar outros recursos como imagens e fontes.</p>
 
-<h1>Instalando a gem</h1>
+<h2>Instalando a gem</h2>
 <p>Nada de especial é necessário para instalar a gem, simplesmente rode no terminal:</p>
 <code class="syntax shell">gem install jammit</code>
 <p>E adicione <span class="snippet">gem "jammit"</span> no arquivo <span class="snippet">Gemfile</span>.</p>
 
-<h1>Compactando de minificando javascript e css</h1>
+<h2>Compactando de minificando javascript e css</h2>
 <h2 class="first">Mostrando onde estão seus arquivos</h2>
 Simplesmente crie o arquivo <span class="snippet">config/assets.yml</span> dizendo onde estão seus arquivos javascript e css, e o nome do arquivo que conterá a compactação dos arquivos:</p>
 <code class="syntax yaml">stylesheets:
@@ -67,7 +67,7 @@ end
 <span class="comentario">Leia sobre porque javascript depois do conteúdo: <a href="http://blog.caelum.com.br/top-7-praticas-para-um-site-otimizado/">Top 7 práticas para um site otimizado</a></span>
 <p>Pronto, com essas modificações já compactamos e minificamos javascript e css, porém podemos ir além disso com Jammit.</p>
 
-<h1>Anexando imagens e fontes junto com CSS</h1>
+<h2>Anexando imagens e fontes junto com CSS</h2>
 <h2 class="first">Usando essa funcionalidade</h2>
 <p>Isso mesmo, o jammit consegue juntar suas imagens com o css num único arquivo, ou seja, somente um request. Para fazer isso, precisamos habilitar a opção <span class="snippet">embed_assets</span> dentro do nosso <span class="snippet">config/assets.yml</span>:</p>
 <code class="syntax yaml">embed_assets: on
@@ -87,10 +87,10 @@ javascripts:
 <h2>Cuidados com essa funcionalidade</h2>
 <p>É importante mostrar que como as imagens serão anexadas ao css, seu css ficará mais pesado, e portanto ele irá demorar mais para ser mostrado. É aconselhavel que esta técnica seja usada em imagens pequenas e que apareçam à primeira vista.</p>
 
-<h1>Conclus&atilde;o</h1>
+<h2>Conclus&atilde;o</h2>
 <p>Jammit é uma gem extremamente poderosa, inclusive é a gem que eu estou utilizando aqui no meu blog, para ver seu efeito, pode ser interessante utilizar o firebug ou similares.</p>
 
-<h1>Refer&ecirc;ncias</h1>
+<h2>Refer&ecirc;ncias</h2>
 <ul>
   <li><a href="http://documentcloud.github.com/jammit/">Documentação do Jammit</a></li>
 </ul>
