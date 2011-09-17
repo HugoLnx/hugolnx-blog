@@ -5,7 +5,7 @@ ScrollableDiv = function() {
 
   var myWindow = $(window);
   var myDocument = $(document);
-  var myParent = $("section#mainSection " + PARENT_DIV_SELECTOR);
+  var myParent = $("div#content " + PARENT_DIV_SELECTOR);
   var me = myParent.find(CHILDREN_DIV_SELECTOR);
   var mySideDiv = myParent.find(SIDE_CHILDREN_DIV_SELECTOR);
   var relativeTop;

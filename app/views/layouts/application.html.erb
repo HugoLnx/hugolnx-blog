@@ -19,8 +19,8 @@
   </head>
   
   <body>
-    <header>
-      <div id="header" class="center main">
+    <div id="main" class="center main">
+      <header>
         <div id="logo_image"></div>
         <ul id="social">
           <li><a href="mailto:hugo.roque@caelum.com.br"><div class="icon" id="email_image"></div></a></li>
@@ -28,19 +28,14 @@
           <li><a href="http://twitter.com/hugolnx"><div class="icon" id="twitter_image"></div></a></li>
           <li><a href="/feed.rss"><div class="icon" id="rss_image"></div></a></li>
         </ul>
-        <nav>
-          <div id="menu">
-            <%= render :partial => 'layouts/menu-selecionavel' %>
-          </div>
-        </nav>
+      </header>
+      <nav>
+        <%= render :partial => 'layouts/menu-selecionavel' %>
+      </nav>
+      <div id="content">
+        <%= yield %>
       </div>
-    </header>
-
-      <div id="main" class="center main">
-        <section id="mainSection">
-          <%= yield %>
-        </section>
-      </div>
+    </div>
 
     <footer>
       <div id="footer" class="center main">
