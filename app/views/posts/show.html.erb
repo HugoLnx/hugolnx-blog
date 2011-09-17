@@ -28,55 +28,61 @@
     </ul>
   </div>
   <div id="post-right">
-    <div id="post-title" class="top-title">
-      <h1><%= @post.title %></h1>
-    </div>
-
-    <div id="post-content">
-      <%= render :inline => @post.body_with_syntax_highlighting %>
-    </div>
-
-
-    <div id="post-date">
-      <span>Criado em: <%= @post.creation_date.to_s :portuguese %></span>
-      <% unless @post.last_modification_date.nil? %>
-        <span>&Uacute;ltima Atualiza&ccedil;&atilde;o em: <%= @post.last_modification_date.to_s :portuguese %></span>
-      <%end%>
-    </div>
-
-    <div id="post-related">
-      <ul class="left-aligned">
-        <span>Postagens relacionadas:</span>
-        <li><a href="#">Post qualquer número 1</a></li>
-        <li><a href="#">Post qualquer número 2</a></li>
-        <li><a href="#">Post qualquer número 3</a></li>
-      </ul>
-    </div>
-
-    <div id="post-comments" class="top">
-      <div id="post-comments-title" class="top-title">
-        <h1>Comentários</h1>
+    <article>
+      <div id="post-title" class="top-title">
+        <h1><%= @post.title %></h1>
       </div>
 
-      <div id="post-comments-content">
-        <%= @comments.empty? ? "Esse post nao foi comentado ainda" : render(@comments) %>
+      <div id="post-content">
+        <%= render :inline => @post.body_with_syntax_highlighting %>
       </div>
 
-    </div>
+      <footer> 
+        <div id="post-date">
+          <span>Criado em: <%= @post.creation_date.to_s :portuguese %></span>
+          <% unless @post.last_modification_date.nil? %>
+            <span>&Uacute;ltima Atualiza&ccedil;&atilde;o em: <%= @post.last_modification_date.to_s :portuguese %></span>
+          <%end%>
+        </div>
 
-    <div id="commentForm" class="top">
-      <div id="commentForm-title" class="top-title">
-        <h1>Deixe seu Comentário</h1>
-      </div>
+        <div id="post-related">
+          <ul class="left-aligned">
+            <span>Postagens relacionadas:</span>
+            <li><a href="#">Post qualquer número 1</a></li>
+            <li><a href="#">Post qualquer número 2</a></li>
+            <li><a href="#">Post qualquer número 3</a></li>
+          </ul>
+        </div>
+      </footer>
 
-      <div id="commentForm-content">
-        <%= render "comments/form" %>
-        <% if current_user %>
-          <a href="/signout" id="signoutTwitter" style="display:block"><%= I18n.t :sign_out_from_twitter %></a></br>
-        <%else%>
-          <a href="/auth/twitter/"><%= I18n.t :sign_in_twitter_to_comment %></a>
-        <%end%>
-      </div>
-    </div>
+      <section>
+        <div id="post-comments" class="top">
+          <div id="post-comments-title" class="top-title">
+            <h1>Comentários</h1>
+          </div>
+
+          <div id="post-comments-content">
+            <%= @comments.empty? ? "Esse post nao foi comentado ainda" : render(@comments) %>
+          </div>
+        </div>
+      <section>
+
+      <section>
+        <div id="commentForm" class="top">
+          <div id="commentForm-title" class="top-title">
+            <h1>Deixe seu Comentário</h1>
+          </div>
+
+          <div id="commentForm-content">
+            <%= render "comments/form" %>
+            <% if current_user %>
+              <a href="/signout" id="signoutTwitter" style="display:block"><%= I18n.t :sign_out_from_twitter %></a></br>
+            <%else%>
+              <a href="/auth/twitter/"><%= I18n.t :sign_in_twitter_to_comment %></a>
+            <%end%>
+          </div>
+        </div>
+      </section>
+    </article>
   </div>
 </div>
