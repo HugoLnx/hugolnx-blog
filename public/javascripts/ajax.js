@@ -14,7 +14,7 @@ AJAX = function() {
   }
 
   function insertDataInContents(xmlHttpRequest) {
-    $("div#contents").html(xmlHttpRequest.responseText);
+    $("div#content").html(xmlHttpRequest.responseText);
   }
 }
 
