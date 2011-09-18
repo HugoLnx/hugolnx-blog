@@ -1,9 +1,20 @@
-#logo_image {background: url("../images/embed/logo.png") no-repeat center;}
-#rss_image {background: url("../images/embed/rss.png") no-repeat center;}
-#twitter_image {background: url("../images/embed/twitter.png") no-repeat center;}
-#github_image {background: url("../images/embed/github.png") no-repeat center;}
-#gplus_image {background: url("../images/embed/gplus.png") no-repeat center;}
-#email_image {background: url("../images/embed/email.png") no-repeat center;}
+#rss_image {background: url(                "../images/embed/rss.png") no-repeat center;}
+#twitter_image {background: url(            "../images/embed/twitter.png") no-repeat center;}
+#github_image {background: url(             "../images/embed/github.png") no-repeat center;}
+#gplus_image {background: url(              "../images/embed/gplus.png") no-repeat center;}
+#email_image {background: url(              "../images/embed/email.png") no-repeat center;}
+#logo_image {background: url(               "../images/embed/logo.png") no-repeat center;}
+#creative_commons_image {background: url(   "../images/embed/creative-commons.jpg") no-repeat center;}
+
+div#logo_image {
+  width:128px;
+  height:48px;
+}
+
+div#creative_commons_image {
+  width: 88px;
+  height: 31px;
+}
 
 body {
   background-color: #ccf;
@@ -21,8 +32,6 @@ div#main div#header {
 
 div#main div#header div#logo_image {
   display: block-inline;
-  width:128px;
-  height:48px;
   float: left;
   padding: 0px;
   margin-left: 10px;
