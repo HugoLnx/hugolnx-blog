@@ -11,78 +11,90 @@
 <%end%>
 
 <div id="post" class="top">
-  <div id="post-left">
-    <ul>
-      <li><g:plusone size="tall"></g:plusone></li>
-      <li><a href="http://twitter.com/share" class="twitter-share-button" data-count="vertical" data-via="hugolnx">Tweet</a></li>
-      <li><div id="fb-root"></div>
-      <script>(function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-              js = d.createElement(s); js.id = id;
-                js.src = "//connect.facebook.net/pt_BR/all.js#appId=175389192539275&xfbml=1";
-                  fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));</script>
-      
-      <div class="fb-like" data-send="false" data-layout="box_count" data-width="130" data-show-faces="false"></div></li>
-    </ul>
-  </div>
-  <div id="post-right">
-    <article>
-      <div id="post-title" class="top-title">
-        <h1><%= @post.title %></h1>
-      </div>
+  <aside>
+    <div id="post-left">
+      <ul>
+        <li><g:plusone size="tall"></g:plusone></li>
+        <li><a href="http://twitter.com/share" class="twitter-share-button" data-count="vertical" data-via="hugolnx">Tweet</a></li>
+        <li><div id="fb-root"></div>
+        <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) {return;}
+                js = d.createElement(s); js.id = id;
+                  js.src = "//connect.facebook.net/pt_BR/all.js#appId=175389192539275&xfbml=1";
+                    fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+        
+        <div class="fb-like" data-send="false" data-layout="box_count" data-width="130" data-show-faces="false"></div></li>
+      </ul>
+    </div>
+  </aside>
+  <article>
+    <div id="post-right">
+      <header>
+        <div id="post-title" class="top-title">
+          <h1><%= @post.title %></h1>
+        </div>
+      </header>
 
       <div id="post-content">
         <%= render :inline => @post.body_with_syntax_highlighting %>
       </div>
 
       <footer> 
-        <div id="post-date">
-          <span>Criado em: <time datetime="<%=@post.creation_date%>" pubdate><%= @post.creation_date.to_s :portuguese %></time></span>
-          <% unless @post.last_modification_date.nil? %>
-            <span>&Uacute;ltima Atualiza&ccedil;&atilde;o em: <time datetime="<%=@post.last_modification_date%>"><%= @post.last_modification_date.to_s :portuguese %></time></span>
-          <%end%>
-        </div>
-
-        <div id="post-related">
-          <ul class="left-aligned">
-            <span>Postagens relacionadas:</span>
-            <li><a href="#">Post qualquer número 1</a></li>
-            <li><a href="#">Post qualquer número 2</a></li>
-            <li><a href="#">Post qualquer número 3</a></li>
-          </ul>
-        </div>
-      </footer>
-
-      <section>
-        <div id="post-comments" class="top">
-          <div id="post-comments-title" class="top-title">
-            <h1>Comentários</h1>
-          </div>
-
-          <div id="post-comments-content">
-            <%= @comments.empty? ? "Esse post nao foi comentado ainda" : render(@comments) %>
-          </div>
-        </div>
-      <section>
-
-      <section>
-        <div id="commentForm" class="top">
-          <div id="commentForm-title" class="top-title">
-            <h1>Deixe seu Comentário</h1>
-          </div>
-
-          <div id="commentForm-content">
-            <%= render "comments/form" %>
-            <% if current_user %>
-              <a href="/signout" id="signoutTwitter" style="display:block"><%= I18n.t :sign_out_from_twitter %></a></br>
-            <%else%>
-              <a href="/auth/twitter/"><%= I18n.t :sign_in_twitter_to_comment %></a>
+        <small>
+          <div id="post-date">
+            <span>Criado em: <time datetime="<%=@post.creation_date%>" pubdate><%= @post.creation_date.to_s :portuguese %></time></span>
+            <% unless @post.last_modification_date.nil? %>
+              <span>&Uacute;ltima Atualiza&ccedil;&atilde;o em: <time datetime="<%=@post.last_modification_date%>"><%= @post.last_modification_date.to_s :portuguese %></time></span>
             <%end%>
           </div>
-        </div>
-      </section>
-    </article>
-  </div>
+
+          <div id="post-related">
+            <ul class="left-aligned">
+              <span>Postagens relacionadas:</span>
+              <li><a href="#">Post qualquer número 1</a></li>
+              <li><a href="#">Post qualquer número 2</a></li>
+              <li><a href="#">Post qualquer número 3</a></li>
+            </ul>
+          </div>
+        </small>
+      </footer>
+
+      <aside>
+        <section>
+          <div id="post-comments" class="top">
+            <header>
+              <div id="post-comments-title" class="top-title">
+                <h1>Comentários</h1>
+              </div>
+            </header>
+
+            <div id="post-comments-content">
+              <%= @comments.empty? ? "Esse post nao foi comentado ainda" : render(@comments) %>
+            </div>
+          </div>
+        <section>
+
+        <section>
+          <div id="commentForm" class="top">
+            <header>
+              <div id="commentForm-title" class="top-title">
+                <h1>Deixe seu Comentário</h1>
+              </div>
+            </header>
+
+            <div id="commentForm-content">
+              <%= render "comments/form" %>
+              <% if current_user %>
+                <a href="/signout" id="signoutTwitter" style="display:block"><%= I18n.t :sign_out_from_twitter %></a></br>
+              <%else%>
+                <a href="/auth/twitter/"><%= I18n.t :sign_in_twitter_to_comment %></a>
+              <%end%>
+            </div>
+          </div>
+        </section>
+      </aside>
+    </div>
+  </article>
 </div>
