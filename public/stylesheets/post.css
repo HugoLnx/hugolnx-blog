@@ -1,6 +1,6 @@
 h2,h3,h4 {
   margin: 0px;
-  margin-top: 50px;
+  margin-top: 20px;
   font-weight: normal;
   color: #555;
 }
@@ -51,4 +51,6 @@ div#post-content {
 
 div#post-content p {
   text-indent: 30px;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
