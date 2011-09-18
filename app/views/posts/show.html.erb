@@ -39,9 +39,9 @@
 
       <footer> 
         <div id="post-date">
-          <span>Criado em: <%= @post.creation_date.to_s :portuguese %></span>
+          <span>Criado em: <time datetime="<%=@post.creation_date%>" pubdate><%= @post.creation_date.to_s :portuguese %></time></span>
           <% unless @post.last_modification_date.nil? %>
-            <span>&Uacute;ltima Atualiza&ccedil;&atilde;o em: <%= @post.last_modification_date.to_s :portuguese %></span>
+            <span>&Uacute;ltima Atualiza&ccedil;&atilde;o em: <time datetime="<%=@post.last_modification_date%>"><%= @post.last_modification_date.to_s :portuguese %></time></span>
           <%end%>
         </div>
 
