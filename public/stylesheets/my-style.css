@@ -25,7 +25,10 @@ div#main > header div#logo_image {
   height:48px;
   float: left;
   padding: 0px;
-  margin: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  margin-right: 30px;
 }
 
 div#main > header div.icon {
