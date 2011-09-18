@@ -1,10 +1,17 @@
 <% content_for :javascript do %>
   <%= javascript_tag do %>
     reloadCommentsIndex();
-  <%end%>
-  <script type="text/javascript">
+
     window.___gcfg = {lang: 'pt-BR'};
-  </script>
+
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/pt_BR/all.js#appId=175389192539275&xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+   <%end%>
 <%end%>
 <%= javascript_tag do %>
   if (window.reloadCommentsIndex != null) reloadCommentsIndex();
@@ -14,16 +21,9 @@
   <div id="post-left">
     <aside>
       <ul>
-        <li><g:plusone size="tall"></g:plusone></li>
+        <li><div class="g-plusone" data-size="tall"></div></li>
         <li><a href="http://twitter.com/share" class="twitter-share-button" data-count="vertical" data-via="hugolnx">Tweet</a></li>
         <li><div id="fb-root"></div>
-        <script>(function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) {return;}
-                js = d.createElement(s); js.id = id;
-                  js.src = "//connect.facebook.net/pt_BR/all.js#appId=175389192539275&xfbml=1";
-                    fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
         
         <div class="fb-like" data-send="false" data-layout="box_count" data-width="130" data-show-faces="false"></div></li>
       </ul>
