@@ -13,13 +13,13 @@ body a {
   color: #55f;
 }
 
-div#main > header {
+div#main div#header {
   width: 960px;
   height: 48px;
   margin: 5px 0px;
 }
 
-div#main > header div#logo_image {
+div#main div#header div#logo_image {
   display: block-inline;
   width:128px;
   height:48px;
@@ -29,19 +29,19 @@ div#main > header div#logo_image {
   margin-right: 30px;
 }
 
-div#main > header div.icon {
+div#main div#header div.icon {
   display: block-inline;
   width: 32px;
   height: 32px;
 }
 
-div#main > header ul#social {
+div#main div#header ul#social {
   list-style-type: none;
   padding-top: 12px;
   margin: 0px;
 }
 
-header ul#social li {
+div#main div#header ul#social li {
   float: left;
 }
 
