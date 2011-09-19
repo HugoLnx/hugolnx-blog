@@ -13,14 +13,3 @@ AJAX = function() {
     $("div#content").html(xmlHttpRequest.responseText);
   }
 }
-
-$(document).ready(function(){
-  ajax = new AJAX();
-  $("a").click(function(){
-    var ajax = new AJAX();
-    ajax.changeContentTo($(this).attr('href'));
-    setupTwitterButton();
-    return false;
-  });
-});
-
