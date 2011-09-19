@@ -12,7 +12,6 @@ ScrollableDiv = function() {
   var relativeLeft;
   var sideRelativeLeft = mySideDiv.offset().left;
   updateRelativePosition();
-  var self = this;
 
   this.fixInRelativePosition = function(){
     me.css("position","fixed");
