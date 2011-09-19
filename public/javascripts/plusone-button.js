@@ -1,3 +1,4 @@
+function setupPlusoneButton() {
 window.___jsl=window.___jsl||{};
 window.___jsl.h=window.___jsl.h||'r;gc\/23217085-590ae8cc';
 window.___jsl.l=[];
@@ -21,3 +22,4 @@ w=/^https:\/\/apis.google.com(\/[a-zA-Z0-9_\-,=]+)*\/[a-zA-Z0-9_\-\.:!]*$/,x=/^(
 "n"?(c=b.join(",").replace(".","_").replace("-","_"),a=h+l.replace("__features__",c)):(c="Cannot respond for features ["+b.join(",")+"].",j&&j.warn(c));d=d||{};if(typeof d==="function"){var c=b,f=d;a?(o(f,1),q(a,void 0),i.push.apply(i,c)):f&&f()}else{(g.cu=g.cu||[]).push(d.config);var f=d.callback,c=b,k=d;a?(o(f,1),q(a,k),i.push.apply(i,c)):f&&f()}};jsloader.reinitialize_=function(b,d){r(b,d)}})();
 gapi.load=function(a,b){jsloader.load(a.split(":"),b)};(window.gapi=window.gapi||{}).load=gapi.load;
 gapi.load('googleapis.client:plusone', {'callback': window['__bsld']  });
+};
