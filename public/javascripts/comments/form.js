@@ -18,7 +18,7 @@ function onInternalServerError (xmlHttpRequest) {
 function onSucess(responseText){
   resetForm();
   updateCommentsWith(responseText);
-  $("div#commentForm div.content form").replaceWith(i18n.dont_do_double_comment);
+  $("div#commentForm div#commentForm-content form").replaceWith(i18n.dont_do_double_comment);
 }
 
 function fieldsOf(attributes) {
@@ -35,5 +35,5 @@ function resetForm() {
 }
 
 function updateCommentsWith(commentsDivs) {
-  $("div#comments div.content").html(commentsDivs);
+  $("div#post-comments-content").html(commentsDivs);
 }
