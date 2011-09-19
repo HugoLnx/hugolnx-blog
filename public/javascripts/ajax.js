@@ -1,12 +1,8 @@
-$(document).ready(function(){
-  ajax = new AJAX();
-});
-
 AJAX = function() {
-  this.changePostTo = function(id) {
+  this.changeContentTo = function(href) {
     $.ajax({
       type: "GET",
-      url: "/without_layout/" + id,
+      url: "/without_layout/" + href,
       dataType: "html",
       async: true,
       complete: insertDataInContents
@@ -17,4 +13,14 @@ AJAX = function() {
     $("div#content").html(xmlHttpRequest.responseText);
   }
 }
+
+$(document).ready(function(){
+  ajax = new AJAX();
+  $("a").click(function(){
+    var ajax = new AJAX();
+    ajax.changeContentTo($(this).attr('href'));
+    setupTwitterButton();
+    return false;
+  });
+});
 

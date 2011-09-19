@@ -1,20 +1,28 @@
 <% content_for :javascript do %>
   <%= javascript_tag do %>
     reloadCommentsIndex();
+    setupTwitterButton();
+    setupPlusoneButton();
 
     window.___gcfg = {lang: 'pt-BR'};
 
-    (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {return;}
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/pt_BR/all.js#appId=175389192539275&xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
+    function setupLikeButton() {
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s);
+        js.src = "//connect.facebook.net/pt_BR/all.js#appId=175389192539275&xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    };
+    setupLikeButton();
    <%end%>
 <%end%>
 <%= javascript_tag do %>
-  if (window.reloadCommentsIndex != null) reloadCommentsIndex();
+  if (window.reloadCommentsIndex !== undefined) reloadCommentsIndex();
+  if (window.setupTwitterButton !== undefined) setupTwitterButton();
+  if (window.setupPlusoneButton !== undefined) setupPlusoneButton();
+  if (window.setupLikeButton !== undefined) setupLikeButton();
 <%end%>
 
 <div id="post" class="top">
