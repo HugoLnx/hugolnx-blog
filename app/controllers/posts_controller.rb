@@ -3,8 +3,7 @@ class PostsController < PostsBaseController
   rescue_from Infrastructure::PostException, :with => :to_error
 
   def index
-    id = Post.id_max
-    post = Post.find id
+    post = Post.last
     params[:id] = post.friendly_id
     show
     @pagehead = PageHead.of_index
@@ -32,11 +31,7 @@ class PostsController < PostsBaseController
   end
 
   def feed
-    @posts = []
-    id_max = Post.id_max
-    (1..id_max).each do |id|
-      @posts << Post.find(id)
-    end
+    @posts = Post.all
 
     respond_to do |format|
       format.rss { render 'feed', :layout => false }
@@ -44,11 +39,7 @@ class PostsController < PostsBaseController
   end
 
   def sitemap
-    @posts = []
-    id_max = Post.id_max
-    (1..id_max).each do |id|
-      @posts << Post.find(id)
-    end
+    @posts = Post.all
 
     respond_to do |format|
       format.xml { render 'sitemap', :layout => false }
