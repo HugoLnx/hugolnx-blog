@@ -10,7 +10,7 @@ class Post < ActiveRecord::Base
   attr_reader :tags
   attr_reader :description
 
-  POSTS_DIRECTORY = 'app/views/posts/posts/'
+  @all = $all_posts
 
   def initialize(options = {})
     @id = options[:id]
@@ -59,38 +59,21 @@ class Post < ActiveRecord::Base
     friendly_id
   end
 
+  alias inspect to_s
+
+
   class << self
-    def find(id,args={})
-      posts_directory = args[:in] || POSTS_DIRECTORY
-      Infrastructure::PostDsl.find_and_build(id,:in => posts_directory)
-    end
-
-    def all_in(directory)
-      Infrastructure::PostDsl.find_all_in(directory)
-    end
-
     def all
-      Infrastructure::PostDsl.find_all_in POSTS_DIRECTORY
+      @all
     end
 
-    def all_post_titles
-      all_post_titles_in POSTS_DIRECTORY
+    def find(id)
+      all.find{|post| post.id == id.to_i}
+    end
+    
+    def last
+      all.max_by{|post| post.id.to_i}
     end
 
-    def id_max
-      id_max_in POSTS_DIRECTORY
-    end
-
-    def all_post_titles_in(directory)
-      Infrastructure::PostDsl.find_all_post_titles_in directory
-    end
-
-    def id_max_in(directory)
-      Infrastructure::PostDsl.find_id_max_in directory
-    end
-
-    def config(args)
-      @@posts_directory = args[:posts_directory]
-    end
   end
 end
