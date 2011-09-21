@@ -10,7 +10,7 @@ class Post < ActiveRecord::Base
   attr_reader :tags
   attr_reader :description
 
-  @all = $all_posts
+  @all = FakeDatabaseInitializer::PostsDatabase.all
 
   def initialize(options = {})
     @id = options[:id]
