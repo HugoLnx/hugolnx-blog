@@ -41,6 +41,10 @@ div#main div#header div.icon {
   height: 32px;
 }
 
+div#main div#header div.icon:hover {
+  opacity: 0.4;
+}
+
 div#main div#header ul#social {
   list-style-type: none;
   padding-top: 12px;
