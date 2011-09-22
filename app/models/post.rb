@@ -67,7 +67,7 @@ class Post < ActiveRecord::Base
       @all
     end
 
-    def find(id)
+    def find(id,args_to_active_record={})
       all.find{|post| post.id == id.to_i}
     end
     
