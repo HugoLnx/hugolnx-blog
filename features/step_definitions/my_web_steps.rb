@@ -26,7 +26,7 @@ end
 
 Then /^I should see the image "([^"]*)"(?: within "([^"]*)")?$/ do |image, selector|
   with_scope(selector) do
-    should have_selector image_selector_for(image), :visible => true
+    should have_selector image_selector_for(image)
   end
 end
 
