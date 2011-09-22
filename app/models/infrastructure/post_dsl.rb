@@ -11,7 +11,8 @@ module Infrastructure
     def build(postfile,postfile_content)
       attributes = {
         :id => postfile.id,
-        :title => postfile.title
+        :title => postfile.title,
+        :location => postfile.location
       }.merge!(postfile_content.catch_attributes)
 
       return Post.new attributes

@@ -3,7 +3,7 @@ module Infrastructure
     extend self
 
     def find_all_in(directory)
-      postfiles_regexp = File.join(directory,"*.html")
+      postfiles_regexp = File.join(directory,"**/*.html")
       Dir[postfiles_regexp]
     end
   end

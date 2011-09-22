@@ -2,10 +2,10 @@ require 'spec_helper'
 
 module Infrastructure
   describe PostDsl do
-    describe '.wrap_postfile_from(path)' do
+    describe '.wrap_postfile_from(path)', :stub_posts_directory_constant => true do
       it 'return postfile and postfile_content from path' do
         postfile, postfile_content = 
-          PostDsl.wrap_postfile_from('spec/fixtures/001-Testing Post 1.html')
+          PostDsl.wrap_postfile_from(TEST_POSTS_IN_TYPE_1.first)
         postfile.should be_a Postfile
         postfile_content.should be_a PostfileContent
       end
@@ -15,7 +15,8 @@ module Infrastructure
       before :each do
         @postfile = stub :postfile,
           :title => 'some title',
-          :id => 999
+          :id => 999,
+          :location => '/commons'
         @postfile_content = stub :postfile_content,
           :catch_attributes => {
             :body => "body of post",
@@ -37,6 +38,10 @@ module Infrastructure
           @post.title.should be == @postfile.title
         end
 
+        it 'location from postfile' do
+          @post.location.should be == @postfile.location
+        end
+
         it 'body from postfile_content' do
           @post.body.should be == @postfile_content.catch_attributes[:body]
         end
@@ -49,8 +54,8 @@ module Infrastructure
     end
 
     describe '.find_all_in' do
-      it 'find all posts in some directory' do
-        posts = PostDsl.find_all_in 'spec/fixtures/posts'
+      it 'find all posts in some directory', :stub_posts_directory_constant => true do
+        posts = PostDsl.find_all_in TEST_POSTS_DIRECTORY
         posts.should be_all {|post| post.is_a? Post}
         posts.should have(2).posts
       end
