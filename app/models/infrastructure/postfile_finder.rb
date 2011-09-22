@@ -12,7 +12,6 @@ module Infrastructure
       filename_regexp = "#{id_prefix}-*"
       path_regexp = File.join(directory,filename_regexp)
       path = Dir[path_regexp].first
-      raise PostException, PostException::PostNotFoundedMessage if path.nil?
       path
     end
   end

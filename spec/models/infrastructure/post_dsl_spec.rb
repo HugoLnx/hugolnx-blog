@@ -2,9 +2,51 @@ require 'spec_helper'
 
 module Infrastructure
   describe PostDsl do
-    it 'should find and build the post of id 1 in spec/fixtures' do
-      post = PostDsl.find_and_build(1,:in => 'spec/fixtures')
-      post.should be_a Post
+    describe '.find(id,{:directory})' do
+      it 'return postfile and postfile_content of a post' do
+        postfile, postfile_content = 
+          PostDsl.find(1,:in => 'spec/fixtures')
+        postfile.should be_a Postfile
+        postfile_content.should be_a PostfileContent
+        
+      end
+    end
+
+    describe '.build(postfile,postfile_content)' do
+      before :each do
+        @postfile = stub :postfile,
+          :title => 'some title',
+          :id => 999
+        @postfile_content = stub :postfile_content,
+          :catch_attributes => {
+            :body => "body of post",
+            :creation_date => :creation_date_of_post
+          }
+        @post = PostDsl.build(@postfile,@postfile_content)
+      end
+
+      it 'return a new post' do
+        @post.should be_a Post
+      end
+
+      context 'with' do
+        it 'id from postfile' do
+          @post.id.should be == @postfile.id
+        end
+
+        it 'title from postfile' do
+          @post.title.should be == @postfile.title
+        end
+
+        it 'body from postfile_content' do
+          @post.body.should be == @postfile_content.catch_attributes[:body]
+        end
+
+        it 'creation date from postfile_content' do
+          @post.creation_date.should be == 
+            @postfile_content.catch_attributes[:creation_date]
+        end
+      end
     end
 
     describe '.find_all_in' do
@@ -12,31 +54,6 @@ module Infrastructure
         posts = PostDsl.find_all_in 'spec/fixtures/posts'
         posts.should be_all {|post| post.is_a? Post}
         posts.should have(2).posts
-      end
-    end
-
-    context 'delegates find of informations in postfiles' do
-      it 'should delegate find of all titles' do
-        postfiles = mock(:postfiles)
-        PostfileArray.stub! :new => postfiles
-
-        PostfileFinder.should_receive('find_all_in')
-                      .with('spec/fixtures')
-                      .and_return([])
-        postfiles.should_receive('titles')
-        PostDsl.find_all_post_titles_in 'spec/fixtures'
-      end
-
-      it 'should delegate find id max' do
-        postfiles = mock(:postfiles)
-        PostfileArray.stub! :new => postfiles
-
-        PostfileFinder.should_receive('find_all_in')
-                      .with('spec/fixtures')
-                      .and_return([])
-        postfiles.should_receive('newer')
-                 .and_return(mock(:postfile, :id=>0))
-        PostDsl.find_id_max_in 'spec/fixtures'
       end
     end
   end
