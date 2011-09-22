@@ -2,9 +2,7 @@ module Infrastructure
   module PostDsl
     extend self
 
-    def find(id,args={})
-      directory = args[:in]
-      path = PostfileFinder.find(id,directory)
+    def wrap_postfile_from(path)
       postfile = Postfile.new(path)
       postfile_content = PostfileContent.new(path)
       return [postfile,postfile_content]
@@ -20,13 +18,10 @@ module Infrastructure
     end
 
     def find_all_in(directory)
-      posts = []
-      id = 1
-      post = PostfileFinder.find(id, directory)
-      until post.nil?
-        posts << build(*find(id, :in => directory))
-        id += 1
-        post = PostfileFinder.find(id, directory)
+      paths = PostfileFinder.find_all_in directory
+      posts = paths.collect do |post_path|
+        postfile, postfile_content = wrap_postfile_from(post_path)
+        build(postfile,postfile_content)
       end
       return posts
     end
