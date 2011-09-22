@@ -18,6 +18,14 @@ describe Post do
         Post.instance_variable_set(:@all,[mock(:post, :id => 2),post_id1])
         Post.find(1).should be == post_id1
       end
+
+      context "when the post dont exist" do
+        it "raise a PostException" do
+          impossible = 99999999999999
+          Post.instance_variable_set(:@all,[])
+          lambda{Post.find(impossible)}.should raise_error Infrastructure::PostException
+        end
+      end
     end
 
     describe ".last()" do

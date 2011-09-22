@@ -1,5 +1,7 @@
 #encoding: utf-8
 class PostsController < PostsBaseController
+  rescue_from Infrastructure::PostException, :with => :redirect_to_not_founded
+
   def index
     post = Post.last
     params[:id] = post.friendly_id
@@ -11,11 +13,7 @@ class PostsController < PostsBaseController
   def redirect_to_right_path
     id = params[:id]
     post = Post.find id
-    if post.nil?
-      redirect_to "/nao-encontrado"
-    else
-      redirect_to post
-    end
+    redirect_to post
   end
   
   def show
@@ -49,4 +47,7 @@ class PostsController < PostsBaseController
   end
 
 private
+  def redirect_to_not_founded
+    redirect_to "/nao-encontrado"
+  end
 end
