@@ -68,7 +68,13 @@ class Post < ActiveRecord::Base
     end
 
     def find(id,args_to_active_record={})
-      all.find{|post| post.id == id.to_i}
+      search_result = all.find{|post| post.id == id.to_i}
+      if search_result.nil?
+        raise Infrastructure::PostException,
+              Infrastructure::PostException::PostNotFoundedMessage
+      else
+        return search_result
+      end
     end
     
     def last
