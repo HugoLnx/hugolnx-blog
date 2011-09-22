@@ -17,7 +17,7 @@ Feature: Coment a post
   Scenario: I fill author and content fields
     Given I fill in "content" of "comment" with "Testing comment" within "form#indexCommentForm"
     When I press "Comentar" within "form#indexCommentForm"
-    Then I should see within "div#comments div#comment1" some informations:
+    Then I should see within "div#post-comments-content div#comment1" some informations:
       | name        | Hugo            |
       | nickname    | hugolnx         |
       | image       | avatar.jpg      |
