@@ -14,8 +14,8 @@ module Infrastructure
       path.should be == 'spec/fixtures/001-Testing Post 1.html'
     end
 
-    it 'should raise PostException with :PostNotFounded when try to find postfile 3 in spec/firstures' do
-      lambda{PostfileFinder.find(3,'spec/fixtures')}.should raise_error(PostException,'PostNotFounded')
+    it 'should return nil when try to find postfile 3 in spec/fixtures' do
+      PostfileFinder.find(3,'spec/fixtures').should be_nil
     end
   end
 end
