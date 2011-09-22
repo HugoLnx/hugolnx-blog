@@ -5,11 +5,13 @@ module Infrastructure
     attr_reader :path
     attr_reader :title
     attr_reader :id
+    attr_reader :location
 
     def initialize(path)
       filename = File.basename path
       @title = title_from filename
       @id = filename[0..2].to_i
+      @location = File.dirname(path).match(/^#{File.join(Post::POSTS_DIRECTORY,'(.*)')}/)[1]
     end
     
     def title_from(filename)

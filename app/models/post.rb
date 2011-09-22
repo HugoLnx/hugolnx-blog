@@ -9,8 +9,11 @@ class Post < ActiveRecord::Base
   attr_reader :keywords
   attr_reader :tags
   attr_reader :description
+  attr_reader :location
 
   @all = FakeDatabaseInitializer::PostsDatabase.all
+
+  POSTS_DIRECTORY = 'app/views/posts/posts/'
 
   def initialize(options = {})
     @id = options[:id]
@@ -21,6 +24,7 @@ class Post < ActiveRecord::Base
     @keywords = options[:keywords]
     @tags = options[:tags]
     @description = options[:description]
+    @location = options[:location]
   end
 
   def body_with_syntax_highlighting
