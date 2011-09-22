@@ -2,13 +2,12 @@ require 'spec_helper'
 
 module Infrastructure
   describe PostDsl do
-    describe '.find(id,{:directory})' do
-      it 'return postfile and postfile_content of a post' do
+    describe '.wrap_postfile_from(path)' do
+      it 'return postfile and postfile_content from path' do
         postfile, postfile_content = 
-          PostDsl.find(1,:in => 'spec/fixtures')
+          PostDsl.wrap_postfile_from('spec/fixtures/001-Testing Post 1.html')
         postfile.should be_a Postfile
         postfile_content.should be_a PostfileContent
-        
       end
     end
 
