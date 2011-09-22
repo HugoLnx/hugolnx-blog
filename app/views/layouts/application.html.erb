@@ -53,6 +53,7 @@
 			$(function(){
         $('div#menu ul#menu-selecionavel').superfish();
 			});
+      var i18n = <%=raw YAML.load_file(I18n.load_path.find{|path| path.include? I18n.locale.to_s})[I18n.locale.to_s].to_json%>;
     <%end%>
     <%= yield :javascript %>
 
