@@ -76,10 +76,10 @@ class Post < ActiveRecord::Base
     def find(id_or_attributes,args_to_active_record={})
       if id_or_attributes.is_a? Hash
         attributes = id_or_attributes
-        search_result = find_by_attributes(attributes)
+        search_result = all.find(&by_attributes(attributes))
       else
         id = id_or_attributes
-        search_result = find_by_id(id)
+        search_result = all.find(&by_id(id))
       end
 
       if search_result.nil?
@@ -89,18 +89,22 @@ class Post < ActiveRecord::Base
         return search_result
       end
     end
+
+    def find_all(attributes)
+      all.find_all(&by_attributes(attributes))
+    end
     
     def last
       all.max_by{|post| post.id.to_i}
     end
 
   private
-    def find_by_id(id)
-      all.find{|post| post.id == id.to_i}
+    def by_id(id)
+      lambda{|post| post.id == id.to_i}
     end
 
-    def find_by_attributes(attrs)
-      all.find do |post|
+    def by_attributes(attrs)
+      lambda do |post|
         attrs.all? do |attr,value|
           post.public_send(attr) == value
         end

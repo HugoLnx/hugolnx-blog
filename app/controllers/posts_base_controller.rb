@@ -7,6 +7,6 @@ private
   end
 
   def prepare_for_layout
-    @tagged_posts = Infrastructure::PostsDateTagger.to_hash Post.all
+    @tagged_posts = Infrastructure::PostsDateTagger.to_hash Post.find_all(:location => PostsController::LOCATION)
   end
 end
