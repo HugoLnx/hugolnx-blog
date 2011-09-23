@@ -9,7 +9,7 @@ module FakeDatabaseInitializer
     end
 
     def initialize
-      @all = posts = Infrastructure::PostDsl.find_all_in(Post::POSTS_DIRECTORY)
+      @all = posts = Infrastructure::PostDsl.build_all_in(Post::POSTS_DIRECTORY)
     end
 
     def set_instance_variable_in_post_to_first_request_after_application_starts

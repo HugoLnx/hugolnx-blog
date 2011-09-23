@@ -53,9 +53,9 @@ module Infrastructure
       end
     end
 
-    describe '.find_all_in' do
-      it 'find all posts in some directory', :stub_posts_directory_constant => true do
-        posts = PostDsl.find_all_in TEST_POSTS_DIRECTORY
+    describe '.build_all_in' do
+      it 'build all posts in some directory', :stub_posts_directory_constant => true do
+        posts = PostDsl.build_all_in TEST_POSTS_DIRECTORY
         posts.should be_all {|post| post.is_a? Post}
         posts.should have(2).posts
       end
