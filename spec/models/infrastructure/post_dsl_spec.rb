@@ -58,11 +58,84 @@ module Infrastructure
       end
     end
 
-    describe '.build_all_in' do
-      it 'build all posts in some directory', :stub_posts_directory_constant => true do
+    describe '.build_all_in', :stub_posts_directory_constant => true do
+      it 'build all posts in some directory' do
+        Post::LOCATION_ORDER = %w{type2 type1}
         posts = PostDsl.build_all_in TEST_POSTS_DIRECTORY
         posts.should be_all {|post| post.is_a? Post}
-        posts.should have(2).posts
+        posts.should have(4).posts
+      end
+    end
+
+    describe '.sort_by_indexing_order(postfiles)' do
+      context 'indexing posts by' do
+        it 'creation_date in first place' do
+          sorted_postfiles = [
+            [
+              stub(:file),
+              stub(:content,:catch_attributes=>{:creation_date=>Date.today-1})
+            ],
+            [
+              stub(:file),
+              stub(:content,:catch_attributes=>{:creation_date=>Date.today})
+            ],
+            [
+              stub(:file),
+              stub(:content,:catch_attributes=>{:creation_date=>Date.today+1})
+            ]
+          ]
+
+          PostDsl.sort_by_indexing_order(sorted_postfiles.rotate)
+            .should be == sorted_postfiles
+        end
+
+        it 'file location in second place' do
+          sorted_postfiles = [
+            [
+              stub(:file, :location => "type1"),
+              stub(:content,:catch_attributes=>{:creation_date=>Date.today})
+            ],
+            [
+              stub(:file,:location => "type2"),
+              stub(:content,:catch_attributes=>{:creation_date=>Date.today})
+            ],
+            [
+              stub(:file, :location => "type1"),
+              stub(:content,:catch_attributes=>{:creation_date=>Date.today+1})
+            ]
+          ]
+
+          PostDsl.sort_by_indexing_order(sorted_postfiles.rotate)
+            .should be == sorted_postfiles
+        end
+
+        it 'file id in third place' do
+          sorted_postfiles = [
+            [
+              stub(:file, :location => "type1", :id => 1),
+              stub(:content,:catch_attributes=>{:creation_date=>Date.today})
+            ],
+            [
+              stub(:file,:location => "type1", :id => 2),
+              stub(:content,:catch_attributes=>{:creation_date=>Date.today})
+            ],
+            [
+              stub(:file, :location => "type1", :id => 3),
+              stub(:content,:catch_attributes=>{:creation_date=>Date.today})
+            ],
+            [
+              stub(:file,:location => "type2", :id => 1),
+              stub(:content,:catch_attributes=>{:creation_date=>Date.today})
+            ],
+            [
+              stub(:file, :location => "type2", :id => 2),
+              stub(:content,:catch_attributes=>{:creation_date=>Date.today})
+            ]
+          ]
+
+          PostDsl.sort_by_indexing_order(sorted_postfiles.rotate)
+            .should be == sorted_postfiles
+        end
       end
     end
   end

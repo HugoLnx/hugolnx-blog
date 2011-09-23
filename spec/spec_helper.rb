@@ -10,6 +10,7 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 TEST_POSTS_DIRECTORY = 'spec/fixtures/posts'
 TEST_POSTS_IN_TYPE_1 = Dir.glob(File.join(TEST_POSTS_DIRECTORY,'type1/*.html'))
+TEST_POSTS_IN_TYPE_2 = Dir.glob(File.join(TEST_POSTS_DIRECTORY,'type2/*.html'))
 
 def no_warning(&block)
   old_verbose = $VERBOSE
