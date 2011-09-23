@@ -73,8 +73,15 @@ class Post < ActiveRecord::Base
       @all
     end
 
-    def find(id,args_to_active_record={})
-      search_result = all.find{|post| post.id == id.to_i}
+    def find(id_or_attributes,args_to_active_record={})
+      if id_or_attributes.is_a? Hash
+        attributes = id_or_attributes
+        search_result = find_by_attributes(attributes)
+      else
+        id = id_or_attributes
+        search_result = find_by_id(id)
+      end
+
       if search_result.nil?
         raise Infrastructure::PostException,
               Infrastructure::PostException::PostNotFoundedMessage
@@ -87,5 +94,17 @@ class Post < ActiveRecord::Base
       all.max_by{|post| post.id.to_i}
     end
 
+  private
+    def find_by_id(id)
+      all.find{|post| post.id == id.to_i}
+    end
+
+    def find_by_attributes(attrs)
+      all.find do |post|
+        attrs.all? do |attr,value|
+          post.public_send(attr) == value
+        end
+      end
+    end
   end
 end

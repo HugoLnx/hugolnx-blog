@@ -12,11 +12,23 @@ describe Post do
       end
     end
 
-    describe ".find(id)" do
-      it "return the post with id 1" do
-        post_id1 = mock(:post, :id => 1)
-        Post.instance_variable_set(:@all,[mock(:post, :id => 2),post_id1])
-        Post.find(1).should be == post_id1
+    describe ".find(id_or_attributes)" do
+      context "pass a fixnum or string, as argument" do
+        it "return the post with id 1" do
+          post_id1 = stub(:post, :id => 1)
+          Post.instance_variable_set(:@all,[stub(:post, :id => 2),post_id1])
+          Post.find(1).should be == post_id1
+        end
+      end
+
+      context "pass a hash of attributes" do
+        it "return the post with this attributes" do
+          post_locationtype1 = stub(:post, :location => 'type1')
+          post_locationtype2 = stub(:post, :location => 'type2')
+          Post.instance_variable_set(:@all,[post_locationtype1,post_locationtype2])
+          Post.find(location: 'type1').should be == post_locationtype1
+          Post.find(location: 'type2').should be == post_locationtype2
+        end
       end
 
       context "when the post dont exist" do
