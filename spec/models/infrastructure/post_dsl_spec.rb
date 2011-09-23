@@ -22,7 +22,8 @@ module Infrastructure
             :body => "body of post",
             :creation_date => :creation_date_of_post
           }
-        @post = PostDsl.build(@postfile,@postfile_content)
+        @id = 1
+        @post = PostDsl.build(@postfile,@postfile_content,@id)
       end
 
       it 'return a new post' do
@@ -30,8 +31,12 @@ module Infrastructure
       end
 
       context 'with' do
-        it 'id from postfile' do
-          @post.id.should be == @postfile.id
+        it 'relative_id from postfile' do
+          @post.relative_id.should be == @postfile.id
+        end
+
+        it 'id is passed as argument' do
+          @post.id.should be == @id
         end
 
         it 'title from postfile' do
