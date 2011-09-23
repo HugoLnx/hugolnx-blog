@@ -2,6 +2,7 @@ class Post < ActiveRecord::Base
   has_many :comments
 
   attr_reader :id
+  attr_reader :relative_id
   attr_reader :title
   attr_reader :creation_date
   attr_reader :last_modification_date
@@ -17,6 +18,7 @@ class Post < ActiveRecord::Base
 
   def initialize(options = {})
     @id = options[:id]
+    @relative_id = options[:relative_id]
     @title = options[:title]
     @creation_date = options[:creation_date]
     @last_modification_date = options[:last_modification_date]

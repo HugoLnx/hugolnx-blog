@@ -8,9 +8,10 @@ module Infrastructure
       return [postfile,postfile_content]
     end
 
-    def build(postfile,postfile_content)
+    def build(postfile,postfile_content,id)
       attributes = {
-        :id => postfile.id,
+        :id => id,
+        :relative_id => postfile.id,
         :title => postfile.title,
         :location => postfile.location
       }.merge!(postfile_content.catch_attributes)
@@ -20,9 +21,9 @@ module Infrastructure
 
     def build_all_in(directory)
       paths = PostfileFinder.find_all_in directory
-      posts = paths.collect do |post_path|
+      posts = paths.collect.with_index do |post_path,id|
         postfile, postfile_content = wrap_postfile_from(post_path)
-        build(postfile,postfile_content)
+        build(postfile,postfile_content,id)
       end
       return posts
     end
