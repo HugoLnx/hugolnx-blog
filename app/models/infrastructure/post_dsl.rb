@@ -18,7 +18,7 @@ module Infrastructure
       return Post.new attributes
     end
 
-    def find_all_in(directory)
+    def build_all_in(directory)
       paths = PostfileFinder.find_all_in directory
       posts = paths.collect do |post_path|
         postfile, postfile_content = wrap_postfile_from(post_path)
