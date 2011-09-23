@@ -27,7 +27,7 @@ module Infrastructure
       postfiles = sort_by_indexing_order(postfiles)
 
       posts = postfiles.collect.with_index do |(file,content),id|
-        build(file,content,id)
+        build(file,content,id+1)
       end
       return posts
     end

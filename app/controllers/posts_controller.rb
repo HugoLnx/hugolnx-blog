@@ -1,9 +1,10 @@
 #encoding: utf-8
 class PostsController < PostsBaseController
   rescue_from Infrastructure::PostException, :with => :redirect_to_not_founded
+  LOCATION = 'artigos'
 
   def index
-    post = Post.last
+    post = Post.find_all(:location => LOCATION).last
     params[:id] = post.friendly_id
     show
     @pagehead = PageHead.of_index
@@ -18,9 +19,10 @@ class PostsController < PostsBaseController
   
   def show
     friendly_id = params[:id]
-    id = friendly_id[/\d+/]
-    @post = Post.find id
-    redirect_to @post if friendly_id != @post.friendly_id
+    id = friendly_id[/\d+/].to_i
+    @post = Post.find(:relative_id => id, :location => LOCATION)
+    url_is_correct = friendly_id == @post.friendly_id
+    redirect_to '/nao-encontrado' unless url_is_correct
     
     prepare_to_render_show_with @post
 

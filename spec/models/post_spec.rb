@@ -40,6 +40,24 @@ describe Post do
       end
     end
 
+    describe ".find_all(attributes)" do
+      it "return the posts with this attributes" do
+        post_locationtype1 = stub(:post, :location => 'type1')
+        post_locationtype2_1 = stub(:post, :location => 'type2')
+        post_locationtype2_2 = stub(:post, :location => 'type2')
+        Post.instance_variable_set(:@all,[post_locationtype1,post_locationtype2_1,post_locationtype2_2])
+        Post.find_all(location: 'type1').should be == [post_locationtype1]
+        Post.find_all(location: 'type2').should be == [post_locationtype2_1, post_locationtype2_2]
+      end
+
+      context "when the post dont exist" do
+        it "return an empty array" do
+          Post.instance_variable_set(:@all,[])
+          Post.find_all(:location => :not_exist).should be == []
+        end
+      end
+    end
+
     describe ".last()" do
       it "return the post with greatest id" do
         post_with_greatest_id = mock(:post, :id => 2)
