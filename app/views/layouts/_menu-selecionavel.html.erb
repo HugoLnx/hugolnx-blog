@@ -1,13 +1,14 @@
 <ul id="suckerfishnav" class="sf-menu" id="menu-selecionavel">
   <li>
-    <a href="sobre-hugolnx">Sobre mim</a>
+    <a href="#">Sobre mim</a>
     <ul>
-      <li><a href="percurso-profissional">Percurso Profissional</a></li>
-      <li><a href="conhecimentos">Conhecimentos</a></li>
+      <%@sobre_mim_posts.each do |post|%>
+        <li><%= link_to post.title, other_post_path('sobre-mim',post.friendly_title) %></a></li>
+      <%end%>
     </ul>
   </li>
   <li>
-    <a href="todos-os-posts">Postagens</a>
+    <a href="#">Artigos</a>
     <ul>
       <% @tagged_posts.each do |tag,posts| %>
       <li>
@@ -27,24 +28,9 @@
   <li>
     <a href="#meu-codigo">Meu Código</a>
     <ul>
-      <li>
-        <a href="#ruby">Ruby</a>
-        <ul>
-          <li><a href="#esteblog">Este Blog</a></li>
-          <li><a href="#caelumweb-rj">Caelumweb RJ</a></li>
-          <li><a href="#rspec-rails-extra-routing">RSpec Rails Extra Routing</a></li>
-          <li><a href="#named-parameter">Named Parameter</a></li>
-          <li><a href="#named-parameter">Ondas 2.0</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#javascript">Javascript</a>
-        <ul>
-          <li><a href="#ondas-no-canvas">Ondas no Canvas</a></li>
-          <li><a href="#estrelas">Estrelas</a></li>
-          <li><a href="#pingos">Pingos Realtime</a></li>
-        </ul>
-      </li>
+      <%@meu_codigo_posts.each do |post|%>
+        <li><%= link_to post.title, other_post_path('meu-codigo',post.friendly_title) %></a></li>
+      <%end%>
     </ul>
   </li>
   <li>
