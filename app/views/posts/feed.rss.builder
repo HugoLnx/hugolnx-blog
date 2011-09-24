@@ -17,5 +17,16 @@ xml.rss :version => "2.0" do
         xml.guid post_url(post)
       end
     end
+
+    for post in @other_posts
+      xml.item do
+        xml.title post.title
+        xml.description post.body_with_syntax_highlighting
+        xml.pubDate post.creation_date.strftime("%a, %d %b %Y %H:%M:%S %z")
+        xml.lastBuildDate post.last_modification_date.strftime("%a, %d %b %Y %H:%M:%S %z") unless post.last_modification_date.nil?
+        xml.link other_post_url(post.location,post.friendly_title)
+        xml.guid other_post_url(post.location,post.friendly_title)
+      end
+    end
   end
 end
