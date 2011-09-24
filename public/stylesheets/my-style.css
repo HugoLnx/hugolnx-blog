@@ -176,6 +176,10 @@ ul#suckerfishnav {
   margin-bottom: 30px;
 }
 
+ul#suckerfishnav li.disabled {
+  background: #5f5f5f url("../images/embed/suckerfish_disabled.png") repeat-x top;
+}
+
 ul#suckerfishnav * {
   position: static;
   z-index: 100;
