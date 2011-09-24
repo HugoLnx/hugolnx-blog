@@ -14,10 +14,10 @@ describe "Errors Routes" do
       :message => 'lol'
     )
 
-    get("/lol/wtf").should route_to(
+    get("/lol/wtf/fasd").should route_to(
       :controller => 'errors',
       :action => 'show',
-      :message => 'lol/wtf'
+      :message => 'lol/wtf/fasd'
     )
 
     get("/123lol").should route_to(

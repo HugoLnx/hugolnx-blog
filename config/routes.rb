@@ -11,10 +11,15 @@ HugolnxBlog::Application.routes.draw do
     get 'sitemap', :controller => :posts, :action => :sitemap, :on => :collection
   end
 
-  match "/nao-encontrado" => "errors#show", :message => Infrastructure::PostException::PostNotFoundedMessage
   match "/auth/failure" => "errors#show"
   match "/auth/:provider" => "sessions#setup"
   match "/auth/:provider/callback" => "sessions#create"
   match "/signout" => "sessions#destroy", :as => :signout
+
+  resources :other_posts, :only => [], :path => '/:location' do
+    get :show, :on => :member
+  end
+
+  match "/nao-encontrado" => "errors#show", :message => Infrastructure::PostException::PostNotFoundedMessage
   match'/(*message)' => 'errors#show'
 end
