@@ -13,11 +13,6 @@ describe 'requests to PostsController' do
     it {should redirect_to '/1-ola-a-todos'}
   end
 
-  describe 'GET /1-different-title' do
-    before(:each) {get '/1-different-title'}
-    it {should redirect_to '/1-ola-a-todos'}
-  end
-
   describe 'GET /1-ola-a-todos' do
     before(:each) do
       Comment.destroy_all
