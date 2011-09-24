@@ -2,7 +2,7 @@ module FakeDatabaseInitializer
   module PostsDatabase
     extend self
     def configure_initialization
-      Rails::Application.config.before_configuration do
+      HugolnxBlog::Application.config.before_configuration do
         initialize
         set_instance_variable_in_post_to_first_request_after_application_starts
       end

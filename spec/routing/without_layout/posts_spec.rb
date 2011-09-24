@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe "WithoutLayout/Posts Routes" do
-  get("/without_layout/4").should route_to(
-    :controller => 'without_layout_posts',
+describe "Routes to WithoutLayout::PostsController" do
+  get("/without_layout/1-ola-a-todos").should route_to(
+    :controller => 'without_layout/posts',
     :action => 'show',
-    :id => '4'
+    :id => '1-ola-a-todos'
   )
 end

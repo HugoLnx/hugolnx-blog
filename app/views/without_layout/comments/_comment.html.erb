@@ -2,7 +2,7 @@
   <div class="comment" id="comment<%=comment.id%>">
     <header>
       <% if comment.user == current_user %>
-        <a style="display:block" class="commentEdit" data-commentId="<%=comment.id%>" href="comments/<%=comment.id%>/editar">Editar</a>
+        <a style="display:block" class="commentEdit" data-commentId="<%=comment.id%>" href="<%=edit_without_layout_comment_path(comment)%>">Editar</a>
       <%end%>
       <img src="<%=comment.user.avatar_path%>"></img>
       <span class="user"><b><%=comment.user.name%></b> (<%=comment.user.nickname%>)</span>

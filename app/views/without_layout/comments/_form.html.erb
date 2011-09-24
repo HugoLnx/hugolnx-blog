@@ -7,7 +7,7 @@
   <% if !@comments.nil? && !@comments.empty? && @comments.last.user == current_user %>
     <%= I18n.t :dont_do_double_comment %>
   <% else %>
-    <%url = action_name == 'edit' ? "comments/#{@comment.id}" : "#{@post.id}/comments" %>
+    <%url = action_name == 'edit' ? comment_path(@comment.id) : post_comments_path(@post.id) %>
     <%= form_for(@comment, :url => url, :html => {:id=>"#{action_name}CommentForm"}) do |f| %>
       <%= f.hidden_field :user_id, :value => current_user.id %> 
       <%= f.hidden_field :post_id, :value => @post.id %> 

@@ -1,6 +1,5 @@
-class WithoutLayoutPostsController < PostsBaseController
+class WithoutLayout::PostsController < PostsBaseController
   layout nil
-  append_view_path 'views/posts/'
 
   def show
     id = params[:id].sub('/','').match(/\d+/)[0]

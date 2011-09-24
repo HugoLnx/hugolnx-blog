@@ -15,7 +15,7 @@ reloadCommentsIndex = function(){
   $(".comment a.commentEdit").click(function(event){
     event.preventDefault();
     var anchor = $(this);
-    $.get($(this).attr("href"),{without_layout: "true"},function(textResponse){
+    $.get($(this).attr("href"),{},function(textResponse){
       var commentId = anchor.attr("data-commentId");
       $("div#comment"+commentId).html(textResponse);
     });
