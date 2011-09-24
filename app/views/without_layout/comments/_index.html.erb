@@ -1,0 +1,7 @@
+<%= javascript_tag do %>
+  reloadCommentsIndex();
+<%end%>
+
+<% @comments.each do |comment| %>
+  <%= render :partial => 'without_layout/comments/comment', :object => comment %>
+<%end%>

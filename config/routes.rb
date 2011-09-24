@@ -1,10 +1,13 @@
 HugolnxBlog::Application.routes.draw do
-  resources :comments, :path_names => {:edit => :editar}, :only => [:edit,:update]
+  resources :comments, :only => :update
 
-  match '/without_layout/:id', :controller => :without_layout_posts, :action => 'show'
+  namespace 'without_layout' do
+    resources :posts, :only => :show, :path => ''
+    resources :comments, :only => :edit
+  end
 
   resources :posts, :only => [:index], :path => ''  do
-    resources :comments
+    resources :comments, :only => :create
     get :show, :constraints => {:id => /\d+\-[\w-]+/}, :on => :member
     get '', :action => :redirect_to_right_path, :constraints => {:id => /\d+/}, :on => :member
     get 'feed', :controller => :posts, :action => :feed, :on => :collection

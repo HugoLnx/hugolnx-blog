@@ -1,0 +1,7 @@
+<% if @comments.empty? %>
+  Este post não foi comentado ainda
+<% else %>
+  <% @comments.each do |comment| %>
+    <%= render :partial => 'without_layout/comments/comment',:object => comment %>
+  <%end%>
+<% end %>

@@ -79,7 +79,7 @@
             </header>
 
             <div id="post-comments-content">
-              <%= @comments.empty? ? "Esse post nao foi comentado ainda" : render(@comments) %>
+              <%= render :partial => 'posts/comments' %>
             </div>
           </div>
         </section>
@@ -93,7 +93,7 @@
             </header>
 
             <div id="commentForm-content">
-              <%= render "comments/form" %>
+              <%= render "without_layout/comments/form" %>
               <% if current_user %>
                 <a href="/signout" id="signoutTwitter" style="display:block"><%= I18n.t :sign_out_from_twitter %></a></br>
               <%else%>
