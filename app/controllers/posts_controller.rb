@@ -20,8 +20,6 @@ class PostsController < PostsBaseController
   def show
     friendly_id = params[:id]
     @post = Post.find(:friendly_id => friendly_id, :location => LOCATION)
-    url_is_correct = friendly_id == @post.friendly_id
-    redirect_to '/nao-encontrado' unless url_is_correct
     
     prepare_to_render_show_with @post
 
