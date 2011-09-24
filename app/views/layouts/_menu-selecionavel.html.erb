@@ -55,11 +55,9 @@
   <li>
     <a href="#comunidade">Desenvolvimento no Rio</a>
     <ul>
-      <li><a href="#rubyonrio">Ruby on Rio</a></li>
-      <li><a href="#nodejs">NodeJS Brasil</a></li>
-      <li><a href="#dojorio">Dojo Rio</a></li>
-      <li><a href="#openspace">Open Space</a></li>
-      <li><a href="#outros">Outros</a></li>
+      <%@comunidade_posts.each do |post|%>
+        <li><%= link_to post.title, other_post_path('comunidade',post.friendly_title) %></a></li>
+      <%end%>
     </ul>
   </li>
 </ul>
