@@ -8,5 +8,6 @@ private
 
   def prepare_for_layout
     @tagged_posts = Infrastructure::PostsDateTagger.to_hash Post.find_all(:location => PostsController::LOCATION)
+    @comunidade_posts = Post.find_all(:location => 'comunidade')
   end
 end
