@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'requests to show a post:' do
+describe 'requests to PostsController' do
   fixtures :users
   describe 'GET /' do
     before(:each) {get '/'}
