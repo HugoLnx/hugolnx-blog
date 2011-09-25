@@ -1,9 +1,5 @@
 <% content_for :javascript do %>
   <%= javascript_tag do %>
-    reloadCommentsIndex();
-    setupTwitterButton();
-    setupPlusoneButton();
-
     window.___gcfg = {lang: 'pt-BR'};
 
     function setupLikeButton() {
@@ -15,7 +11,13 @@
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
     };
-    setupLikeButton();
+
+    $(window).load(function(){
+      reloadCommentsIndex();
+      setupLikeButton();
+      setupTwitterButton();
+      setupPlusoneButton();
+    });
    <%end%>
 <%end%>
 <%= javascript_tag do %>
