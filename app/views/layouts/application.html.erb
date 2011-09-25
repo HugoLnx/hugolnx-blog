@@ -49,9 +49,7 @@
     <%= include_javascripts :all_minified %>
 
     <%= javascript_tag do %>
-			$(function(){
-        $('div#menu ul#menu-selecionavel').superfish();
-			});
+      $('div#menu ul#menu-selecionavel').superfish();
       var i18n = <%=raw YAML.load_file(I18n.load_path.find{|path| path.include? I18n.locale.to_s})[I18n.locale.to_s].to_json%>;
     <%end%>
     <%= yield :javascript %>
