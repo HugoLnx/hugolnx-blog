@@ -21,13 +21,6 @@
     });
    <%end%>
 <%end%>
-<%= javascript_tag do %>
-  if (window.innerPostJavascripts !== undefined) innerPostJavascripts();
-  if (window.reloadCommentsIndex !== undefined) reloadCommentsIndex();
-  if (window.setupTwitterButton !== undefined) setupTwitterButton();
-  if (window.setupPlusoneButton !== undefined) setupPlusoneButton();
-  if (window.setupLikeButton !== undefined) setupLikeButton();
-<%end%>
 
 <div id="post" class="top">
   <div id="post-left">
@@ -110,3 +103,11 @@
     </article>
   </div>
 </div>
+
+<%= javascript_tag do %>
+  if (window.innerPostJavascripts !== undefined) innerPostJavascripts();
+  if (window.reloadCommentsIndex !== undefined) reloadCommentsIndex();
+  if (window.setupTwitterButton !== undefined) setupTwitterButton();
+  if (window.setupPlusoneButton !== undefined) setupPlusoneButton();
+  if (window.setupLikeButton !== undefined) setupLikeButton();
+<%end%>
