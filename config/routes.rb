@@ -3,6 +3,7 @@ HugolnxBlog::Application.routes.draw do
 
   namespace 'without_layout' do
     resources :posts, :only => :show, :path => ''
+    resources :other_posts, :only => :show, :path => '/:location'
     resources :comments, :only => :edit
   end
 
