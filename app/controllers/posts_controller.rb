@@ -52,3 +52,18 @@ private
     redirect_to "/nao-encontrado"
   end
 end
+
+class JammitController < ActionController::Base
+  alias old_package package
+  def package
+    puts "KJFNASKLJFNASKLJFNASLFN"
+    puts "KJFNASKLJFNASKLJFNASLFN"
+    puts "KJFNASKLJFNASKLJFNASLFN"
+    puts "KJFNASKLJFNASKLJFNASLFN"
+    puts "KJFNASKLJFNASKLJFNASLFN"
+    old_package
+      three_years = 60*60*24*365*3
+      response.headers["Cache-Control"] = "public,max-age:#{three_years}"
+      response.last_modified = WHEN_SERVER_STARTS
+  end
+end
