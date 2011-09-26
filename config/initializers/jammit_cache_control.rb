@@ -1,0 +1,1 @@
+WHEN_APPLICATION_UP = Time.now
