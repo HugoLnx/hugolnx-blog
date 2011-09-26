@@ -46,7 +46,8 @@
       </div>
     </footer>
 
-    <%= include_javascripts :all_minified %>
+    <%#= include_javascripts :all_minified %>
+    <%= javascript_include_tag "/jammit-assets/all_minified.js" %>
 
     <%= javascript_tag do %>
       $('div#menu ul#menu-selecionavel').superfish();

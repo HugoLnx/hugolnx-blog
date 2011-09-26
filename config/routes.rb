@@ -1,4 +1,6 @@
 HugolnxBlog::Application.routes.draw do
+  match '/jammit-assets/:package.:extension', :controller => 'my_jammit', :action => :package, :extension=>/.+/
+
   resources :comments, :only => :update
 
   namespace 'without_layout' do
