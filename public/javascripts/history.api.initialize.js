@@ -2,10 +2,12 @@ $(document).ready(function(){
   if (!History.enabled) return;
   
   var ajax = new AJAX();
-  $("div#menu a").click(function(){
+  $("nav a").click(function(){
     var href = $(this).attr('href');
-    ajax.changeContentTo(href);
-    History.pushState({},"Novo Titulo",href);
+    var response = ajax.requestWithoutLayout(href, function(body,title){
+      $("div#content").html(body);
+      History.pushState({},title,href);
+    });
     return false;
   });
 });
