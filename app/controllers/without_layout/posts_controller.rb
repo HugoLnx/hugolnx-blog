@@ -6,5 +6,6 @@ class WithoutLayout::PostsController < PostsBaseController
     @post = Post.find id
     prepare_to_render_show_with @post
     render 'posts/show'
+    response.headers['title'] = @post.title
   end
 end

@@ -1,15 +1,19 @@
 AJAX = function() {
-  this.changeContentTo = function(href) {
+  var whatDoWithResponse;
+  this.requestWithoutLayout = function(href,givenFunction) {
+    whatDoWithResponse = givenFunction;
     $.ajax({
       type: "GET",
       url: "/without_layout/" + href,
       dataType: "html",
       async: true,
-      complete: insertDataInContents
+      complete: prepareToGivenFunction
     });
   }
 
-  function insertDataInContents(xmlHttpRequest) {
-    $("div#content").html(xmlHttpRequest.responseText);
+  function prepareToGivenFunction(xmlHttpRequest) {
+    var title = "Hugolnx::Blog: " + xmlHttpRequest.getResponseHeader("title")
+    var body = xmlHttpRequest.responseText
+    whatDoWithResponse(body,title);
   }
 }
