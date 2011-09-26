@@ -13,6 +13,7 @@
     };
 
     $(window).load(function(){
+      if (window.innerPostJavascripts !== undefined) innerPostJavascripts();
       reloadCommentsIndex();
       setupLikeButton();
       setupTwitterButton();
@@ -21,6 +22,7 @@
    <%end%>
 <%end%>
 <%= javascript_tag do %>
+  if (window.innerPostJavascripts !== undefined) innerPostJavascripts();
   if (window.reloadCommentsIndex !== undefined) reloadCommentsIndex();
   if (window.setupTwitterButton !== undefined) setupTwitterButton();
   if (window.setupPlusoneButton !== undefined) setupPlusoneButton();

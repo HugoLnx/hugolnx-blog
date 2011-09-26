@@ -1,4 +1,4 @@
-window.onload = function() {
+function innerPostJavascripts() {
   var GREAT = {
     TOPBAR: "rgba(0,0,255,0.5)",
     BOTTOMBAR: "#009"
