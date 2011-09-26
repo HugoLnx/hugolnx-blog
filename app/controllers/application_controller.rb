@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   before_filter :check_domain
   before_filter :define_robots_metatag_content
+  after_filter :compress_with_gzip
 private
   def check_domain
     head :moved_permanently, :location => "http://hugolnx.com/" if request.host == 'hugolnx.heroku.com'
@@ -18,5 +19,10 @@ private
   
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
+
+  def compress_with_gzip
+    response.body = ActiveSupport::Gzip.compress response.body
+    response.headers["Content-Encoding"] = "gzip"
   end
 end
