@@ -1,5 +1,5 @@
 # encoding: utf-8
-class ErrorsController < PostsBaseController
+class ErrorsController < ApplicationController
   def show
     prepare_for_layout
     error_message = params[:message]
