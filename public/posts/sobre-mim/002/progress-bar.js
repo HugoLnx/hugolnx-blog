@@ -14,41 +14,34 @@ function innerPostJavascripts() {
     BOTTOMBAR: "#900"
   };
 
-  (function(){
-    var progressBars = $("div.progress-bar");
-    progressBars.each(function(i){
-      var progressBar = $(progressBars[i]);
-      fillBar = $(document.createElement('div'));
-      fillTopBar = $(document.createElement('div'));
-      fillBottomBar = $(document.createElement('div'));
+  var progressBars = $("div.progress-bar");
+  progressBars.each(function(i){
+    var progressBar = $(progressBars[i]);
+    fillBar = $(document.createElement('div'));
+    fillTopBar = $(document.createElement('div'));
+    fillBottomBar = $(document.createElement('div'));
 
-      fillBar.width(progressBar.attr("data-progress"));
-      fillBar.height("100%");
+    fillBar.width(progressBar.attr("data-progress"));
+    fillBar.height("100%");
 
-      fillTopBar.height("60%");
-      fillTopBar.width("100%");
+    fillTopBar.height("60%");
+    fillTopBar.width("100%");
 
-      var porcent = parseInt(progressBar.attr("data-progress").slice(0,-1));
+    var porcent = parseInt(progressBar.attr("data-progress").slice(0,-1));
 
-      var fillColor;
-      if (porcent > 80) {
-        fillColor = GREAT;
-      } else if (porcent > 40) {
-        fillColor = GOOD;
-      } else {
-        fillColor = BAD;
-      }
-      fillTopBar.css("background-color",fillColor.TOPBAR);
-      fillBar.css("background-color",fillColor.BOTTOMBAR);
+    var fillColor;
+    if (porcent > 80) {
+      fillColor = GREAT;
+    } else if (porcent > 40) {
+      fillColor = GOOD;
+    } else {
+      fillColor = BAD;
+    }
+    fillTopBar.css("background-color",fillColor.TOPBAR);
+    fillBar.css("background-color",fillColor.BOTTOMBAR);
 
-      fillBar.append(fillTopBar);
+    fillBar.append(fillTopBar);
 
-      progressBar.append(fillBar);
-
-      var progressStatus = $(document.createElement('span'));
-      progressStatus.text(progressBar.attr("data-progress"));
-
-      progressBar.append(progressStatus);
-    });
-  })();
+    progressBar.append(fillBar);
+  });
 };
