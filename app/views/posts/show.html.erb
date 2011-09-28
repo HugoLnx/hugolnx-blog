@@ -14,6 +14,7 @@
 
     $(window).load(function(){
       if (window.innerPostJavascripts !== undefined) innerPostJavascripts();
+      initializeScrollableDiv();
       reloadCommentsIndex();
       setupLikeButton();
       setupTwitterButton();
@@ -106,6 +107,8 @@
 
 <%= javascript_tag do %>
   if (window.innerPostJavascripts !== undefined) innerPostJavascripts();
+  innerPostJavascripts = undefined;
+  if (window.initializeScrollableDiv !== undefined) initializeScrollableDiv();
   if (window.reloadCommentsIndex !== undefined) reloadCommentsIndex();
   if (window.setupTwitterButton !== undefined) setupTwitterButton();
   if (window.setupPlusoneButton !== undefined) setupPlusoneButton();
