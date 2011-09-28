@@ -28,10 +28,8 @@ class PostsController < PostsBaseController
                              :robots => @robots_metatag
   end
 
-  DONT_FEED_LOCATIONS = ['sobre-mim']
   def feed
-    @posts, @other_posts = Post.all.partition{|post| post.location == LOCATION}
-    @other_posts.delete_if{|post| DONT_FEED_LOCATIONS.include? post.location}
+    @posts = Post.find_all(:location => LOCATION)
 
     respond_to do |format|
       format.rss { render 'feed', :layout => false }
