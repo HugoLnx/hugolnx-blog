@@ -17,7 +17,7 @@ Feature: Coment a post
   Scenario: I fill author and content fields
     Given I fill in "content" of "comment" with "Testing comment" within "form#indexCommentForm"
     When I press "Comentar" within "form#indexCommentForm"
-    Then I should see within "div#post-comments-content div#comment1" some informations:
+    Then I should see some informations within "div#post-comments-content div":
       | name        | Hugo            |
       | nickname    | hugolnx         |
       | image       | avatar.jpg      |
@@ -48,11 +48,11 @@ Feature: Coment a post
   Scenario: I post a comment longer than 800 characters
     Given I fill in "content" of "comment" with a text with "801" characters within "form#indexCommentForm"
     When I press "Comentar" within "form#indexCommentForm"
-    Then I should see "ler mais" within "div#comment1"
+    Then I should see "ler mais" within "div#post-comments-content div"
 
   @comment_show_comment_of_1601_characters_bit_a_bit
   Scenario: I post a comment longer than 1600 characters
     Given I fill in "content" of "comment" with a text with "1601" characters within "form#indexCommentForm"
     When I press "Comentar" within "form#indexCommentForm"
-    And I press "ler mais" within "div#comment1"
-    Then I should see "ler mais" within "div#comment1"
+    And I press "ler mais" within "div#post-comments-content div"
+    Then I should see "ler mais" within "div#post-comments-content div"

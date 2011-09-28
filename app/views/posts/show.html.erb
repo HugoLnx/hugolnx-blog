@@ -27,9 +27,11 @@
   <div id="post-left">
     <aside>
       <ul>
-        <li><div class="g-plusone" data-size="tall"></div></li>
-        <li><a href="http://twitter.com/share" class="twitter-share-button" data-count="vertical" data-via="hugolnx">Tweet</a></li>
-        <li><div id="fb-root"></div>
+        <% unless Rails.env == 'test' %>
+          <li><div class="g-plusone" data-size="tall"></div></li>
+          <li><a href="http://twitter.com/share" class="twitter-share-button" data-count="vertical" data-via="hugolnx">Tweet</a></li>
+          <li><div id="fb-root"></div>
+        <% end %>
         
         <div class="fb-like" data-send="false" data-layout="box_count" data-width="130" data-show-faces="false"></div></li>
       </ul>
