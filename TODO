@@ -59,6 +59,8 @@ DONE AT 28-09
 
 TODO =====================================
  FEATURES
+  - URL of actual post in share buttons
+  - Facebook like shows hugolnxBlog image
   - Move screen to bottom after user post a comment and server renderize comments again.
   - Redirect to origin url when a session is destroyed
   - Use ajax to sign out Twitter
