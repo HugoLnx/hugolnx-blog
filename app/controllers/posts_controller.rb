@@ -21,19 +21,13 @@ class PostsController < PostsBaseController
     friendly_id = params[:id]
     @post = Post.find(:friendly_id => friendly_id, :location => LOCATION)
     @post_url = post_url(@post.friendly_id)
-    prepare_to_render_show_with @post
+    prepare_to_render_show_with @post, @post_url
 
     @pagehead = PageHead.new(
       :keywords => @post.keywords.join(','),
       :description => @post.description,
       :title_complement => @post.title,
       :robots => @robots_metatag
-    )
-
-    @sharing_head = Infrastructure::SharingServicesHead.new(
-      :post => @post,
-      :request => request,
-      :url => @post_url
     )
   end
 
