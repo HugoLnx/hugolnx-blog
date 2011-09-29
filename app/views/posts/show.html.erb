@@ -25,11 +25,15 @@
 
 <% content_for :head do %>
   <meta itemprop="name" content="<%=@post.title%>">
-  <meta itemprop="description" content="<%=@post.description%>">
   <meta property="og:title" content="<%= @post.title %>" />
+  <meta itemprop="description" content="<%=@post.description%>">
+  <meta property="og:description" content="<%=@post.description%>" />
+  <meta itemprop="image" content="<%= request.protocol + request.host %>/images/logo.png">
+  <meta property="og:image" content="<%= request.protocol + request.host %>/images/logo.png" />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="<%=@post_url%>" />
-  <meta property="og:description" content="<%=@post.description%>" />
+  <meta property="og:site_name" content="HugoLnx::Blog" />
+  <meta property="fb:admins" content="100000637301295" />
 <% end %>
 
 <div id="post" class="top">
