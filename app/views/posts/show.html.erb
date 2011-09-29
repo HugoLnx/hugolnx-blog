@@ -24,16 +24,16 @@
 <%end%>
 
 <% content_for :head do %>
-  <meta itemprop="name" content="<%=@post.title%>">
-  <meta property="og:title" content="<%= @post.title %>" />
-  <meta itemprop="description" content="<%=@post.description%>">
-  <meta property="og:description" content="<%=@post.description%>" />
-  <meta itemprop="image" content="<%= request.protocol + request.host %>/images/logo.png">
-  <meta property="og:image" content="<%= request.protocol + request.host %>/images/logo.png" />
-  <meta property="og:type" content="article" />
-  <meta property="og:url" content="<%=@post_url%>" />
-  <meta property="og:site_name" content="HugoLnx::Blog" />
-  <meta property="fb:admins" content="100000637301295" />
+  <meta itemprop="name" content="<%=@sharing_head.title%>">
+  <meta property="og:title" content="<%= @sharing_head.title %>" />
+  <meta itemprop="description" content="<%=@sharing_head.description%>">
+  <meta property="og:description" content="<%=@sharing_head.description%>" />
+  <meta itemprop="image" content="<%= @sharing_head.image %>">
+  <meta property="og:image" content="<%= @sharing_head.image %>" />
+  <meta property="og:type" content="<%= @sharing_head.type%>" />
+  <meta property="og:url" content="<%=@sharing_head.url%>" />
+  <meta property="og:site_name" content="<%=@sharing_head.site_name%>" />
+  <meta property="fb:admins" content="<%=@sharing_head.fb_token%>" />
 <% end %>
 
 <div id="post" class="top">

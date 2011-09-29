@@ -6,16 +6,17 @@ AJAX = function() {
       $.ajax({
         type: "GET",
         url: "/without_layout/" + href,
-        dataType: "html",
+        dataType: "json",
         async: true,
-        complete: prepareToGivenFunction
+        success: prepareToGivenFunction
       });
     }
   }
 
-  function prepareToGivenFunction(xmlHttpRequest) {
-    var title = "Hugolnx::Blog: " + xmlHttpRequest.getResponseHeader("title")
-    var body = xmlHttpRequest.responseText
-    whatDoWithResponse(body,title);
+  function prepareToGivenFunction(data) {
+    var title = "Hugolnx::Blog: " + data["title"];
+    var body = data["body"];
+    var sharing_head = data["sharing_head"];
+    whatDoWithResponse(body,title,sharing_head);
   }
 }
