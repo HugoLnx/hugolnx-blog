@@ -1,17 +1,11 @@
 <!DOCTYPE html> 
-<html>
+<html itemscope itemtype="http://schema.org/">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="description" content="<%= @pagehead.description %>" />
     <meta name="keywords" content="<%=@pagehead.keywords %>" />
     <meta name="robots" content="<%=@pagehead.robots%>" />
-    <meta property="og:title" content="<%= @pagehead.title_complement %>" />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="<%=request.url%>" />
-    <meta property="og:image" content="<%= request.protocol + request.host %>/images/logo.jpg" />
-    <meta property="og:site_name" content="HugoLnx::Blog" />
-    <meta property="fb:admins" content="100000637301295" />
-
+    <%= yield :head %>
     <title>HugoLnx::Blog: <%=@pagehead.title_complement%></title>
     <%= include_stylesheets :all_minified %>
     <%= favicon_link_tag %>

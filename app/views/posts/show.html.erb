@@ -14,6 +14,7 @@
 
     $(window).load(function(){
       if (window.innerPostJavascripts !== undefined) innerPostJavascripts();
+      initializeScrollableDiv();
       reloadCommentsIndex();
       setupLikeButton();
       setupTwitterButton();
@@ -22,15 +23,29 @@
    <%end%>
 <%end%>
 
+<% content_for :head do %>
+  <meta itemprop="name" content="<%=@sharing_head.title%>">
+  <meta property="og:title" content="<%= @sharing_head.title %>" />
+  <meta itemprop="description" content="<%=@sharing_head.description%>">
+  <meta property="og:description" content="<%=@sharing_head.description%>" />
+  <meta itemprop="image" content="<%= @sharing_head.image %>">
+  <meta property="og:image" content="<%= @sharing_head.image %>" />
+  <meta property="og:type" content="<%= @sharing_head.type%>" />
+  <meta property="og:url" content="<%=@sharing_head.url%>" />
+  <meta property="og:site_name" content="<%=@sharing_head.site_name%>" />
+  <meta property="fb:admins" content="<%=@sharing_head.fb_token%>" />
+<% end %>
+
 <div id="post" class="top">
   <div id="post-left">
     <aside>
       <ul>
-        <li><div class="g-plusone" data-size="tall"></div></li>
-        <li><a href="http://twitter.com/share" class="twitter-share-button" data-count="vertical" data-via="hugolnx">Tweet</a></li>
-        <li><div id="fb-root"></div>
-        
-        <div class="fb-like" data-send="false" data-layout="box_count" data-width="130" data-show-faces="false"></div></li>
+        <% unless Rails.env == 'test' %>
+          <li><div class="g-plusone" data-href="<%=@post_url%>" data-size="tall"></div></li>
+          <li><a href="http://twitter.com/share" data-text="<%=@post.title%>" class="twitter-share-button" data-count="vertical" data-via="hugolnx" data-url="<%=@post_url%>">Tweet</a></li>
+          <li><div id="fb-root"></div>
+          <div class="fb-like" data-href="<%=@post_url%>" data-send="false" data-layout="box_count" data-width="130" data-show-faces="false"></div></li>
+        <% end %>
       </ul>
     </aside>
   </div>
@@ -106,6 +121,8 @@
 
 <%= javascript_tag do %>
   if (window.innerPostJavascripts !== undefined) innerPostJavascripts();
+  innerPostJavascripts = undefined;
+  if (window.initializeScrollableDiv !== undefined) initializeScrollableDiv();
   if (window.reloadCommentsIndex !== undefined) reloadCommentsIndex();
   if (window.setupTwitterButton !== undefined) setupTwitterButton();
   if (window.setupPlusoneButton !== undefined) setupPlusoneButton();

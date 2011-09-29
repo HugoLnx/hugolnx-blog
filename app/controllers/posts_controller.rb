@@ -20,19 +20,19 @@ class PostsController < PostsBaseController
   def show
     friendly_id = params[:id]
     @post = Post.find(:friendly_id => friendly_id, :location => LOCATION)
-    
-    prepare_to_render_show_with @post
+    @post_url = post_url(@post.friendly_id)
+    prepare_to_render_show_with @post, @post_url
 
-    @pagehead = PageHead.new :keywords => @post.keywords.join(','),
-                             :description => @post.description,
-                             :title_complement => @post.title,
-                             :robots => @robots_metatag
+    @pagehead = PageHead.new(
+      :keywords => @post.keywords.join(','),
+      :description => @post.description,
+      :title_complement => @post.title,
+      :robots => @robots_metatag
+    )
   end
 
-  DONT_FEED_LOCATIONS = ['sobre-mim']
   def feed
-    @posts, @other_posts = Post.all.partition{|post| post.location == LOCATION}
-    @other_posts.delete_if{|post| DONT_FEED_LOCATIONS.include? post.location}
+    @posts = Post.find_all(:location => LOCATION)
 
     respond_to do |format|
       format.rss { render 'feed', :layout => false }

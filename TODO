@@ -50,16 +50,22 @@ DONE IN 26-05~04-06
 DONE BEFORE 21-08
   - slider use expressive urls
 
+DONE BEFORE 28-09
+  - Fix slider in error pages
+  - fix blog on IE
+
+DONE AT 28-09
+  - Trate to user can't overflow database.
+
 TODO =====================================
  FEATURES
-  - Fix slider in error pages
+  - URL of actual post in share buttons
+  - Facebook like shows hugolnxBlog image
   - Move screen to bottom after user post a comment and server renderize comments again.
   - Redirect to origin url when a session is destroyed
   - Use ajax to sign out Twitter
   - Use ajax to sign in Twitter
   - Put a window in bottom right of screen to user comment and sign in/out to/from twitter.
  TECNICAL
-  - fix blog on IE
   - Trate comment textarea overflow at font size variation
   - Show comment creation date
-  - Trate to user can't overflow database.

@@ -34,6 +34,7 @@ gem 'nokogiri'
 gem 'omniauth'
 gem 'jammit'
 gem 'babosa'
+gem 'named_parameter'
 
 group :test, :development do
   gem 'rspec-rails'

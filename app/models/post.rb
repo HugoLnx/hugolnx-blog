@@ -36,7 +36,7 @@ class Post < ActiveRecord::Base
       classes.delete 'syntax'
       language = classes.first
       language = 'java_script' if language == 'javascript'
-      language = 'scheme' unless CodeRay::Scanners.list.include? language
+      language = 'ruby' unless (CodeRay::Scanners.list + ['scheme']).include? language
       node = code_tag.parse "<div class='CodeRay'>#{CodeRay.scan(code_tag.text,language).div(:line_numbers => :table)}</div>"
       node.search("*").each do |tag|
         unless tag['style'].nil?
