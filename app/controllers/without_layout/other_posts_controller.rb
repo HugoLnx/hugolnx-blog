@@ -6,7 +6,7 @@ module WithoutLayout
       location = params[:location]
       friendly_title = params[:id]
       @post = Post.find(:location => location, :friendly_title => friendly_title)
-      @post_url = post_url @post.friendly_id
+      @post_url = other_post_url @post.location, @post.friendly_title
 
       prepare_to_render_show_with @post, @post_url
       render_json_to_page_changes
