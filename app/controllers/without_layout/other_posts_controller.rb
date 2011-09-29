@@ -1,5 +1,5 @@
 module WithoutLayout
-  class OtherPostsController < WithoutLayout::PostsBaseController
+  class OtherPostsController < PostsBaseController
     layout nil
 
     def show
