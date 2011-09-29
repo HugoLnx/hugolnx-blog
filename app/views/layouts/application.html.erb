@@ -9,6 +9,7 @@
     <meta property="og:site_name" content="HugoLnx::Blog" />
     <meta property="fb:admins" content="100000637301295" />
     <meta itemprop="image" content="<%= request.protocol + request.host %>/images/logo.png">
+    <%= yield :head %>
 
     <title>HugoLnx::Blog: <%=@pagehead.title_complement%></title>
     <%= include_stylesheets :all_minified %>
