@@ -20,7 +20,7 @@ class PostsController < PostsBaseController
   def show
     friendly_id = params[:id]
     @post = Post.find(:friendly_id => friendly_id, :location => LOCATION)
-    @post_url = posts_url(@post.friendly_id)
+    @post_url = post_url(@post.friendly_id)
     prepare_to_render_show_with @post
 
     @pagehead = PageHead.new :keywords => @post.keywords.join(','),
