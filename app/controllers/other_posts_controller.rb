@@ -5,9 +5,9 @@ class OtherPostsController < PostsBaseController
     location = params[:location]
     friendly_title = params[:id]
     @post = Post.find(:location => location, :friendly_title => friendly_title)
-
     @post_url = other_post_url(@post.location,@post.friendly_title)
-    prepare_to_render_show_with @post
+
+    prepare_to_render_show_with @post, @post_url
 
     @pagehead = PageHead.new :keywords => @post.keywords.join(','),
                              :description => @post.description,
