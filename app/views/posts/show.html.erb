@@ -24,9 +24,9 @@
 <%end%>
 
 <% content_for :head do %>
-  <meta itemprop="name" content="<%=@pagehead.title_complement%>">
+  <meta itemprop="name" content="<%=@post.title%>">
   <meta itemprop="description" content="<%=@post.description%>">
-  <meta property="og:title" content="<%= @pagehead.title_complement %>" />
+  <meta property="og:title" content="<%= @post.title %>" />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="<%=@post_url%>" />
 <% end %>
@@ -36,12 +36,11 @@
     <aside>
       <ul>
         <% unless Rails.env == 'test' %>
-          <li><div class="g-plusone" data-text="<%=@post.title%>" data-href="<%=@post_url%>" data-size="tall"></div></li>
-          <li><a href="http://twitter.com/share" class="twitter-share-button" data-count="vertical" data-via="hugolnx" data-url="<%=@post_url%>">Tweet</a></li>
+          <li><div class="g-plusone" data-href="<%=@post_url%>" data-size="tall"></div></li>
+          <li><a href="http://twitter.com/share" data-text="<%=@post.title%>" class="twitter-share-button" data-count="vertical" data-via="hugolnx" data-url="<%=@post_url%>">Tweet</a></li>
           <li><div id="fb-root"></div>
+          <div class="fb-like" data-href="<%=@post_url%>" data-send="false" data-layout="box_count" data-width="130" data-show-faces="false"></div></li>
         <% end %>
-        
-        <div class="fb-like" data-href="<%=@post_url%>" data-send="false" data-layout="box_count" data-width="130" data-show-faces="false"></div></li>
       </ul>
     </aside>
   </div>
