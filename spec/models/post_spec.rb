@@ -70,9 +70,9 @@ describe Post do
 
   context "Instance" do
     describe '#friendly_id' do
-      it 'returns a friendly id based on id and title' do
-        post = Post.new :title => "Testing Post 1", :id => 1
-        post.friendly_id.should be == "1-testing-post-1"
+      it 'returns a friendly id based on relative_id and title' do
+        post = Post.new :title => "Testing Post 1", :id => 1, :relative_id => 10
+        post.friendly_id.should be == "10-testing-post-1"
       end
     end
 

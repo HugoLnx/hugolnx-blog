@@ -58,7 +58,7 @@ class Post < ActiveRecord::Base
   end
 
   def friendly_id
-    "#{@id}-#{friendly_title}"
+    "#{@relative_id}-#{friendly_title}"
   end
 
   def to_param
