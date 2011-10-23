@@ -1,0 +1,23 @@
+Creation Date: 23/10/2011
+Description: Descrição da gem que desenvolvi para simular named parameter em ruby.
+Keywords: named parameter ruby gem
+
+<section>
+  <h2 class="first">Sobre o Projeto</h2>
+  <p>Named Parameter é uma gem desenvolvida por mim, que simula named parameter em ruby. O projeto é open source e está <a href="http://github.com/hugolnx/named_parameter">hospedado no Github</a>. Para mais informações sobre o projeto leia o <a href="https://github.com/HugoLnx/named_parameter/blob/master/README.md">README(inglês)</a> ou o <a href="http://hugolnx.com/12-named-parameter-em-ruby">artigo aqui mesmo no blog(português)</a>.</p>
+</section>
+
+<section>
+  <h2>Rápida visualização do efeito da gem</h2>
+  <p>Com a gem este código é possível:</p>
+  <code class="syntax ruby">class Ponto
+    extend NamedParameter
+
+    named def mover_para(x,y,z=0)
+      puts "Movido para: [#{x},#{y},#{z}]"
+    end
+  end
+
+  Ponto.new.mover_para(y: 30,x: 50) # => Movido para: [50,30,0]
+  Ponto.new.mover_para(z: 10, y: 30,x: 50) # => Movido para: [50,30,10]</code>
+</section>
