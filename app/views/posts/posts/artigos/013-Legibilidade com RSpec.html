@@ -1,0 +1,58 @@
+Creation Date: 25/10/2011
+Description: Um exemplo simples e objetivo de como utilizar o poder o RSpec de forma à trazer legibilidade ao seus testes.
+Keywords: rspec legibilidade dica
+Tags: ruby rspec teste
+
+<h2 class="first">Introdu&ccedil;&atilde;o</h2>
+<p>Após vários meses utilizando o RSpec passei a utilizar seus recursos da melhor forma possível, neste artigo irei mostrar como eu organizo meus testes e como utilizo os recursos básicos do rspec como o describe e o context.</p>
+
+<h2 class="first">Um problema simples</h2>
+<p>Para ilustrar este artigo vamos supor que no nosso programa, teremos uma casa. Nessa casa, podemos abrir a porta e deixar as pessoas entrar. Seguindo o bom TDD iremos começar com o teste:</p>
+<code class="syntax ruby"># encoding: utf-8
+# spec/casa_spec.rb
+require 'casa' # require na classe Casa que iremos criar
+
+describe Casa do
+  it 'não deveria dar para entrar se fechar a porta' do
+    casa = Casa.new
+    casa.fechar_porta
+    casa.da_para_entrar?.should be_false
+  end
+
+  it 'deveria dar para entrar se abrir a porta' do
+    casa = Casa.new
+    casa.abrir_porta
+    casa.da_para_entrar?.should be_true
+  end
+end
+</code>
+
+<p>Com o teste escrito, podemos partir para a implementação da classe Casa:</p>
+<code class="syntax ruby"># lib/casa.rb
+class Casa
+  def da_para_entrar?
+    return @da_para_entrar
+  end
+
+  def fechar_porta
+    @da_para_entrar = false
+  end
+
+  def abrir_porta
+    @da_para_entrar = true
+  end
+end
+</code>
+
+<p>Se rodarmos os testes teremos como output:</p>
+<img src="/posts/artigos/013/organizacao-comum.png"/>
+
+
+<h2>Conclus&atilde;o</h2>
+<p>O c&oacute;digo fonte da gem est&aacute; no github: <a href="https://github.com/HugoLnx/named_parameter">https://github.com/HugoLnx/named_parameter</a>. Os testes foram escritos utilizando RSpec. Quem quiser contribuir pode mandar um pull request (com testes por favor).</p>
+
+<h2>Refer&ecirc;ncias</h2>
+<ul>
+  <li><a href="http://ruby-doc.org/core/classes/Module.html#M000460">Documenta&ccedil;&atilde;o do callback method_added</a></li>
+  <li><a href="https://gist.github.com/534772#file_around_alias.rb">Exemplo de uso do around_alias</a></li>
+</ul>
