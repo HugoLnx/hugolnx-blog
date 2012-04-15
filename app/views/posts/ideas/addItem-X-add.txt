@@ -1,0 +1,46 @@
+Post baseado nessa conversa:
+===> Titulo <===
+Renomeando método do Builder
+
+===> Pergunta <===
+Será que o método comItem(Item itemNovo) precisa ter esse nome? 
+O que acha de chamá-lo apenas de com(ItemNovo)? 
+Faça essa alteração e discuta quais as vantagens desse novo nome.
+
+===> Resposta do aluno <===
+Pode ser uma implementação um pouuco perigoso tendo em vista que vai contra a proposta do pattern que é de facilitar a criação de objetos.
+
+===> Minha resposta: <===
+Por que você diz que vai contra a proposta do pattern?
+Essa forma torna a chamada do código bem mais limpa. Por exemplo:
+[java]
+  Item item = new Item();
+  
+  // é mais limpo dessa forma...
+  builder.comItem(item);
+  
+  // ...ou dessa forma?
+  builder.com(item); 
+[/java]
+Com exemplo fica fácil ver a redundância na chamada do método.
+Mas tome cuidado, esse tipo de nomenclatura pode ser perigosa (como você disse), em linguagens implicitamente tipadas, pois dificulta o crescimento do código. Se por exemplo quiséssemos que o builder pudesse receber um item e um produto, em java teríamos algo como:
+[java]
+  public void com(Item item){
+    // faz o que tem que fazer
+  } 
+  public void com(Produto produto) {
+    // faz o que tem que fazer
+  }
+[/java]
+
+já em linguagens implicitamente tipadas, como ruby, teríamos que fazer algo como:
+[ruby]
+  def com(item_ou_produto)
+    if item_ou_produto.is_a? Item
+      # faz o que tem que fazer se for Item
+    elsif item_ou_produto.is_a? Produto
+      # faz o que tem que fazer se for Produto
+    end
+  end
+[/ruby]
+ou seja, teríamos um código mais sujo, existem algumas maneiras de tratar esse tipo de problema em linguagens implicitamente tipadas, se você tiver interesse em saber mais, é só perguntar.
