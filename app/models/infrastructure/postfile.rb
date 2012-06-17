@@ -9,7 +9,7 @@ module Infrastructure
 
     def initialize(path)
       filename = File.basename path
-      @title = title_from filename
+      @title = title_from(filename).force_encoding('utf-8')
       @id = filename[0..2].to_i
       @location = File.dirname(path).match(/^#{File.join(Post::POSTS_DIRECTORY,'(.*)')}/)[1]
     end
