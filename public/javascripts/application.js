@@ -1,4 +1,5 @@
 $(function(){ 
+  setInterval(checkChangeOfHash,500);
   var id = catchIdFromHash();
   changePostTo(id);
   $.syntax() 
