@@ -1,7 +1,7 @@
 module Infraestrutura
   class Postfile
     def initialize(id,directory)
-      path = find_path(id,directory)
+      path = find_path(id,directory).force_encoding("UTF-8")
       @filename = File.basename path
       @content = File.read(path).strip
     end
