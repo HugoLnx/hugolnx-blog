@@ -28,10 +28,12 @@ gem 'rails', '3.0.5'
 #   gem 'webrat'
 # end
 
-gem 'mysql2'
+gem 'mysql2', "~> 0.2.x"
+gem 'activerecord-mysql2-adapter'
 
 group :development, :production, :test do
   gem 'omniauth'
+  gem 'omniauth-twitter'
 end
 
 group :test, :development do
