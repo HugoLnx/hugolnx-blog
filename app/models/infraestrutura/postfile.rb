@@ -2,7 +2,7 @@ module Infraestrutura
   class Postfile
     def initialize(id,directory)
       path = find_path(id,directory).force_encoding("UTF-8")
-      @filename = File.basename path
+      @filename = File.basename(path).force_encoding("UTF-8")
       @content = File.read(path).strip
     end
     
@@ -51,7 +51,7 @@ module Infraestrutura
       end
 
       def title_from(filename)
-        string_beetween_id_prefix_and_extension_of filename
+        string_beetween_id_prefix_and_extension_of(filename).force_encoding("UTF-8")
       end
 
       def convert_3_first_numbers_of(postfiles_names)
